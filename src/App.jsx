@@ -18,30 +18,32 @@ const C = {
 /* ─────────────── NAV SECTIONS ─────────────── */
 const SECTIONS = [
   { id:"home",       label:"Accueil",              icon:"🏠", group:"intro" },
-  { id:"overview",   label:"Modèle de sécurité",   icon:"🏛️", group:"secu" },
+  { id:"overview",   label:"Sécurité",             icon:"🏛️", group:"secu" },
   { id:"auth",       label:"Auth & Réseau",         icon:"🔐", group:"secu" },
-  { id:"workspace",  label:"Workspace & Capacité",  icon:"🏢", group:"secu" },
+  { id:"workspace",  label:"Workspace",             icon:"🏢", group:"secu" },
   { id:"rls",        label:"RLS",                   icon:"↔️", group:"secu" },
   { id:"cls",        label:"CLS",                   icon:"📋", group:"secu" },
   { id:"ols",        label:"OLS",                   icon:"👁️", group:"secu" },
-  { id:"ddm",        label:"Masquage DDM",          icon:"🎭", group:"secu" },
-  { id:"onelake",    label:"OneLake Security",      icon:"🏔️", group:"secu" },
+  { id:"ddm",        label:"DDM",                   icon:"🎭", group:"secu" },
+  { id:"onelake",    label:"OneLake Sec.",          icon:"🏔️", group:"secu" },
   { id:"purview",    label:"Purview",               icon:"🛡️", group:"gov" },
-  { id:"catalogue",  label:"OneLake Catalog",       icon:"📚", group:"gov" },
+  { id:"catalogue",  label:"Catalog",               icon:"📚", group:"gov" },
   { id:"architecture",label:"Architecture",         icon:"🏗️", group:"arch" },
-  { id:"deployment", label:"Ingestion & CI/CD",     icon:"🚀", group:"arch" },
-  { id:"git",        label:"Git & Collaboration",   icon:"🌿", group:"arch" },
+  { id:"deployment", label:"Ingestion CI/CD",       icon:"🚀", group:"arch" },
+  { id:"queryfolding",label:"Query Folding",        icon:"🔍", group:"arch" },
+  { id:"git",        label:"Git & Collab.",         icon:"🌿", group:"arch" },
   { id:"pbiformats", label:"Formats PBI",           icon:"📄", group:"arch" },
-  { id:"datastores", label:"Analytics Data Stores", icon:"🗄️", group:"ds" },
-  { id:"transform",  label:"Design & Transform",    icon:"⚙️", group:"ds" },
+  { id:"datastores", label:"Data Stores",           icon:"🗄️", group:"ds" },
+  { id:"transform",  label:"Transform",             icon:"⚙️", group:"ds" },
   { id:"semantic",   label:"Semantic Models",       icon:"📐", group:"ds" },
+  { id:"calcgroups", label:"Calc Groups",            icon:"🧮", group:"ds" },
   { id:"aiready",    label:"AI-Ready Data",         icon:"🤖", group:"ds" },
-  { id:"secgov",     label:"Sécurité & Gouvernance",icon:"🔒", group:"ds" },
-  { id:"optimization",label:"Optimisation Delta",   icon:"⚡", group:"perf" },
+  { id:"secgov",     label:"SecGov Expert",         icon:"🔒", group:"ds" },
+  { id:"optimization",label:"Delta Optim.",         icon:"⚡", group:"perf" },
   { id:"activator",  label:"Activator",             icon:"🔔", group:"perf" },
   { id:"copilot",    label:"Copilot & AI",          icon:"🤖", group:"perf" },
-  { id:"scenarios",  label:"Scénarios Sécurité",    icon:"🎯", group:"exam" },
-  { id:"archi_scenarios",label:"Scénarios Archi",   icon:"🧠", group:"exam" },
+  { id:"scenarios",  label:"Quiz Hub (Sécu)",       icon:"🎯", group:"exam" },
+  { id:"archi_scenarios",label:"Quiz Hub (Archi)",  icon:"🧠", group:"exam" },
   { id:"memo",       label:"Fiche Mémo",            icon:"📌", group:"exam" },
   { id:"pieges",     label:"Pièges & Erreurs",      icon:"⚠️", group:"exam" },
 ];
@@ -171,14 +173,443 @@ function ScenarioCard({ scenario: s }) {
   );
 }
 
-const scenarios = [
-  {id:1,difficulty:"Facile",color:"green",question:"Les analystes financiers doivent voir toutes les colonnes SAUF 'Salaire' et 'BonusAnnuel'. Quelle solution ?",options:["A. Row-Level Security (RLS)","B. Column-Level Security (CLS) — DENY sur les colonnes sensibles","C. Dynamic Data Masking (DDM)","D. Object-Level Security (OLS)"],answer:1,explanation:"CLS via DENY sur les colonnes spécifiques. RLS filtre des lignes, DDM masque sans cacher, OLS cache des tables entières.",code:"DENY SELECT ON dbo.Employes(Salaire, BonusAnnuel) TO [AnalystesFinanciers];"},
-  {id:2,difficulty:"Moyen",color:"amber",question:"Un Viewer voit TOUTES les données malgré une politique RLS. Quelle est la cause probable ?",options:["A. RLS ne fonctionne pas dans Fabric Warehouse","B. L'utilisateur est Admin ou Member — ces rôles bypasse RLS","C. La politique RLS n'est pas activée","D. RLS doit être configuré dans Power BI Desktop"],answer:1,explanation:"Les rôles Admin, Member et Contributor bypassent RLS et OneLake Security. Seuls les Viewers sont soumis aux contrôles granulaires."},
-  {id:3,difficulty:"Moyen",color:"amber",question:"L'équipe dev teste avec des données réalistes sans voir les vrais numéros de carte. Quelle fonctionnalité ?",options:["A. Row-Level Security","B. Column-Level Security","C. Dynamic Data Masking (DDM)","D. Object-Level Security"],answer:2,explanation:"DDM remplace les valeurs par des masques sans supprimer la structure. Les développeurs voient le format, pas les vraies valeurs.",code:"ALTER TABLE dbo.Clients\nALTER COLUMN NumCarte ADD MASKED WITH (FUNCTION = 'partial(0,\"XXXX-XXXX-XXXX-\",4)');"},
-  {id:4,difficulty:"Difficile",color:"red",question:"OneLake Security activé. Un Contributor peut-il lire les fichiers protégés par les OneLake Data Access Roles ?",options:["A. Non — les Contributors sont soumis aux OneLake Security Roles","B. Oui — Admin, Member et Contributor bypasse OneLake Security par défaut","C. Cela dépend de la configuration du tenant","D. Non — ils doivent avoir le rôle DefaultReader"],answer:1,explanation:"Admin, Member et Contributor bypassent OneLake Security Roles. Seuls les Viewers sont soumis aux contrôles granulaires."},
-  {id:5,difficulty:"Difficile",color:"red",question:"Cacher la table 'DonnéesRH' entièrement — même les métadonnées invisibles. Quelle approche ?",options:["A. RLS avec filtre DAX renvoyant table vide","B. CLS avec DENY sur toutes les colonnes","C. Object-Level Security (OLS) dans le semantic model","D. DDM sur toutes les colonnes"],answer:2,explanation:"OLS cache tables et colonnes ENTIÈRES — même les métadonnées. CLS cache des colonnes mais le schéma reste visible, DDM masque des valeurs."},
-  {id:6,difficulty:"Expert",color:"purple",question:"Analystes régionaux : seulement leur région, jamais 'MargeNette', numéros masqués. Combinaison optimale ?",options:["A. RLS uniquement avec des filtres complexes","B. RLS (filtrage région) + CLS (masquer MargeNette) + DDM (numéros de compte)","C. OLS + DDM seulement","D. Vue par région avec colonnes autorisées"],answer:1,explanation:"Defense in Depth : RLS pour les LIGNES par région, CLS pour interdire la COLONNE MargeNette, DDM pour masquer partiellement les numéros."},
+const ALL_QUESTIONS = [
+  {
+    id: 1,
+    category: "Sécurité",
+    diff: "Facile",
+    difficulty: "Facile",
+    color: "green",
+    tag: "CLS",
+    q: "Les analystes financiers doivent voir toutes les colonnes SAUF 'Salaire' et 'BonusAnnuel'. Quelle solution ?",
+    question: "Les analystes financiers doivent voir toutes les colonnes SAUF 'Salaire' et 'BonusAnnuel'. Quelle solution ?",
+    opts: ["A. Row-Level Security (RLS)", "B. Column-Level Security (CLS) — DENY sur les colonnes sensibles", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security (OLS)"],
+    options: ["A. Row-Level Security (RLS)", "B. Column-Level Security (CLS) — DENY sur les colonnes sensibles", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security (OLS)"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. ❌ A : RLS filtre des lignes de données (horizontal). ❌ C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. ❌ D : OLS cache des tables entières.",
+    explanation: "✅ B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. ❌ A : RLS filtre des lignes de données (horizontal). ❌ C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. ❌ D : OLS cache des tables entières."
+  },
+  {
+    id: 2,
+    category: "Sécurité",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "RLS",
+    q: "Un Viewer voit TOUTES les données malgré une politique RLS configurée. Quelle est la cause probable ?",
+    question: "Un Viewer voit TOUTES les données malgré une politique RLS configurée. Quelle est la cause probable ?",
+    opts: ["A. RLS ne fonctionne pas dans Fabric Warehouse", "B. L'utilisateur est Admin ou Member — ces rôles bypassent RLS dans tous les contextes", "C. La politique RLS n'est pas activée", "D. RLS doit être configuré dans Power BI Desktop uniquement"],
+    options: ["A. RLS ne fonctionne pas dans Fabric Warehouse", "B. L'utilisateur est Admin ou Member — ces rôles bypassent RLS dans tous les contextes", "C. La politique RLS n'est pas activée", "D. RLS doit être configuré dans Power BI Desktop uniquement"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. ❌ A : RLS fonctionne parfaitement dans le Warehouse. ❌ C : RLS est actif dès sa liaison à la table. ❌ D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI.",
+    explanation: "✅ B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. ❌ A : RLS fonctionne parfaitement dans le Warehouse. ❌ C : RLS est actif dès sa liaison à la table. ❌ D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI."
+  },
+  {
+    id: 3,
+    category: "Sécurité",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "DDM",
+    q: "L'équipe dev doit tester avec des données réalistes sans voir les vrais numéros de carte de crédit. Quelle fonctionnalité ?",
+    question: "L'équipe dev doit tester avec des données réalistes sans voir les vrais numéros de carte de crédit. Quelle fonctionnalité ?",
+    opts: ["A. Row-Level Security", "B. Column-Level Security", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security"],
+    options: ["A. Row-Level Security", "B. Column-Level Security", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. ❌ A : RLS restreint l'accès aux lignes de données. ❌ B : CLS bloque l'accès aux colonnes. ❌ D : OLS cache entièrement la table.",
+    explanation: "✅ C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. ❌ A : RLS restreint l'accès aux lignes de données. ❌ B : CLS bloque l'accès aux colonnes. ❌ D : OLS cache entièrement la table."
+  },
+  {
+    id: 4,
+    category: "Sécurité",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "OneLake",
+    q: "OneLake Security est activé sur un Lakehouse. Un utilisateur est Contributor. Peut-il lire les fichiers protégés par les OneLake Data Access Roles ?",
+    question: "OneLake Security est activé sur un Lakehouse. Un utilisateur est Contributor. Peut-il lire les fichiers protégés par les OneLake Data Access Roles ?",
+    opts: ["A. Non — les Contributors sont soumis aux OneLake Security Roles", "B. Oui — Admin, Member et Contributor bypassent OneLake Security par défaut", "C. Cela dépend de la configuration du tenant", "D. Non — ils doivent avoir le rôle DefaultReader"],
+    options: ["A. Non — les Contributors sont soumis aux OneLake Security Roles", "B. Oui — Admin, Member et Contributor bypassent OneLake Security par défaut", "C. Cela dépend de la configuration du tenant", "D. Non — ils doivent avoir le rôle DefaultReader"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. ❌ A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. ❌ C : Ce comportement ne dépend pas des tenant settings. ❌ D : Les rôles de workspace remplacent le besoin de DefaultReader.",
+    explanation: "✅ B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. ❌ A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. ❌ C : Ce comportement ne dépend pas des tenant settings. ❌ D : Les rôles de workspace remplacent le besoin de DefaultReader."
+  },
+  {
+    id: 5,
+    category: "Sécurité",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "OLS",
+    q: "Vous voulez cacher une table 'DonnéesRH' entièrement — même les métadonnées ne doivent pas être visibles. Quelle approche ?",
+    question: "Vous voulez cacher une table 'DonnéesRH' entièrement — même les métadonnées ne doivent pas être visibles. Quelle approche ?",
+    opts: ["A. RLS avec un filtre DAX qui renvoie une table vide", "B. CLS avec DENY sur toutes les colonnes", "C. Object-Level Security (OLS) dans le semantic model", "D. DDM sur toutes les colonnes"],
+    options: ["A. RLS avec un filtre DAX qui renvoie une table vide", "B. CLS avec DENY sur toutes les colonnes", "C. Object-Level Security (OLS) dans le semantic model", "D. DDM sur toutes les colonnes"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. ❌ A : RLS filtre les données mais la table reste visible. ❌ B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. ❌ D : DDM n'obfusque que les valeurs, le schéma reste visible.",
+    explanation: "✅ C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. ❌ A : RLS filtre les données mais la table reste visible. ❌ B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. ❌ D : DDM n'obfusque que les valeurs, le schéma reste visible."
+  },
+  {
+    id: 6,
+    category: "Sécurité",
+    diff: "Expert",
+    difficulty: "Expert",
+    color: "purple",
+    tag: "Defense in Depth",
+    q: "COMPLET : Analystes régionaux (Europe/Asie/Amériques) ne voient que leur région, jamais la colonne 'MargeNette', numéros de compte masqués. Combinaison optimale ?",
+    question: "COMPLET : Analystes régionaux (Europe/Asie/Amériques) ne voient que leur région, jamais la colonne 'MargeNette', numéros de compte masqués. Combinaison optimale ?",
+    opts: ["A. RLS uniquement avec des filtres complexes", "B. RLS (filtrage par région) + CLS (masquer MargeNette) + DDM (numéros de compte)", "C. OLS + DDM seulement", "D. Créer une vue par région avec les colonnes autorisées"],
+    options: ["A. RLS uniquement avec des filtres complexes", "B. RLS (filtrage par région) + CLS (masquer MargeNette) + DDM (numéros de compte)", "C. OLS + DDM seulement", "D. Créer une vue par région avec les colonnes autorisées"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). ❌ A : RLS seul ne peut pas masquer des colonnes. ❌ C : OLS masquerait toute la table. ❌ D : Créer des vues multiples est complexe à maintenir.",
+    explanation: "✅ B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). ❌ A : RLS seul ne peut pas masquer des colonnes. ❌ C : OLS masquerait toute la table. ❌ D : Créer des vues multiples est complexe à maintenir."
+  },
+  {
+    id: 7,
+    category: "Architecture",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Layers",
+    q: "Une entreprise veut que ses data engineers accèdent aux couches Bronze et Silver, mais que les analystes métier n'accèdent qu'à Gold. Quelle architecture recommandez-vous ?",
+    question: "Une entreprise veut que ses data engineers accèdent aux couches Bronze et Silver, mais que les analystes métier n'accèdent qu'à Gold. Quelle architecture recommandez-vous ?",
+    opts: ["A. Un seul Lakehouse avec 3 schémas (bronze, silver, gold) et RLS par couche", "B. 3 Lakehouses dans un même workspace avec des rôles item différents", "C. 3 Lakehouses dans 3 workspaces séparés, avec des rôles workspace différents par workspace", "D. Un Warehouse unique avec des vues par couche et CLS"],
+    options: ["A. Un seul Lakehouse avec 3 schémas (bronze, silver, gold) et RLS par couche", "B. 3 Lakehouses dans un même workspace avec des rôles item différents", "C. 3 Lakehouses dans 3 workspaces séparés, avec des rôles workspace différents par workspace", "D. Un Warehouse unique avec des vues par couche et CLS"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. ❌ A : RLS ne restreint pas l'accès au niveau des items du workspace. ❌ B : Un Contributor verra tous les items du workspace. ❌ D : Un Warehouse unique ne permet pas l'isolation physique par couche.",
+    explanation: "✅ C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. ❌ A : RLS ne restreint pas l'accès au niveau des items du workspace. ❌ B : Un Contributor verra tous les items du workspace. ❌ D : Un Warehouse unique ne permet pas l'isolation physique par couche."
+  },
+  {
+    id: 8,
+    category: "Architecture",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Warehouse vs Lakehouse",
+    q: "Votre équipe BI utilise principalement T-SQL, crée des vues, procédures stockées et rapports Power BI. Elle n'a pas besoin de Spark ni de ML. Quelle solution pour la couche Gold ?",
+    question: "Votre équipe BI utilise principalement T-SQL, crée des vues, procédures stockées et rapports Power BI. Elle n'a pas besoin de Spark ni de ML. Quelle solution pour la couche Gold ?",
+    opts: ["A. Lakehouse — plus flexible et supporté par toutes les équipes", "B. Warehouse — T-SQL complet (DDL + DML), RLS/CLS natifs, idéal pour les équipes SQL", "C. Eventhouse — pour des requêtes analytiques rapides", "D. Lakehouse avec SQL Analytics Endpoint uniquement"],
+    options: ["A. Lakehouse — plus flexible et supporté par toutes les équipes", "B. Warehouse — T-SQL complet (DDL + DML), RLS/CLS natifs, idéal pour les équipes SQL", "C. Eventhouse — pour des requêtes analytiques rapides", "D. Lakehouse avec SQL Analytics Endpoint uniquement"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. ❌ A : Le Lakehouse nécessite Spark pour les écritures. ❌ C : Eventhouse est destiné au streaming et logs. ❌ D : Le SQL Endpoint du Lakehouse est en lecture seule.",
+    explanation: "✅ B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. ❌ A : Le Lakehouse nécessite Spark pour les écritures. ❌ C : Eventhouse est destiné au streaming et logs. ❌ D : Le SQL Endpoint du Lakehouse est en lecture seule."
+  },
+  {
+    id: 9,
+    category: "Architecture",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Shortcut",
+    q: "Vous avez un Lakehouse Gold dans Workspace A. L'équipe Analytics veut créer des semantic models Power BI pointant vers ces données SANS copier les données dans leur workspace. Quelle solution ?",
+    question: "Vous avez un Lakehouse Gold dans Workspace A. L'équipe Analytics veut créer des semantic models Power BI pointant vers ces données SANS copier les données dans leur workspace. Quelle solution ?",
+    opts: ["A. Créer un Pipeline qui copie les données Gold dans Analytics Workspace toutes les heures", "B. Utiliser un Shortcut depuis Analytics Workspace vers le Gold Lakehouse du Data Workspace", "C. Configurer Mirroring entre les deux Lakehouses", "D. Donner aux analystes le rôle Contributor dans le Data Workspace"],
+    options: ["A. Créer un Pipeline qui copie les données Gold dans Analytics Workspace toutes les heures", "B. Utiliser un Shortcut depuis Analytics Workspace vers le Gold Lakehouse du Data Workspace", "C. Configurer Mirroring entre les deux Lakehouses", "D. Donner aux analystes le rôle Contributor dans le Data Workspace"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. ❌ A : Dupliquer les données augmente le coût et la latence. ❌ C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. ❌ D : Donner Contributor expose l'ensemble du workspace.",
+    explanation: "✅ B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. ❌ A : Dupliquer les données augmente le coût et la latence. ❌ C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. ❌ D : Donner Contributor expose l'ensemble du workspace."
+  },
+  {
+    id: 10,
+    category: "Architecture",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Workspace Settings",
+    q: "Un Fabric Admin veut permettre à un groupe d'utilisateurs de créer des workspaces Fabric sans leur donner des droits admin globaux. Comment procéder ?",
+    question: "Un Fabric Admin veut permettre à un groupe d'utilisateurs de créer des workspaces Fabric sans leur donner des droits admin globaux. Comment procéder ?",
+    opts: ["A. Les ajouter comme Capacity Admin sur toutes les capacités", "B. Créer un groupe de sécurité et l'ajouter au tenant setting 'Create workspaces' dans le portail Admin", "C. Donner le rôle Member dans tous les workspaces existants", "D. Activer le tenant setting 'Enable Microsoft Fabric for the entire organization'"],
+    options: ["A. Les ajouter comme Capacity Admin sur toutes les capacités", "B. Créer un groupe de sécurité et l'ajouter au tenant setting 'Create workspaces' dans le portail Admin", "C. Donner le rôle Member dans tous les workspaces existants", "D. Activer le tenant setting 'Enable Microsoft Fabric for the entire organization'"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. ❌ A : Capacity Admin donne des droits d'administration de capacité. ❌ C : Être membre n'autorise pas la création de nouveaux workspaces. ❌ D : Activer Fabric permet d'utiliser le service mais pas de créer des workspaces.",
+    explanation: "✅ B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. ❌ A : Capacity Admin donne des droits d'administration de capacité. ❌ C : Être membre n'autorise pas la création de nouveaux workspaces. ❌ D : Activer Fabric permet d'utiliser le service mais pas d'instancier des workspaces."
+  },
+  {
+    id: 11,
+    category: "Architecture",
+    diff: "Expert",
+    difficulty: "Expert",
+    color: "purple",
+    tag: "Mirroring",
+    q: "Votre organisation veut synchroniser une base Azure SQL (OLTP, données changeant en continu) dans Fabric pour l'analytique, avec une latence maximale de quelques minutes. Quelle solution ?",
+    question: "Votre organisation veut synchroniser une base Azure SQL (OLTP, données changeant en continu) dans Fabric pour l'analytique, avec une latence maximale de quelques minutes. Quelle solution ?",
+    opts: ["A. Pipeline Data Factory avec trigger toutes les 15 minutes (Copy Activity)", "B. Shortcut vers Azure SQL Database", "C. Fabric Mirroring d'Azure SQL Database vers OneLake", "D. Dataflow Gen2 avec refresh planifié toutes les 30 minutes"],
+    options: ["A. Pipeline Data Factory avec trigger toutes les 15 minutes (Copy Activity)", "B. Shortcut vers Azure SQL Database", "C. Fabric Mirroring d'Azure SQL Database vers OneLake", "D. Dataflow Gen2 avec refresh planifié toutes les 30 minutes"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. ❌ A : Les pipelines introduisent du traitement batch. ❌ B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. ❌ D : Les Dataflows Gen2 sont batch et lents.",
+    explanation: "✅ C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. ❌ A : Les pipelines introduisent du traitement batch. ❌ B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. ❌ D : Les Dataflows Gen2 sont batch et lents."
+  },
+  {
+    id: 12,
+    category: "Architecture",
+    diff: "Expert",
+    difficulty: "Expert",
+    color: "purple",
+    tag: "Healthcare Scenario",
+    q: "SCÉNARIO COMPLET : Une entreprise Healthcare veut (1) accès patients uniquement aux médecins de leur service, (2) numéros de dossier masqués pour les administratifs, (3) table 'RechercheClinique' invisible aux non-chercheurs, (4) traçabilité complète HIPAA. Combinaison optimale ?",
+    question: "SCÉNARIO COMPLET : Une entreprise Healthcare veut (1) accès patients uniquement aux médecins de leur service, (2) numéros de dossier masqués pour les administratifs, (3) table 'RechercheClinique' invisible aux non-chercheurs, (4) traçabilité complète HIPAA. Combinaison optimale ?",
+    opts: ["A. RLS + DDM + audit logs uniquement", "B. RLS (par service) + DDM (numéros dossier) + OLS (table RechercheClinique) + Purview Audit Logs", "C. CLS + OLS + audit logs — RLS n'est pas nécessaire", "D. OneLake Security Roles uniquement avec des rôles personnalisés par service"],
+    options: ["A. RLS + DDM + audit logs uniquement", "B. RLS (par service) + DDM (numéros dossier) + OLS (table RechercheClinique) + Purview Audit Logs", "C. CLS + OLS + audit logs — RLS n'est pas nécessaire", "D. OneLake Security Roles uniquement avec des rôles personnalisés par service"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. ❌ A : RLS + DDM ne cache pas la table. ❌ C : RLS est obligatoire pour filtrer selon le service. ❌ D : Les rôles OneLake ne supportent pas DDM/OLS.",
+    explanation: "✅ B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. ❌ A : RLS + DDM ne cache pas la table. ❌ C : RLS est obligatoire pour filtrer selon le service. ❌ D : Les rôles OneLake ne supportent pas DDM/OLS."
+  },
+  {
+    id: 13,
+    category: "Delta & Perf",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "OPTIMIZE/VACUUM",
+    q: "Un data engineer exécute OPTIMIZE sur une table Gold depuis l'éditeur SQL du Fabric Warehouse. L'opération échoue. Quelle est la cause ?",
+    question: "Un data engineer exécute OPTIMIZE sur une table Gold depuis l'éditeur SQL du Fabric Warehouse. L'opération échoue. Quelle est la cause ?",
+    opts: ["A. OPTIMIZE requiert des droits Admin sur le workspace", "B. OPTIMIZE et VACUUM ne sont pas supportés dans le SQL Editor du Warehouse — utiliser Spark", "C. La table Gold doit être partitionnée pour supporter OPTIMIZE", "D. OPTIMIZE requiert que V-Order soit désactivé d'abord"],
+    options: ["A. OPTIMIZE requiert des droits Admin sur le workspace", "B. OPTIMIZE et VACUUM ne sont pas supportés dans le SQL Editor du Warehouse — utiliser Spark", "C. La table Gold doit être partitionnée pour supporter OPTIMIZE", "D. OPTIMIZE requiert que V-Order soit désactivé d'abord"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. ❌ A : Les Contributors peuvent l'exécuter via Spark. ❌ C : OPTIMIZE fonctionne sur toutes les tables Delta. ❌ D : V-Order et OPTIMIZE sont totalement compatibles.",
+    explanation: "✅ B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. ❌ A : Les Contributors peuvent l'exécuter via Spark. ❌ C : OPTIMIZE fonctionne sur toutes les tables Delta. ❌ D : V-Order et OPTIMIZE sont totalement compatibles."
+  },
+  {
+    id: 14,
+    category: "Delta & Perf",
+    diff: "Expert",
+    difficulty: "Expert",
+    color: "purple",
+    tag: "Liquid Clustering",
+    q: "Une nouvelle table de faits est créée dans un Lakehouse Gold. Les requêtes Power BI filtrent typiquement sur ClientID et Region. L'équipe hésite entre partitionnement Hive-style et Liquid Clustering. Quelle est la recommandation ?",
+    question: "Une nouvelle table de faits est créée dans un Lakehouse Gold. Les requêtes Power BI filtrent typiquement sur ClientID et Region. L'équipe hésite entre partitionnement Hive-style et Liquid Clustering. Quelle est la recommandation ?",
+    opts: ["A. Partitionner par ClientID — cardinalité élevée pour un meilleur file skipping", "B. Partitionner par Region + Liquid Clustering sur ClientID", "C. Liquid Clustering sur (ClientID, Region) — incompatible avec le partitionnement Hive-style", "D. Partitionner par DateVente + Z-ORDER sur ClientID et Region"],
+    options: ["A. Partitionner par ClientID — cardinalité élevée pour un meilleur file skipping", "B. Partitionner par Region + Liquid Clustering sur ClientID", "C. Liquid Clustering sur (ClientID, Region) — incompatible avec le partitionnement Hive-style", "D. Partitionner par DateVente + Z-ORDER sur ClientID et Region"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. ❌ A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. ❌ B : Les deux ne peuvent pas coexister. ❌ D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements.",
+    explanation: "✅ C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. ❌ A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. ❌ B : Les deux ne peuvent pas coexister. ❌ D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements."
+  },
+  {
+    id: 15,
+    category: "Delta & Perf",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "V-Order",
+    q: "Un rapport Power BI en mode Direct Lake affiche des performances dégradées sur une table Gold de 500 millions de lignes. Le data engineer vérifie et constate que V-Order est désactivé sur cette table. Quelle est la commande correcte pour activer V-Order sur la table existante ?",
+    question: "Un rapport Power BI en mode Direct Lake affiche des performances dégradées sur une table Gold de 500 millions de lignes. Le data engineer vérifie et constate que V-Order est désactivé sur cette table. Quelle est la commande correcte pour activer V-Order sur la table existante ?",
+    opts: ["A. ALTER TABLE gold.FactVentes SET TBLPROPERTIES ('delta.parquet.vorder.enabled' = 'true');", "B. OPTIMIZE gold.FactVentes WITH VORDER;", "C. spark.conf.set(\"spark.sql.parquet.vorder.enabled\", \"true\");", "D. CREATE TABLE gold.FactVentes_vorder CLONE gold.FactVentes WITH VORDER;"],
+    options: ["A. ALTER TABLE gold.FactVentes SET TBLPROPERTIES ('delta.parquet.vorder.enabled' = 'true');", "B. OPTIMIZE gold.FactVentes WITH VORDER;", "C. spark.conf.set(\"spark.sql.parquet.vorder.enabled\", \"true\");", "D. CREATE TABLE gold.FactVentes_vorder CLONE gold.FactVentes WITH VORDER;"],
+    ans: 0,
+    answer: 0,
+    exp: "✅ A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. ❌ B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. ❌ C : spark.conf.set n'applique le paramètre que pour la session active. ❌ D : Cette syntaxe de clonage avec V-Order n'existe pas.",
+    explanation: "✅ A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. ❌ B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. ❌ C : spark.conf.set n'applique le paramètre que pour la session active. ❌ D : Cette syntaxe de clonage avec V-Order n'existe pas."
+  },
+  {
+    id: 16,
+    category: "Calculation Groups",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Calculation Groups",
+    q: "Un analyste BI doit créer YTD, MTD, QTD, et MoM pour 12 mesures différentes (CA, Marge, Quantité, etc.) dans un Semantic Model. Quelle approche évite de créer 48 mesures DAX ?",
+    question: "Un analyste BI doit créer YTD, MTD, QTD, et MoM pour 12 mesures différentes (CA, Marge, Quantité, etc.) dans un Semantic Model. Quelle approche évite de créer 48 mesures DAX ?",
+    opts: ["A. Créer 48 mesures avec DATESYTD(), DATESMTD(), etc. pour chaque KPI", "B. Créer un Calculation Group avec 4 Calculation Items — SELECTEDMEASURE() s'applique à toutes les mesures", "C. Utiliser des Field Parameters pour dynamiser les périodes", "D. Créer une table de paramètres M avec les 4 périodes et une mesure SWITCH()"],
+    options: ["A. Créer 48 mesures avec DATESYTD(), DATESMTD(), etc. pour chaque KPI", "B. Créer un Calculation Group avec 4 Calculation Items — SELECTEDMEASURE() s'applique à toutes les mesures", "C. Utiliser des Field Parameters pour dynamiser les périodes", "D. Créer une table de paramètres M avec les 4 périodes et une mesure SWITCH()"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. ❌ A : Cela multiplierait inutilement le nombre de mesures. ❌ C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. ❌ D : SWITCH() oblige à coder en dur chaque mesure dans la formule.",
+    explanation: "✅ B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. ❌ A : Cela multiplierait inutilement le nombre de mesures. ❌ C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. ❌ D : SWITCH() oblige à coder en dur chaque mesure dans la formule."
+  },
+  {
+    id: 17,
+    category: "Calculation Groups",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Precedence",
+    q: "Un Semantic Model a deux Calculation Groups : 'Time Intelligence' (YTD, MTD) avec Precedence = 10, et 'Devise' (EUR, USD, GBP) avec Precedence = 20. Un utilisateur sélectionne YTD dans le slicer Time Intelligence et EUR dans le slicer Devise. Dans quel ordre les Calculation Groups s'appliquent-ils ?",
+    question: "Un Semantic Model a deux Calculation Groups : 'Time Intelligence' (YTD, MTD) avec Precedence = 10, et 'Devise' (EUR, USD, GBP) avec Precedence = 20. Un utilisateur sélectionne YTD dans le slicer Time Intelligence et EUR dans le slicer Devise. Dans quel ordre les Calculation Groups s'appliquent-ils ?",
+    opts: ["A. Time Intelligence d'abord (Precedence 10), puis Devise (Precedence 20)", "B. Devise d'abord (Precedence 20 = plus haute priorité), puis Time Intelligence", "C. Les deux s'appliquent simultanément — l'ordre n'a pas d'importance", "D. Un seul Calculation Group peut être actif — il faut une logique SWITCH() pour combiner"],
+    options: ["A. Time Intelligence d'abord (Precedence 10), puis Devise (Precedence 20)", "B. Devise d'abord (Precedence 20 = plus haute priorité), puis Time Intelligence", "C. Les deux s'appliquent simultanément — l'ordre n'a pas d'importance", "D. Un seul Calculation Group peut être actif — il faut une logique SWITCH() pour combiner"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. ❌ A : Precedence 20 passe avant 10. ❌ C : Les groups s'exécutent de façon séquentielle. ❌ D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes.",
+    explanation: "✅ B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. ❌ A : Precedence 20 passe avant 10. ❌ C : Les groups s'exécutent de façon séquentielle. ❌ D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes."
+  },
+  {
+    id: 18,
+    category: "Query Folding",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Query Folding",
+    q: "Un Dataflow Gen2 ingère des données depuis Azure SQL Database (600 millions de lignes). Le refresh prend 3 heures. L'analyse montre que le Query Folding est inactif à cause d'une transformation Table.Buffer() ajoutée en début de pipeline. Quelle est la solution immédiate ?",
+    question: "Un Dataflow Gen2 ingère des données depuis Azure SQL Database (600 millions de lignes). Le refresh prend 3 heures. L'analyse montre que le Query Folding est inactif à cause d'une transformation Table.Buffer() ajoutée en début de pipeline. Quelle est la solution immédiate ?",
+    opts: ["A. Augmenter la capacité Fabric pour accélérer le traitement Power Query", "B. Déplacer Table.Buffer() à la fin du pipeline, après tous les filtres et agrégations", "C. Remplacer Dataflow Gen2 par un Notebook PySpark", "D. Activer le Query Folding dans les paramètres du connecteur Azure SQL"],
+    options: ["A. Augmenter la capacité Fabric pour accélérer le traitement Power Query", "B. Déplacer Table.Buffer() à la fin du pipeline, après tous les filtres et agrégations", "C. Remplacer Dataflow Gen2 par un Notebook PySpark", "D. Activer le Query Folding dans les paramètres du connecteur Azure SQL"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. ❌ A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. ❌ C : Changer d'outil demande beaucoup plus de temps de développement. ❌ D : Le folding est automatique, il n'existe pas de paramètre d'activation.",
+    explanation: "✅ B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. ❌ A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. ❌ C : Changer d'outil demande beaucoup plus de temps de développement. ❌ D : Le folding est automatique, il n'existe pas de paramètre d'activation."
+  },
+  {
+    id: 19,
+    category: "Architecture",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Direct Lake",
+    q: "Un rapport Power BI en mode Direct Lake on SQL pointe vers le SQL Analytics Endpoint d'un Lakehouse. Le rapport est soudainement 10x plus lent. L'investigation montre que la source de données est maintenant une vue SQL (CREATE VIEW) au lieu de la table Delta directe. Quelle est la cause du ralentissement ?",
+    question: "Un rapport Power BI en mode Direct Lake on SQL pointe vers le SQL Analytics Endpoint d'un Lakehouse. Le rapport est soudainement 10x plus lent. L'investigation montre que la source de données est maintenant une vue SQL (CREATE VIEW) au lieu de la table Delta directe. Quelle est la cause du ralentissement ?",
+    opts: ["A. Les vues SQL ne sont pas supportées par Direct Lake — erreur de connexion", "B. Direct Lake a basculé en mode DirectQuery car la source est une vue SQL — les requêtes s'exécutent maintenant à la demande", "C. La vue SQL n'a pas de V-Order — activer V-Order sur la vue", "D. Le SQL Analytics Endpoint ne supporte pas les vues pour Direct Lake"],
+    options: ["A. Les vues SQL ne sont pas supportées par Direct Lake — erreur de connexion", "B. Direct Lake a basculé en mode DirectQuery car la source est une vue SQL — les requêtes s'exécutent maintenant à la demande", "C. La vue SQL n'a pas de V-Order — activer V-Order sur la vue", "D. Le SQL Analytics Endpoint ne supporte pas les vues pour Direct Lake"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. ❌ A : Les vues SQL sont acceptées mais forcent le DirectQuery. ❌ C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. ❌ D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake.",
+    explanation: "✅ B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. ❌ A : Les vues SQL sont acceptées mais forcent le DirectQuery. ❌ C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. ❌ D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake."
+  },
+  {
+    id: 20,
+    category: "Architecture",
+    diff: "Expert",
+    difficulty: "Expert",
+    color: "purple",
+    tag: "Direct Lake",
+    q: "Un équipe data a réduit la rétention VACUUM à 24 heures sur la table Gold FactVentes pour économiser du stockage. Deux jours plus tard, les utilisateurs signalent des erreurs dans les rapports Power BI en Direct Lake. Quelle est la cause et la solution ?",
+    question: "Un équipe data a réduit la rétention VACUUM à 24 heures sur la table Gold FactVentes pour économiser du stockage. Deux jours plus tard, les utilisateurs signalent des erreurs dans les rapports Power BI en Direct Lake. Quelle est la cause et la solution ?",
+    opts: ["A. VACUUM a corrompu la table Delta — recréer la table depuis Silver", "B. Le Semantic Model Direct Lake référence des fichiers Parquet supprimés par VACUUM — augmenter la rétention à 168h minimum et déclencher un refresh", "C. 24 heures de rétention VACUUM est correcte — le problème vient d'un autre facteur", "D. Direct Lake ne supporte pas VACUUM — désactiver VACUUM sur les tables Gold"],
+    options: ["A. VACUUM a corrompu la table Delta — recréer la table depuis Silver", "B. Le Semantic Model Direct Lake référence des fichiers Parquet supprimés par VACUUM — augmenter la rétention à 168h minimum et déclencher un refresh", "C. 24 heures de rétention VACUUM est correcte — le problème vient d'un autre facteur", "D. Direct Lake ne supporte pas VACUUM — désactiver VACUUM sur les tables Gold"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). ❌ A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. ❌ C : 24h est trop agressif pour la coexistence avec Direct Lake. ❌ D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante.",
+    explanation: "✅ B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). ❌ A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. ❌ C : 24h est trop agressif pour la coexistence avec Direct Lake. ❌ D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante."
+  },
+  {
+    id: 21,
+    category: "Activator",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Activator",
+    q: "Une équipe veut être alertée automatiquement quand le CA journalier d'une région chute de plus de 15% par rapport à la veille. Les données arrivent via Eventstream depuis un Event Hub. Quelle architecture est la plus appropriée ?",
+    question: "Une équipe veut être alertée automatiquement quand le CA journalier d'une région chute de plus de 15% par rapport à la veille. Les données arrivent via Eventstream depuis un Event Hub. Quelle architecture est la plus appropriée ?",
+    opts: ["A. Pipeline Data Factory avec trigger toutes les heures qui compare le CA dans le Warehouse", "B. Eventstream → Eventhouse + Activator avec règle DECREASES > 15% → notification Teams", "C. Notebook PySpark planifié toutes les heures avec envoi d'email via spark.sendEmail()", "D. Power BI Scheduled Alert sur le rapport CA journalier"],
+    options: ["A. Pipeline Data Factory avec trigger toutes les heures qui compare le CA dans le Warehouse", "B. Eventstream → Eventhouse + Activator avec règle DECREASES > 15% → notification Teams", "C. Notebook PySpark planifié toutes les heures avec envoi d'email via spark.sendEmail()", "D. Power BI Scheduled Alert sur le rapport CA journalier"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. ❌ A : Les Pipelines sont batch et périodiques. ❌ C : Un Notebook Spark est trop lourd pour du push temps réel. ❌ D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative.",
+    explanation: "✅ B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. ❌ A : Les Pipelines sont batch et périodiques. ❌ C : Un Notebook Spark est trop lourd pour du push temps réel. ❌ D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative."
+  },
+  {
+    id: 22,
+    category: "Activator",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Heartbeat",
+    q: "Des capteurs IoT envoient des données toutes les 30 secondes via Eventstream. L'équipe opérationnelle doit être alertée si un capteur n'envoie plus de données depuis plus de 5 minutes (panne potentielle). Quelle règle Activator utiliser ?",
+    question: "Des capteurs IoT envoient des données toutes les 30 secondes via Eventstream. L'équipe opérationnelle doit être alertée si un capteur n'envoie plus de données depuis plus de 5 minutes (panne potentielle). Quelle règle Activator utiliser ?",
+    opts: ["A. THRESHOLD — déclencher si la valeur dépasse un seuil", "B. BECOMES — déclencher quand la condition passe de false à true", "C. HEARTBEAT — déclencher en cas d'absence de données pendant la durée définie", "D. EXIT RANGE — déclencher si la valeur sort d'une plage"],
+    options: ["A. THRESHOLD — déclencher si la valeur dépasse un seuil", "B. BECOMES — déclencher quand la condition passe de false à true", "C. HEARTBEAT — déclencher en cas d'absence de données pendant la durée définie", "D. EXIT RANGE — déclencher si la valeur sort d'une plage"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. ❌ A : THRESHOLD surveille les valeurs. ❌ B : BECOMES suit les transitions d'état. ❌ D : EXIT RANGE surveille les sorties de plages.",
+    explanation: "✅ C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. ❌ A : THRESHOLD surveille les valeurs. ❌ B : BECOMES suit les transitions d'état. ❌ D : EXIT RANGE surveille les sorties de plages."
+  },
+  {
+    id: 23,
+    category: "Copilot & IA",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Copilot",
+    q: "Un client utilise Microsoft Fabric avec un Trial SKU (60 jours gratuits). Il veut activer Copilot pour ses data scientists. L'admin Fabric a activé Copilot dans les tenant settings. Pourquoi Copilot reste-t-il indisponible ?",
+    question: "Un client utilise Microsoft Fabric avec un Trial SKU (60 jours gratuits). Il veut activer Copilot pour ses data scientists. L'admin Fabric a activé Copilot dans les tenant settings. Pourquoi Copilot reste-t-il indisponible ?",
+    opts: ["A. Copilot nécessite une licence Microsoft 365 E5 séparée", "B. Le Trial SKU ne supporte pas Copilot — une capacité F2+ achetée est requise", "C. Copilot doit être activé au niveau du workspace, pas du tenant", "D. Copilot n'est disponible que pour les rôles Admin et Member — pas les data scientists"],
+    options: ["A. Copilot nécessite une licence Microsoft 365 E5 séparée", "B. Le Trial SKU ne supporte pas Copilot — une capacité F2+ achetée est requise", "C. Copilot doit être activé au niveau du workspace, pas du tenant", "D. Copilot n'est disponible que pour les rôles Admin et Member — pas les data scientists"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. ❌ A : Aucune licence M365 E5 n'est requise. ❌ C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. ❌ D : Tous les rôles d'écriture peuvent utiliser Copilot.",
+    explanation: "✅ B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. ❌ A : Aucune licence M365 E5 n'est requise. ❌ C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. ❌ D : Tous les rôles d'écriture peuvent utiliser Copilot."
+  },
+  {
+    id: 24,
+    category: "Copilot & IA",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Fabric IQ",
+    q: "L'équipe veut créer un agent IA qui répond aux questions en langage naturel sur les données du Lakehouse Gold, du Warehouse et des rapports Power BI, en maintenant le contexte métier de l'organisation. Quelle feature Fabric est la plus adaptée ?",
+    question: "L'équipe veut créer un agent IA qui répond aux questions en langage naturel sur les données du Lakehouse Gold, du Warehouse et des rapports Power BI, en maintenant le contexte métier de l'organisation. Quelle feature Fabric est la plus adaptée ?",
+    opts: ["A. Copilot dans les Notebooks — génération de code PySpark en langage naturel", "B. Power BI Q&A — questions en langage naturel sur les données du rapport", "C. Fabric IQ Data Agent — agent IA avec accès multi-sources et contexte Ontology", "D. Azure OpenAI Service + Python SDK — construire un agent personnalisé"],
+    options: ["A. Copilot dans les Notebooks — génération de code PySpark en langage naturel", "B. Power BI Q&A — questions en langage naturel sur les données du rapport", "C. Fabric IQ Data Agent — agent IA avec accès multi-sources et contexte Ontology", "D. Azure OpenAI Service + Python SDK — construire un agent personnalisé"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. ❌ A : Copilot Notebook sert à la génération de code. ❌ B : Power BI Q&A est limité à un seul Semantic Model. ❌ D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe.",
+    explanation: "✅ C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. ❌ A : Copilot Notebook sert à la génération de code. ❌ B : Power BI Q&A est limité à un seul Semantic Model. ❌ D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe."
+  },
+  {
+    id: 25,
+    category: "Formats PBI",
+    diff: "Facile",
+    difficulty: "Facile",
+    color: "green",
+    tag: "PBIP",
+    q: "Une équipe de 8 développeurs BI doit collaborer sur le même Semantic Model Power BI avec un suivi de version Git et la possibilité de faire des code reviews des rôles RLS. Quel format de fichier Power BI utiliser ?",
+    question: "Une équipe de 8 développeurs BI doit collaborer sur le même Semantic Model Power BI avec un suivi de version Git et la possibilité de faire des code reviews des rôles RLS. Quel format de fichier Power BI utiliser ?",
+    opts: ["A. .pbix — le format standard, le plus compatible", "B. .pbit — template sans données", "C. .pbip — fichiers texte TMDL, compatible Git avec diff propre", "D. .pbids — fichier de connexion à la source"],
+    options: ["A. .pbix — le format standard, le plus compatible", "B. .pbit — template sans données", "C. .pbip — fichiers texte TMDL, compatible Git avec diff propre", "D. .pbids — fichier de connexion à la source"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. ❌ A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. ❌ B : Le format .pbit est un template vide non destiné au travail collaboratif. ❌ D : Le format .pbids sert uniquement à stocker des infos de connexion.",
+    explanation: "✅ C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. ❌ A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. ❌ B : Le format .pbit est un template vide non destiné au travail collaboratif. ❌ D : Le format .pbids sert uniquement à stocker des infos de connexion."
+  },
+  {
+    id: 26,
+    category: "Formats PBI",
+    diff: "Moyen",
+    difficulty: "Moyen",
+    color: "amber",
+    tag: "Purview",
+    q: "Un rapport .pbix avec un sensitivity label 'Hautement Confidentiel' incluant un chiffrement Purview est exporté et envoyé par email à un partenaire. Le partenaire ne peut pas ouvrir le fichier. Quelle est la cause ?",
+    question: "Un rapport .pbix avec un sensitivity label 'Hautement Confidentiel' incluant un chiffrement Purview est exporté et envoyé par email à un partenaire. Le partenaire ne peut pas ouvrir le fichier. Quelle est la cause ?",
+    opts: ["A. Le format .pbix ne supporte pas les sensitivity labels", "B. L'email a corrompu le fichier binaire .pbix", "C. Le partenaire n'a pas les permissions Purview nécessaires pour déchiffrer le fichier", "D. Les sensitivity labels n'affectent pas les exports — le fichier devrait s'ouvrir normalement"],
+    options: ["A. Le format .pbix ne supporte pas les sensitivity labels", "B. L'email a corrompu le fichier binaire .pbix", "C. Le partenaire n'a pas les permissions Purview nécessaires pour déchiffrer le fichier", "D. Les sensitivity labels n'affectent pas les exports — le fichier devrait s'ouvrir normalement"],
+    ans: 2,
+    answer: 2,
+    exp: "✅ C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. ❌ A : Le format .pbix supporte les sensitivity labels. ❌ B : L'email ne corrompt pas le fichier. ❌ D : Les labels restreignent l'accès même après export.",
+    explanation: "✅ C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. ❌ A : Le format .pbix supporte les sensitivity labels. ❌ B : L'email ne corrompt pas le fichier. ❌ D : Les labels restreignent l'accès même après export."
+  },
+  {
+    id: 27,
+    category: "Formats PBI",
+    diff: "Difficile",
+    difficulty: "Difficile",
+    color: "red",
+    tag: "Deployment Pipelines",
+    q: "Depuis février 2026, une promotion depuis le workspace Test vers Prod via Deployment Pipeline échoue avec l'erreur : 'Semantic Model not supported'. Le Semantic Model fonctionne parfaitement en Test. Quelle est la cause la plus probable ?",
+    question: "Depuis février 2026, une promotion depuis le workspace Test vers Prod via Deployment Pipeline échoue avec l'erreur : 'Semantic Model not supported'. Le Semantic Model fonctionne parfaitement en Test. Quelle est la cause la plus probable ?",
+    opts: ["A. Les Deployment Pipelines ne supportent plus les Semantic Models — utiliser Git", "B. Le Semantic Model utilise le format legacy non migré vers Enhanced Metadata (PBIR)", "C. Le Semantic Model dépasse la limite de taille du Deployment Pipeline", "D. Les rôles RLS ne sont pas compatibles entre Test et Prod"],
+    options: ["A. Les Deployment Pipelines ne supportent plus les Semantic Models — utiliser Git", "B. Le Semantic Model utilise le format legacy non migré vers Enhanced Metadata (PBIR)", "C. Le Semantic Model dépasse la limite de taille du Deployment Pipeline", "D. Les rôles RLS ne sont pas compatibles entre Test et Prod"],
+    ans: 1,
+    answer: 1,
+    exp: "✅ B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). ❌ A : Les Deployment Pipelines supportent toujours les modèles sémantiques. ❌ C : La taille n'empêche pas la promotion. ❌ D : Les rôles RLS ne bloquent pas le support de l'item.",
+    explanation: "✅ B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). ❌ A : Les Deployment Pipelines supportent toujours les modèles sémantiques. ❌ C : La taille n'empêche pas la promotion. ❌ D : Les rôles RLS ne bloquent pas le support de l'item."
+  }
 ];
+
+const SECU_QS = ALL_QUESTIONS.filter(q => q.category === "Sécurité");
+const scenarios = SECU_QS;
 
 /* ─────────────── QUIZ COMPONENT ─────────────── */
 function Quiz({ qs }) {
@@ -186,33 +617,36 @@ function Quiz({ qs }) {
   const [rev, setRev] = useState({});
   return (
     <div>
-      {qs.map(q=>{
-        const s=sel[q.id], r=rev[q.id];
+      {qs.map(q => {
+        const s = sel[q.id], r = rev[q.id];
         return (
-          <Card key={q.id} accent={C[q.color]||C.blue}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:"0.75rem"}}>
-              <Badge text={`Q${q.id}`} color="blue"/>
-              <Badge text={q.diff} color={q.color}/>
-              {q.tag&&<Badge text={q.tag} color="slate"/>}
+          <Card key={q.id} accent={C[q.color] || C.blue}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
+              <Badge text={`Q${q.id}`} color="blue" />
+              <Badge text={q.diff || q.difficulty} color={q.color} />
+              {q.tag && <Badge text={q.tag} color="slate" />}
             </div>
-            <p style={{fontSize:14,color:"#1f2937",marginBottom:"0.75rem",fontWeight:500,lineHeight:1.5}}>{q.q}</p>
-            <div style={{display:"flex",flexDirection:"column",gap:6,marginBottom:"0.75rem"}}>
-              {q.opts.map((opt,i)=>{
-                let bg="#f9fafb",border="1px solid #e5e7eb",col="#374151";
-                if(r){if(i===q.ans){bg="#dcfce7";border="1px solid #86efac";col="#15803d";}else if(s===i){bg="#fee2e2";border="1px solid #fca5a5";col="#b91c1c";}}
-                else if(s===i){bg="#dbeafe";border="1px solid #93c5fd";col=C.blue;}
-                return <button key={i} id={`quiz-q${q.id}-opt-${i}`} onClick={()=>!r&&setSel(p=>({...p,[q.id]:i}))} style={{background:bg,border,borderRadius:6,padding:"8px 12px",cursor:r?"default":"pointer",textAlign:"left",fontSize:13,color:col,transition:"all 0.15s"}}>{opt}</button>;
+            <p style={{ fontSize: 14, color: "#1f2937", marginBottom: "0.75rem", fontWeight: 500, lineHeight: 1.5 }}>{q.q || q.question}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: "0.75rem" }}>
+              {(q.opts || q.options).map((opt, i) => {
+                let bg = "#f9fafb", border = "1px solid #e5e7eb", col = "#374151";
+                if (r) {
+                  if (i === q.ans || i === q.answer) { bg = "#dcfce7"; border = "1px solid #86efac"; col = "#15803d"; }
+                  else if (s === i) { bg = "#fee2e2"; border = "1px solid #fca5a5"; col = "#b91c1c"; }
+                }
+                else if (s === i) { bg = "#dbeafe"; border = "1px solid #93c5fd"; col = C.blue; }
+                return <button key={i} id={`quiz-q${q.id}-opt-${i}`} onClick={() => !r && setSel(p => ({ ...p, [q.id]: i }))} style={{ background: bg, border, borderRadius: 6, padding: "8px 12px", cursor: r ? "default" : "pointer", textAlign: "left", fontSize: 13, color: col, transition: "all 0.15s" }}>{opt}</button>;
               })}
             </div>
-            <div style={{display:"flex",gap:8}}>
-              <button id={`quiz-q${q.id}-reveal-btn`} onClick={()=>s!==undefined&&setRev(p=>({...p,[q.id]:true}))} disabled={s===undefined} style={{background:s!==undefined?C.blue:"#d1d5db",color:"#fff",border:"none",borderRadius:6,padding:"6px 14px",fontSize:13,cursor:s!==undefined?"pointer":"not-allowed",fontWeight:600}}>Voir la réponse</button>
-              <button id={`quiz-q${q.id}-reset-btn`} onClick={()=>{setSel(p=>{const n={...p};delete n[q.id];return n;});setRev(p=>{const n={...p};delete n[q.id];return n;});}} style={{background:"transparent",border:"1px solid #d1d5db",borderRadius:6,padding:"6px 14px",fontSize:13,cursor:"pointer",color:"#6b7280"}}>Reset</button>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button id={`quiz-q${q.id}-reveal-btn`} onClick={() => s !== undefined && setRev(p => ({ ...p, [q.id]: true }))} disabled={s === undefined} style={{ background: s !== undefined ? C.blue : "#d1d5db", color: "#fff", border: "none", borderRadius: 6, padding: "6px 14px", fontSize: 13, cursor: s !== undefined ? "pointer" : "not-allowed", fontWeight: 600 }}>Voir la réponse</button>
+              <button id={`quiz-q${q.id}-reset-btn`} onClick={() => { setSel(p => { const n = { ...p }; delete n[q.id]; return n; }); setRev(p => { const n = { ...p }; delete n[q.id]; return n; }); }} style={{ background: "transparent", border: "1px solid #d1d5db", borderRadius: 6, padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#6b7280" }}>Reset</button>
             </div>
-            {r&&(
-              <div style={{marginTop:"0.75rem",padding:"0.75rem 1rem",background:"#f0fdf4",borderRadius:8,border:"1px solid #bbf7d0"}}>
-                <p style={{fontSize:13,color:"#166534",margin:"0 0 0.4rem",fontWeight:600}}>✅ {q.opts[q.ans]}</p>
-                <p style={{fontSize:13,color:"#166534",margin:0,lineHeight:1.5}}>{q.exp}</p>
-                {q.code&&<Code code={q.code}/>}
+            {r && (
+              <div style={{ marginTop: "0.75rem", padding: "0.75rem 1rem", background: "#f0fdf4", borderRadius: 8, border: "1px solid #bbf7d0" }}>
+                <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 600 }}>✅ {(q.opts || q.options)[q.ans || q.answer]}</p>
+                <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.5 }}>{q.exp || q.explanation}</p>
+                {q.code && <Code code={q.code} />}
               </div>
             )}
           </Card>
@@ -222,15 +656,217 @@ function Quiz({ qs }) {
   );
 }
 
-/* ─────────────── QUIZ DATA ─────────────── */
-const SECU_QS = [
-  {id:1,diff:"Facile",color:"green",tag:"CLS",q:"Les analystes financiers doivent voir toutes les colonnes SAUF 'Salaire' et 'BonusAnnuel'. Quelle solution ?",opts:["A. Row-Level Security (RLS)","B. Column-Level Security (CLS) — DENY sur les colonnes sensibles","C. Dynamic Data Masking (DDM)","D. Object-Level Security (OLS)"],ans:1,exp:"CLS via DENY sur les colonnes spécifiques. RLS filtre des lignes, DDM masque sans cacher, OLS cache des tables entières.",code:"DENY SELECT ON dbo.Employes(Salaire, BonusAnnuel) TO [AnalystesFinanciers];"},
-  {id:2,diff:"Moyen",color:"amber",tag:"RLS",q:"Un Viewer voit TOUTES les données malgré une politique RLS configurée. Quelle est la cause probable ?",opts:["A. RLS ne fonctionne pas dans Fabric Warehouse","B. L'utilisateur est Admin ou Member — ces rôles bypasse RLS","C. La politique RLS n'est pas activée","D. RLS doit être configuré dans Power BI Desktop uniquement"],ans:1,exp:"Les rôles Admin, Member et Contributor bypassent RLS. Seuls les Viewers et utilisateurs avec permission Read item-level sont soumis à RLS."},
-  {id:3,diff:"Moyen",color:"amber",tag:"DDM",q:"L'équipe dev doit tester avec des données réalistes sans voir les vrais numéros de carte de crédit. Quelle fonctionnalité ?",opts:["A. Row-Level Security","B. Column-Level Security","C. Dynamic Data Masking (DDM)","D. Object-Level Security"],ans:2,exp:"DDM remplace les valeurs par des masques (ex: XXXX-1234) sans supprimer la structure. Les développeurs voient le format, pas les vraies valeurs.",code:"ALTER TABLE dbo.Clients\nALTER COLUMN NumCarte ADD MASKED WITH (FUNCTION = 'partial(0,\"XXXX-XXXX-XXXX-\",4)');"},
-  {id:4,diff:"Difficile",color:"red",tag:"OneLake",q:"OneLake Security est activé sur un Lakehouse. Un utilisateur est Contributor. Peut-il lire les fichiers protégés par les OneLake Data Access Roles ?",opts:["A. Non — les Contributors sont soumis aux OneLake Security Roles","B. Oui — Admin, Member et Contributor bypasse OneLake Security par défaut","C. Cela dépend de la configuration du tenant","D. Non — ils doivent avoir le rôle DefaultReader"],ans:1,exp:"Admin, Member et Contributor bypassent OneLake Security Roles par défaut. Seuls les Viewers sont soumis aux contrôles granulaires."},
-  {id:5,diff:"Difficile",color:"red",tag:"OLS",q:"Vous voulez cacher une table 'DonnéesRH' entièrement — même les métadonnées ne doivent pas être visibles. Quelle approche ?",opts:["A. RLS avec un filtre DAX qui renvoie une table vide","B. CLS avec DENY sur toutes les colonnes","C. Object-Level Security (OLS) dans le semantic model","D. DDM sur toutes les colonnes"],ans:2,exp:"OLS cache tables et colonnes ENTIÈRES — même les métadonnées (nom, schéma). RLS filtre des lignes, CLS cache des colonnes mais le schéma reste visible, DDM masque des valeurs."},
-  {id:6,diff:"Expert",color:"purple",tag:"Defense in Depth",q:"COMPLET : Analystes régionaux (Europe/Asie/Amériques) ne voient que leur région, jamais la colonne 'MargeNette', numéros de compte masqués. Combinaison optimale ?",opts:["A. RLS uniquement avec des filtres complexes","B. RLS (filtrage par région) + CLS (masquer MargeNette) + DDM (numéros de compte)","C. OLS + DDM seulement","D. Créer une vue par région avec les colonnes autorisées"],ans:1,exp:"Defense in Depth : RLS pour les LIGNES par région, CLS pour interdire la COLONNE MargeNette, DDM pour masquer partiellement les numéros (format visible, valeur masquée)."},
-];
+/* ─────────────── UNIFIED QUIZ HUB ─────────────── */
+function QuizHub({ defaultCategory = "Tous" }) {
+  const [selectedCat, setSelectedCat] = useState(defaultCategory);
+  const [answers, setAnswers] = useState({});
+
+  const categories = ["Tous", ...new Set(ALL_QUESTIONS.map(q => q.category))];
+
+  const filteredQuestions = selectedCat === "Tous" 
+    ? ALL_QUESTIONS 
+    : ALL_QUESTIONS.filter(q => q.category === selectedCat);
+
+  const totalQuestions = filteredQuestions.length;
+  const revealedQuestions = filteredQuestions.filter(q => answers[q.id]?.revealed).length;
+  const correctQuestions = filteredQuestions.filter(q => {
+    const ans = answers[q.id];
+    return ans?.revealed && ans.selected === (q.ans !== undefined ? q.ans : q.answer);
+  }).length;
+
+  const percentComplete = totalQuestions > 0 ? Math.round((revealedQuestions / totalQuestions) * 100) : 0;
+
+  const handleSelect = (qId, optionIdx) => {
+    if (answers[qId]?.revealed) return;
+    setAnswers(prev => ({
+      ...prev,
+      [qId]: { ...prev[qId], selected: optionIdx }
+    }));
+  };
+
+  const handleReveal = (qId) => {
+    if (answers[qId]?.selected === undefined) return;
+    setAnswers(prev => ({
+      ...prev,
+      [qId]: { ...prev[qId], revealed: true }
+    }));
+  };
+
+  const handleResetQuestion = (qId) => {
+    setAnswers(prev => {
+      const copy = { ...prev };
+      delete copy[qId];
+      return copy;
+    });
+  };
+
+  const handleResetAll = () => {
+    setAnswers({});
+  };
+
+  return (
+    <div>
+      <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
+        Testez vos connaissances Fabric avec notre Quiz Hub unifié. Filtrez par catégorie, suivez votre score en direct et préparez-vous efficacement aux examens DP-600 et DP-700.
+      </p>
+
+      <Card title="Tableau de Bord du Quiz" accent={C.indigo} icon="📊">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center", marginBottom: "1rem" }}>
+          <div>
+            <div style={{ fontSize: 13, color: "#475569", marginBottom: 4 }}>Score global pour les questions affichées :</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: C.indigo }}>
+              {correctQuestions} / {revealedQuestions} <span style={{ fontSize: 14, fontWeight: 500, color: "#64748b" }}>corrects ({revealedQuestions} validées sur {totalQuestions})</span>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <button 
+              onClick={handleResetAll} 
+              style={{
+                background: "transparent",
+                border: "1px solid #cbd5e1",
+                borderRadius: 8,
+                padding: "6px 16px",
+                fontSize: 13,
+                fontWeight: 600,
+                color: "#475569",
+                cursor: "pointer",
+                transition: "all 0.2s"
+              }}
+            >
+              🔄 Réinitialiser le Quiz
+            </button>
+          </div>
+        </div>
+
+        <div style={{ width: "100%", background: "#e2e8f0", borderRadius: 999, height: 10, overflow: "hidden", marginBottom: 6 }}>
+          <div style={{ width: `${percentComplete}%`, background: `linear-gradient(90deg, ${C.blue}, ${C.indigo})`, height: "100%", transition: "width 0.4s ease" }} />
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#64748b" }}>
+          <span>Progression : {percentComplete}% complété</span>
+          <span>{revealedQuestions} / {totalQuestions} questions</span>
+        </div>
+      </Card>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: "1.5rem" }}>
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCat(cat)}
+            style={{
+              padding: "6px 12px",
+              borderRadius: 20,
+              fontSize: 12.5,
+              fontWeight: 600,
+              cursor: "pointer",
+              background: selectedCat === cat ? C.indigo : "#f1f5f9",
+              color: selectedCat === cat ? "#ffffff" : "#475569",
+              border: "none",
+              transition: "all 0.2s"
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div>
+        {filteredQuestions.map(q => {
+          const state = answers[q.id];
+          const hasSelected = state?.selected !== undefined;
+          const isRevealed = state?.revealed;
+          const correctAnsIdx = q.ans !== undefined ? q.ans : q.answer;
+
+          return (
+            <Card key={q.id} accent={C[q.color] || C.blue}>
+              <div style={{ display: "flex", alignItems: "center", justifyRules: "space-between", marginBottom: "0.75rem", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <Badge text={`Q${q.id}`} color="blue" />
+                  <Badge text={q.diff || q.difficulty} color={q.color} />
+                  {q.tag && <Badge text={q.tag} color="slate" />}
+                </div>
+                <div style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>{q.category}</div>
+              </div>
+              <p style={{ fontSize: 14.5, color: "#1f2937", marginBottom: "0.75rem", fontWeight: 600, lineHeight: 1.55 }}>
+                {q.q || q.question}
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: "0.75rem" }}>
+                {(q.opts || q.options).map((opt, i) => {
+                  let bg = "#f9fafb", border = "1px solid #e2e8f0", col = "#374151";
+                  if (isRevealed) {
+                    if (i === correctAnsIdx) { bg = "#dcfce7"; border = "1px solid #86efac"; col = "#15803d"; }
+                    else if (state.selected === i) { bg = "#fee2e2"; border = "1px solid #fca5a5"; col = "#b91c1c"; }
+                  }
+                  else if (state?.selected === i) { bg = "#dbeafe"; border = "1px solid #93c5fd"; col = C.blue; }
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => handleSelect(q.id, i)}
+                      style={{
+                        background: bg,
+                        border,
+                        borderRadius: 8,
+                        padding: "10px 14px",
+                        cursor: isRevealed ? "default" : "pointer",
+                        textAlign: "left",
+                        fontSize: 13,
+                        color: col,
+                        fontWeight: state?.selected === i ? 600 : 400,
+                        transition: "all 0.15s"
+                      }}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  onClick={() => handleReveal(q.id)}
+                  disabled={!hasSelected || isRevealed}
+                  style={{
+                    background: hasSelected && !isRevealed ? C.blue : "#cbd5e1",
+                    color: "#ffffff",
+                    border: "none",
+                    borderRadius: 8,
+                    padding: "8px 16px",
+                    fontSize: 13,
+                    cursor: hasSelected && !isRevealed ? "pointer" : "not-allowed",
+                    fontWeight: 700,
+                    transition: "all 0.2s"
+                  }}
+                >
+                  Voir la réponse
+                </button>
+                <button
+                  onClick={() => handleResetQuestion(q.id)}
+                  style={{
+                    background: "transparent",
+                    border: "1px solid #cbd5e1",
+                    borderRadius: 8,
+                    padding: "8px 16px",
+                    fontSize: 13,
+                    cursor: "pointer",
+                    color: "#64748b",
+                    transition: "all 0.2s"
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
+              {isRevealed && (
+                <div style={{ marginTop: "0.75rem", padding: "0.875rem 1.25rem", background: "#f0fdf4", borderRadius: 8, border: "1px solid #bbf7d0" }}>
+                  <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 700 }}>✅ {(q.opts || q.options)[correctAnsIdx]}</p>
+                  <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.6 }}>{q.exp || q.explanation}</p>
+                  {q.code && <Code code={q.code} />}
+                </div>
+              )}
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 
 
@@ -245,11 +881,104 @@ const HomePage = ({ onNav }) => (
         Préparation complète DP-600 & DP-700
       </p>
       <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-        {[{label:"21 sections",icon:"📚"},{label:"18 scénarios certif",icon:"🎯"},{label:"Fiche mémo",icon:"📌"},{label:"Pièges classiques",icon:"⚠️"},{label:"Mis à jour juin 2026",icon:"🔄"}].map((b,i)=>(
+        {[{label:"21 sections",icon:"📚"},{label:"27 scénarios certif",icon:"🎯"},{label:"Fiche mémo",icon:"📌"},{label:"Pièges classiques",icon:"⚠️"},{label:"Mis à jour 2026",icon:"🔄"}].map((b,i)=>(
           <span key={i} style={{background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"4px 10px",fontSize:12,fontWeight:500}}>{b.icon} {b.label}</span>
         ))}
       </div>
     </div>
+
+    {/* EXAM GUIDED PATHS */}
+    <Card title="Parcours de Préparation Guidés (DP-600 & DP-700)" accent={C.indigo} icon="🗺️">
+      <p style={{ fontSize: 14, color: "#374151", marginBottom: "1rem", lineHeight: 1.6 }}>
+        Sélectionnez votre examen pour afficher le parcours de révision recommandé par étape :
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 15 }}>
+        {/* DP-600 Path */}
+        <div style={{ background: `${C.blue}08`, border: `1px solid ${C.blue}30`, borderRadius: 12, padding: "1.25rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
+            <span style={{ fontSize: 20 }}>📊</span>
+            <div style={{ fontWeight: 800, fontSize: 15, color: C.blue }}>Parcours DP-600</div>
+          </div>
+          <div style={{ fontSize: 12, color: "#64748b", marginBottom: "0.75rem" }}>Fabric Analytics Engineer (Core Developer)</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {[
+              { id: "architecture", step: "1", label: "Architecture Fabric" },
+              { id: "deployment", step: "2", label: "Ingestion & CI/CD" },
+              { id: "queryfolding", step: "3", label: "Query Folding" },
+              { id: "optimization", step: "4", label: "Optimisation Delta" },
+              { id: "semantic", step: "5", label: "Semantic Models" },
+              { id: "calcgroups", step: "6", label: "Calculation Groups" }
+            ].map(item => (
+              <button
+                key={item.id}
+                onClick={() => onNav(item.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#ffffff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: 6,
+                  padding: "6px 10px",
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  color: "#334155",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  transition: "all 0.2s"
+                }}
+              >
+                <span style={{ background: C.blue, color: "#ffffff", borderRadius: "50%", width: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 }}>{item.step}</span>
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* DP-700 Path */}
+        <div style={{ background: `${C.purple}08`, border: `1px solid ${C.purple}30`, borderRadius: 12, padding: "1.25rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
+            <span style={{ fontSize: 20 }}>🛡️</span>
+            <div style={{ fontWeight: 800, fontSize: 15, color: C.purple }}>Parcours DP-700</div>
+          </div>
+          <div style={{ fontSize: 12, color: "#64748b", marginBottom: "0.75rem" }}>Fabric Data Engineer (Enterprise Administrator)</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {[
+              { id: "overview", step: "1", label: "Sécurité & bypass" },
+              { id: "auth", step: "2", label: "Auth & Réseau" },
+              { id: "workspace", step: "3", label: "Workspace & Capacité" },
+              { id: "onelake", step: "4", label: "OneLake Security" },
+              { id: "git", step: "5", label: "Git & Collab." },
+              { id: "datastores", step: "6", label: "Data Stores" },
+              { id: "secgov", step: "7", label: "SecGov Expert" }
+            ].map(item => (
+              <button
+                key={item.id}
+                onClick={() => onNav(item.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#ffffff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: 6,
+                  padding: "6px 10px",
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  color: "#334155",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  transition: "all 0.2s"
+                }}
+              >
+                <span style={{ background: C.purple, color: "#ffffff", borderRadius: "50%", width: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 }}>{item.step}</span>
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Card>
 
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:10,marginBottom:"1.5rem"}}>
       {Object.entries(GROUPS).filter(([k])=>k!=="intro").map(([k,g])=>{
@@ -280,7 +1009,9 @@ const HomePage = ({ onNav }) => (
           </div>
         ))}
       </div>
-      <Important>Admin, Member et Contributor bypassent RLS, CLS et OneLake Security. Seuls les Viewers et utilisateurs avec permission Read item-level sont soumis aux contrôles granulaires.</Important>
+      <Important>
+        <strong>Bypass de sécurité :</strong> Dans le Warehouse (T-SQL) et OneLake, Admin, Member et Contributor contournent RLS, CLS et OneLake Security. Mais dans le <strong>Semantic Model Power BI</strong>, le rôle Contributor est SOUMIS à la RLS/OLS. Seuls les Viewers ou les permissions d'item sont soumis partout.
+      </Important>
     </Card>
 
     <Card title="Les 7 workloads Fabric" accent={C.purple} icon="⚙️">
@@ -335,12 +1066,12 @@ const OptimizationSection = () => (
     </Card>
 
     <Card title="V-Order — Comprendre le comportement par workload" accent={C.blue} icon="📐">
-      <T headers={["Workload/Context","V-Order activé par défaut ?","Irréversible ?"]}
+      <T headers={["Workload/Context","V-Order activé par défaut ?","Détails & Runtimes"]}
          rows={[
-           ["Fabric Warehouse","✅ Oui — activé et ne peut pas être désactivé","⚠️ Oui — irréversible dans Warehouse"],
-           ["Spark (nouveaux workspaces F SKU)","❌ Non — désactivé par défaut depuis 2025","Non, configurable par session ou table"],
-           ["Spark (anciens workspaces / Runtime 1.3)","✅ Oui — activé par défaut","Non"],
-           ["Dataflow Gen2","✅ Oui — activé lors de l'écriture","Non"],
+           ["Fabric Warehouse","✅ Oui (Toujours activé)","Toujours activé par défaut. Impossible à désactiver (irréversible)."],
+           ["Spark (Runtime 1.2 / Pre-2025)","✅ Oui","Activé par défaut sur les anciennes versions de runtime."],
+           ["Spark (Runtime 1.3+ / F SKU 2025+)","❌ Non (Désactivé)","Désactivé par défaut. Doit être activé manuellement."],
+           ["Dataflow Gen2","✅ Oui","Activé par défaut lors du chargement dans OneLake."],
          ]}
       />
       <Code code={`-- Activer V-Order sur une table existante (Spark SQL)
@@ -351,6 +1082,9 @@ df.write.format("delta").option("parquet.vorder.enabled","true").saveAsTable("go
 
 -- Forcer V-Order pour la session Spark
 spark.conf.set("spark.sql.parquet.vorder.enabled","true")`}/>
+      <Warn>
+        <strong>Piège Examen DP-700 / DP-600 :</strong> Si vous utilisez Spark Runtime 1.3+ ou créez un nouveau workspace en 2025+, V-Order est <strong>désactivé par défaut</strong> pour Spark. Si les performances Direct Lake déclinent, vous devez l'activer explicitement via la configuration de session Spark ou les propriétés de table.
+      </Warn>
       <Tip>Exam DP-700 : V-Order désactivé par défaut en Spark pour les nouveaux workspaces. Irréversible dans Warehouse. Ces deux points sont des questions fréquentes.</Tip>
     </Card>
 
@@ -572,6 +1306,9 @@ SELECT
     ai_generate_text('Résume ce historique client en 2 phrases: ' + History) AS Summary
 FROM dbo.ClientHistory;`}/>
       <Important>Ces fonctions AI native dans Warehouse (preview mars 2026) permettent d'exécuter des opérations ML/NLP directement en T-SQL sans quitter le Warehouse — utile pour l'enrichissement de données Gold.</Important>
+      <Warn>
+        <strong>Restrictions géographiques (Cross-Geo AI) :</strong> Par défaut, les fonctions IA natives T-SQL (<code>AI.GENERATE_TEXT</code>, etc.) sont uniquement disponibles dans les régions <strong>East US, West US 2, West Europe, Southeast Asia</strong>. Pour toute autre région, le Fabric Admin doit activer le paramètre <strong>"Allow cross-geo AI processing"</strong> (traitement transfrontalier de l'IA) dans le portail d'administration.
+      </Warn>
     </Card>
 
     <Card title="Data Science — Cycle ML complet dans Fabric" accent={C.purple} icon="🔬">
@@ -598,10 +1335,29 @@ const MemoSection = () => (
     <Card title={`Règle d'or : Bypass de sécurité`} accent={C.red} icon="🚨">
       <div style={{background:"#fff1f2",borderRadius:8,padding:"1rem",border:"1px solid #fecdd3",fontSize:13,color:"#881337"}}>
         <div style={{fontWeight:700,fontSize:15,marginBottom:8}}>TOUJOURS mémoriser :</div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
-          {["Admin ⟹ bypass RLS, CLS, DDM, OneLake Security","Member ⟹ bypass RLS, CLS, DDM, OneLake Security","Contributor ⟹ bypass RLS, CLS, DDM, OneLake Security","Viewer ⟹ SOUMIS à RLS, CLS, DDM, OneLake Security","Item-level Read ⟹ SOUMIS aux contrôles granulaires","UNMASK permission ⟹ bypass DDM"].map((s,i)=>(
-            <div key={i} style={{padding:"4px 8px",background:i<3?"#ffe4e6":"#dcfce7",borderRadius:5,fontWeight:i<3?600:400}}>{s}</div>
-          ))}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+          <div>
+            <div style={{fontWeight:700,fontSize:13,marginBottom:4,color:"#991b1b"}}>Dans Fabric Warehouse (T-SQL) :</div>
+            {["Admin ⟹ bypass RLS, CLS, DDM, OneLake Security",
+              "Member ⟹ bypass RLS, CLS, DDM, OneLake Security",
+              "Contributor ⟹ bypass RLS, CLS, DDM, OneLake Security",
+              "Viewer ⟹ soumis à RLS, CLS, DDM, OneLake Security",
+              "Item-level Read ⟹ soumis aux contrôles granulaires"
+            ].map((s,i)=>(
+              <div key={i} style={{padding:"4px 8px",background:i<3?"#ffe4e6":"#dcfce7",borderRadius:5,marginBottom:3,fontWeight:i<3?600:400}}>{s}</div>
+            ))}
+          </div>
+          <div>
+            <div style={{fontWeight:700,fontSize:13,marginBottom:4,color:"#991b1b"}}>Dans Semantic Model Power BI :</div>
+            {["Admin ⟹ bypass RLS, OLS",
+              "Member ⟹ bypass RLS, OLS",
+              "Contributor ⟹ SOUMIS à RLS, OLS (différence !)",
+              "Viewer ⟹ soumis à RLS, OLS",
+              "Build permission ⟹ soumis à RLS, OLS"
+            ].map((s,i)=>(
+              <div key={i} style={{padding:"4px 8px",background:i<2?"#ffe4e6":"#dcfce7",borderRadius:5,marginBottom:3,fontWeight:i<2?600:400}}>{s}</div>
+            ))}
+          </div>
         </div>
       </div>
     </Card>
@@ -697,7 +1453,7 @@ const PiegesSection = () => (
       {
         cat:"Sécurité", color:C.red,
         items:[
-          {p:"❌ Piège","t":"Admin/Member/Contributor bypass tout","d":"Ces 3 rôles contournent RLS, CLS, OneLake Security, et DDM. Pour tester la sécurité, utiliser un compte Viewer ou un utilisateur avec item-level Read uniquement."},
+          {p:"❌ Piège","t":"Contributor bypass tout","d":"Vrai uniquement dans le Warehouse T-SQL et OneLake. Dans le Semantic Model Power BI, le Contributor est SOUMIS à la RLS/OLS. Seuls Admin/Member contournent la sécurité dans tous les contextes. Pour tester la sécurité d'un modèle sémantique, un utilisateur Contributor convient pour vérifier la RLS."},
           {p:"❌ Piège","t":"DDM = vraie sécurité","d":"DDM masque visuellement les données mais un utilisateur avec UNMASK ou des droits admin voit les vraies valeurs. DDM = obfuscation, pas sécurité. Combiner avec CLS pour vraiment protéger."},
           {p:"❌ Piège","t":"OLS dans Warehouse = idem Semantic Model","d":"OLS (Object-Level Security) dans Power BI/Semantic Model ≠ OneLake OLS. Dans Warehouse, utiliser CLS (DENY) pour interdire des colonnes. OLS ne s'applique qu'au modèle sémantique."},
           {p:"❌ Piège","t":"UNMASK = accès global","d":"GRANT UNMASK TO permet de voir toutes les colonnes masquées. GRANT UNMASK ON table(colonne) TO est le grant granulaire sur une seule colonne."},
@@ -795,16 +1551,17 @@ const _SECTIONS_DATA = {
           rows={[
             ["Workspace Roles", "2", "Workspace", "Tous les items du workspace", "—"],
             ["Item Permissions", "2", "Item individuel", "Un seul item (Lakehouse, Warehouse...)", "—"],
-            ["RLS", "3", "Warehouse / Semantic model", "Lignes (filtrage horizontal)", "Admin, Member, Contributor"],
+            ["RLS (Warehouse)", "3", "Warehouse T-SQL", "Lignes (filtrage horizontal)", "Admin, Member, Contributor"],
+            ["RLS (Semantic Model)", "3", "Semantic Model Power BI", "Lignes (filtrage horizontal)", "Admin, Member uniquement (Contributor est soumis !)"],
             ["CLS", "3", "Warehouse", "Colonnes (accès interdit)", "Admin, Member, Contributor"],
-            ["OLS", "3", "Semantic model Power BI", "Tables/colonnes (invisibles)", "—"],
-            ["DDM", "3", "Warehouse", "Masquage de valeurs (format visible)", "unmask_permission"],
+            ["OLS", "3", "Semantic model Power BI", "Tables/colonnes (invisibles)", "Admin, Member uniquement (Contributor est soumis !)"],
+            ["DDM", "3", "Warehouse", "Masquage de valeurs (format visible)", "unmask_permission (ou Admin, Member, Contributor)"],
             ["OneLake Roles", "3", "Lakehouse / OneLake", "Fichiers/dossiers", "Admin, Member, Contributor"],
           ]}
         />
       </Card>
       <ExamTip>
-        Mémorisez que Admin, Member et Contributor bypasse RLS, CLS et OneLake Security. Seuls les Viewers et les utilisateurs avec permission Read item-level sont soumis à ces contrôles.
+        Mémorisez les nuances de bypass : dans le Warehouse, Contributor contourne RLS, CLS et OneLake Security. Dans le Semantic Model Power BI (Direct Lake/Import/DQ), Contributor est SOUMIS à la RLS/OLS. Seuls Admin et Member y échappent.
       </ExamTip>
     </div>
   ),
@@ -865,13 +1622,15 @@ const _SECTIONS_DATA = {
         <Table
           headers={["Rôle", "Lire", "Modifier", "Partager", "Gérer membres", "Bypass sécurité data"]}
           rows={[
-            ["Admin", "✅", "✅", "✅", "✅ (tous rôles)", "✅ OUI"],
-            ["Member", "✅", "✅", "✅", "✅ (Contributor/Viewer)", "✅ OUI"],
-            ["Contributor", "✅", "✅", "❌", "❌", "✅ OUI"],
-            ["Viewer", "✅ (lecture seule)", "❌", "❌", "❌", "❌ NON — soumis RLS/CLS/OneLake"],
+            ["Admin", "✅", "✅", "✅", "✅ (tous rôles)", "✅ OUI (Warehouse & Semantic Model)"],
+            ["Member", "✅", "✅", "✅", "✅ (Contributor/Viewer)", "✅ OUI (Warehouse & Semantic Model)"],
+            ["Contributor", "✅", "✅", "❌", "❌", "⚠️ OUI dans Warehouse / ❌ NON dans Semantic Model (soumis RLS/OLS)"],
+            ["Viewer", "✅ (lecture seule)", "❌", "❌", "❌", "❌ NON (soumis à tous les contrôles)"],
           ]}
         />
-        <Warning>Admin, Member et Contributor bypassent RLS, CLS et OneLake Security. Utilisez le rôle Viewer + item permissions pour les utilisateurs soumis à la sécurité granulaire.</Warning>
+        <Warning>
+          <strong>Différence critique examen :</strong> Dans le Warehouse (T-SQL), le rôle Contributor bypass RLS, CLS, DDM et OneLake Security. Mais dans le Semantic Model Power BI, le rôle Contributor est SOUMIS aux règles RLS et OLS !
+        </Warning>
       </Card>
       <Card title="Item-Level Permissions" accent={colors.teal} icon="🔑">
         <p style={{ fontSize: 14, color: "#374151", margin: "0 0 0.75rem", lineHeight: 1.6 }}>
@@ -962,7 +1721,8 @@ EXEC sp_set_session_context @key = N'Region', @value = 'Europe';
       <Card title="RLS — Points clés certification" accent={colors.green} icon="📌">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>Seule l'<strong>authentification Entra ID</strong> est supportée pour RLS dans Warehouse</li>
-          <li>Les rôles <strong>Admin/Member/Contributor bypasse RLS</strong> — seuls Viewers sont filtrés</li>
+          <li>Dans le <strong>Warehouse (T-SQL)</strong>, Admin/Member/Contributor bypassent RLS.</li>
+          <li>Dans le <strong>Semantic Model Power BI</strong>, seul Admin/Member bypassent RLS. Le rôle <strong>Contributor est SOUMIS à la RLS</strong>.</li>
           <li><strong>FILTER PREDICATE</strong> = restreint SELECT. <strong>BLOCK PREDICATE</strong> = restreint INSERT/UPDATE/DELETE</li>
           <li>Pour <strong>tester le RLS</strong> sans changer d'utilisateur : <code>EXECUTE AS USER = 'user@domain.com'</code></li>
           <li>Dans Power BI : tester avec "Afficher en tant que rôle" dans Power BI Desktop</li>
@@ -1550,6 +2310,106 @@ delta_table.alias("cible").merge(
             </div>
           ))}
         </div>
+      </Card>
+
+      <Card title="SCD Type 2 (Slowly Changing Dimensions) dans Fabric" accent={colors.teal} icon="🔄">
+        <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
+          La dimension à variation lente (SCD) Type 2 conserve l'historique complet en créant une nouvelle ligne pour chaque modification de données.
+        </p>
+        <T headers={["Colonne clé", "Type", "Rôle"]}
+           rows={[
+             ["ClientSK (Surrogate Key)", "INT / BIGINT", "Clé unique artificielle auto-incrémentée (clé primaire de la dimension)."],
+             ["ClientID (Business Key)", "INT", "Clé naturelle provenant du système source (peut se répéter si plusieurs versions)."],
+             ["DateDebut", "DATE / DATETIME", "Date de début de validité de cet enregistrement."],
+             ["DateFin", "DATE / DATETIME", "Date de fin de validité (NULL ou '9999-12-31' si actif)."],
+             ["IsCurrent", "BOOLEAN / INT", "Indicateur (true/1 = version actuelle, false/0 = version archivée)."],
+           ]}
+        />
+        <CodeBlock code={`# PySpark (Spark SQL) : Fusion Silver -> Gold SCD Type 2
+# 1. Identifier les enregistrements modifiés et nouveaux
+# 2. Merger dans la table Gold avec historisation
+
+from pyspark.sql.functions import col, lit, current_date
+
+# Récupérer les données Silver (nouveautés)
+df_silver = spark.read.table("silver.Clients")
+
+# 1. Fermer les anciennes versions
+# 2. Insérer les nouvelles versions
+# (Pour simplifier à l'examen, on utilise la syntaxe MERGE INTO de Spark SQL)
+
+spark.sql("""
+MERGE INTO gold.DimClient AS cible
+USING (
+    -- Sélectionner les données à merger et préparer les lignes de mise à jour
+    SELECT NULL AS ClientSK, s.ClientID, s.Nom, s.Ville, current_date() AS DateDebut, CAST('9999-12-31' AS DATE) AS DateFin, true AS IsCurrent
+    FROM silver.Clients s
+    UNION ALL
+    SELECT NULL AS ClientSK, s.ClientID, s.Nom, s.Ville, current_date() AS DateDebut, current_date() AS DateFin, false AS IsCurrent
+    FROM silver.Clients s
+    JOIN gold.DimClient c ON s.ClientID = c.ClientID
+    WHERE c.IsCurrent = true AND (c.Nom != s.Nom OR c.Ville != s.Ville)
+) AS source
+ON cible.ClientID = source.ClientID AND cible.IsCurrent = true AND source.IsCurrent = false
+WHEN MATCHED THEN
+    UPDATE SET cible.DateFin = source.DateFin, cible.IsCurrent = false
+""")
+
+# Insérer ensuite les nouvelles lignes actives
+spark.sql("""
+INSERT INTO gold.DimClient
+SELECT NULL, s.ClientID, s.Nom, s.Ville, current_date(), CAST('9999-12-31' AS DATE), true
+FROM silver.Clients s
+LEFT JOIN gold.DimClient c ON s.ClientID = c.ClientID AND c.IsCurrent = true
+WHERE c.ClientID IS NULL OR (c.Nom != s.Nom OR c.Ville != s.Ville)
+""")`} />
+
+        <CodeBlock code={`-- T-SQL equivalent pour Fabric Warehouse
+-- (Dans Fabric Warehouse, les transactions T-SQL multi-statements sont supportées)
+
+-- 1. Fermer les versions existantes modifiées
+UPDATE gold.DimClient
+SET DateFin = GETDATE(), IsCurrent = 0
+FROM gold.DimClient c
+JOIN silver.Clients s ON c.ClientID = s.ClientID
+WHERE c.IsCurrent = 1 AND (c.Nom <> s.Nom OR c.Ville <> s.Ville);
+
+-- 2. Insérer les nouvelles lignes
+INSERT INTO gold.DimClient (ClientID, Nom, Ville, DateDebut, DateFin, IsCurrent)
+SELECT s.ClientID, s.Nom, s.Ville, GETDATE(), '9999-12-31', 1
+FROM silver.Clients s
+LEFT JOIN gold.DimClient c ON s.ClientID = c.ClientID AND c.IsCurrent = 1
+WHERE c.ClientID IS NULL OR (c.Nom <> s.Nom OR c.Ville <> s.Ville);`} />
+
+        <ExamTip>
+          <strong>SCD Type 1 vs Type 2 :</strong> Si l'examen dit "conserver uniquement la dernière valeur" ⟹ Type 1 (Simple UPDATE/MERGE). S'il dit "conserver l'historique complet des changements au cours du temps pour les rapports d'analyse" ⟹ Type 2.
+        </ExamTip>
+      </Card>
+
+      <Card title="Direct Lake Framing — Cycle de vie & Fallbacks" accent={colors.blue} icon="🖼️">
+        <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
+          Le <strong>Framing</strong> est l'opération par laquelle le Semantic Model en mode Direct Lake aligne ses métadonnées sur une version spécifique des fichiers Parquet d'une table Delta dans OneLake.
+        </p>
+        <T headers={["Concept", "Description", "Rôle / Impact"]}
+           rows={[
+             ["Auto-Framing", "Le modèle sémantique se met automatiquement à jour dès qu'une modification Delta est détectée.", "Activé par défaut. Peut provoquer des fallbacks temporaires si de grosses opérations d'écriture Spark sont en cours."],
+             ["Manual / API-Framing", "Le framing automatique est désactivé. Les mises à jour de version sont déclenchées par API/Pipeline.", "Recommandé en production. Évite les fluctuations de performance pendant les batchs de chargement de données."],
+             ["VACUUM agressif", "Exécuter VACUUM avec une rétention courte (ex: 24h) supprime les anciens fichiers physiques.", "Si le Semantic Model Direct Lake fait référence à un ancien snapshot Delta dont les fichiers ont été purgés par VACUUM, le rapport tombe immédiatement en erreur ou en fallback DirectQuery."],
+           ]}
+        />
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, margin: "0.75rem 0" }}>
+          <div style={{ fontWeight: 600, fontSize: 13, color: "#111827" }}>Bonnes pratiques Direct Lake Framing :</div>
+          <div style={{ fontSize: 12.5, color: "#374151", lineHeight: 1.5 }}>
+            • <strong>Désactiver l'auto-framing pendant l'ETL :</strong> Pendant vos pipelines de chargement dans le Lakehouse, utilisez les APIs de refresh pour couper l'auto-sync, charger vos tables Gold, puis déclencher un refresh manuel.
+            <br />
+            • <strong>Maintenir une rétention VACUUM de 7 jours (168h) minimum :</strong> Cela garantit que le modèle sémantique a le temps de se réaligner sur la dernière version sans que ses fichiers sources ne soient supprimés sous ses pieds.
+            <br />
+            • <strong>Éviter les colonnes calculées DAX complexes :</strong> Les colonnes calculées en DAX forcent le modèle à stocker ces données en mémoire locale, ralentissant le chargement et augmentant le risque de fallback DirectQuery.
+          </div>
+        </div>
+        <Warn>
+          Direct Lake ne fait pas de copie en mémoire à l'avance. Il mappe les fichiers Parquet en mémoire à la demande (paging). Si un fichier requis est supprimé par un VACUUM trop agressif, le moteur Power BI est contraint de basculer en mode <strong>DirectQuery</strong> via le SQL Endpoint pour reconstruire le dataset à la volée.
+        </Warn>
       </Card>
 
       {/* ── STREAMING ── */}
@@ -2376,15 +3236,15 @@ function GitSection() {
         {"Strategies Git adaptees au profil d'equipe, nombre de developpeurs, contraintes regionales et de conformite."}
       </p>
 
-      <Card title={"Regles fondamentales Git dans Fabric"} accent={C.teal} icon={"📋"}>
+      <Card title={"Règles fondamentales Git dans Fabric"} accent={C.teal} icon={"📋"}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
           {[
-            {r:"1 Workspace = 1 branche Git",d:"Un workspace ne peut etre connecte qu'a une seule branche a la fois. Regle absolue Fabric.",c:C.red},
-            {r:"Workspace = environnement LIVE",d:"Tout changement direct dans le workspace est immediatement visible de tous les membres.",c:C.red},
-            {r:"Branch out to new workspace",d:"Creer un workspace isole connecte a une feature branch en quelques clics depuis Source Control.",c:C.green},
-            {r:"Donnees jamais dans Git",d:"cache.abf, fichiers Parquet, Delta — jamais commites. Seules les definitions TMDL et JSON.",c:C.amber},
-            {r:"Providers supportes",d:"Azure DevOps (Azure Repos) et GitHub. GitLab non supporte nativement.",c:C.blue},
-            {r:"Items non versionnables",d:"Certains items Fabric ne supportent pas Git (items preview). Verifier la liste officielle.",c:C.purple},
+            {r:"1 Workspace = 1 branche Git",d:"Un workspace ne peut être connecté qu'a une seule branche à la fois. Règle absolue Fabric.",c:C.red},
+            {r:"Workspace = environnement LIVE",d:"Tout changement direct dans le workspace est immédiatement visible de tous les membres.",c:C.red},
+            {r:"Branch out to new workspace",d:"Créer un workspace isolé connecté à une feature branch en quelques clics depuis Source Control.",c:C.green},
+            {r:"Données jamais dans Git",d:"cache.abf, fichiers Parquet, Delta — jamais commités. Seules les définitions TMDL et JSON.",c:C.amber},
+            {r:"Providers supportés",d:"Azure DevOps, GitHub, et GitLab (Preview).",c:C.blue},
+            {r:"Items non versionnables",d:"Certains items Fabric ne supportent pas Git (items preview). Vérifier la liste officielle.",c:C.purple},
           ].map((item,i)=>(
             <div key={i} style={{padding:"0.75rem",background:"#f9fafb",borderRadius:8,borderLeft:`3px solid ${item.c}`}}>
               <div style={{fontWeight:700,fontSize:12,color:item.c,marginBottom:3}}>{item.r}</div>
@@ -2392,6 +3252,22 @@ function GitSection() {
             </div>
           ))}
         </div>
+      </Card>
+
+      <Card title={"Compatibilité des Providers Git"} accent={C.blue} icon={"☁️"}>
+        <p style={{fontSize:13,color:"#374151",marginBottom:"0.5rem"}}>
+          Fabric s'intègre avec différents hébergeurs Git. Voici les statuts de compatibilité actuels :
+        </p>
+        <T headers={["Provider", "Statut", "Fonctionnalités & Limitations"]}
+           rows={[
+             ["Azure DevOps (Repos)", "✅ GA", "Intégration native, synchronisation bidirectionnelle fluide, authentification automatique par jeton Azure."],
+             ["GitHub (Cloud/Enterprise)", "✅ GA", "Support complet, authentification par OAuth, synchronisation automatique des branches et items."],
+             ["GitLab (Cloud/Self-Managed)", "⚠️ Preview", "Support en preview publique. Limitations de configuration (nécessite des tokens personnels manuels, proxy réseau parfois obligatoire, intégration moins fluide)."],
+           ]}
+        />
+        <Tip>
+          Pour l'examen, mémorisez que GitLab est en **Preview** avec limitations de jeton/proxy, tandis qu'Azure DevOps et GitHub sont pleinement supportés (**GA**).
+        </Tip>
       </Card>
 
       <Card title={"Selectionner votre profil"} accent={C.purple} icon={"👥"}>
@@ -2981,6 +3857,166 @@ spark.sql(f"""
     </div>
   );
 }
+/* ─────────────── CALCULATION GROUPS SECTION ─────────────── */
+function CalcGroupsSection() {
+  const cgQuestions = ALL_QUESTIONS.filter(q => q.id === 16 || q.id === 17);
+  return (
+    <div>
+      <STitle sub="Time Intelligence, SELECTEDMEASURE(), Precedence, TMDL et interactions — expertise DAX pour DP-700.">🧮 Calculation Groups (DAX)</STitle>
+
+      <Card title="Définition et Utilité" accent={C.purple} icon="📐">
+        <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
+          Les <strong>Calculation Groups</strong> permettent de réutiliser des formules de calcul complexes (comme la Time Intelligence) sur de nombreuses mesures existantes sans avoir à les dupliquer. Ils agissent comme des tables de filtres dynamiques où chaque ligne représente une formule (Calculation Item).
+        </p>
+        <T headers={["Concept", "Rôle", "Description"]}
+           rows={[
+             ["SELECTEDMEASURE()", "Référence dynamique", "Représente la mesure active sur laquelle le Calculation Item est appliqué."],
+             ["SELECTEDMEASURENAME()", "Nom de la mesure", "Renvoie le nom sous forme de chaîne de caractères (utile pour le formatage conditionnel)."],
+             ["ISSELECTEDMEASURE()", "Filtrage conditionnel", "Renvoie VRAI si la mesure en cours d'évaluation correspond à l'une des mesures passées en argument."],
+             ["Ordinal", "Ordre d'affichage", "Indicateur numérique (0-indexed) définissant l'ordre de tri des Calculation Items dans les visuels."],
+             ["Precedence", "Priorité d'évaluation", "Entier définissant l'ordre de priorité si plusieurs Calculation Groups sont appliqués (la priorité la plus élevée est évaluée en premier)."],
+           ]}
+        />
+      </Card>
+
+      <Card title="Exemple TMDL — Time Intelligence" accent={C.blue} icon="📄">
+        <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.5rem" }}>
+          Structure d'un Calculation Group défini au format TMDL (Tabular Model Definition Language) :
+        </p>
+        <Code code={`
+createOrReplace calculationGroup 'Time Intelligence'
+  precedence: 10
+  
+  calculationItem YTD = 
+    CALCULATE(
+      SELECTEDMEASURE(),
+      DATESYTD('Calendar'[Date])
+    )
+    
+  calculationItem MTD = 
+    CALCULATE(
+      SELECTEDMEASURE(),
+      DATESMTD('Calendar'[Date])
+    )
+    
+  calculationItem 'Prior Year' = 
+    CALCULATE(
+      SELECTEDMEASURE(),
+      SAMEPERIODLASTYEAR('Calendar'[Date])
+    )
+`} />
+      </Card>
+
+      <Card title="Les 3 Règles Critiques pour l'Examen (DP-700)" accent={C.red} icon="🚨">
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {[
+            {
+              t: "1. Ordre de Precedence",
+              d: "Si vous appliquez à la fois un groupe 'Devises' (Precedence = 20) et un groupe 'Time Intelligence' (Precedence = 10), la priorité la plus élevée (Devises) s'applique en premier. Le calcul de la devise enveloppe le calcul temporel."
+            },
+            {
+              t: "2. Désactivation de 'Discourage Implicit Measures'",
+              d: "Les Calculation Groups nécessitent que l'option 'Discourage Implicit Measures' soit désactivée (ou forcer les mesures explicites) dans le modèle sémantique. L'utilisateur final ne doit pas pouvoir glisser-déposer des colonnes numériques directement dans les visuels sans mesure DAX explicite."
+            },
+            {
+              t: "3. Différence fondamentale avec les Field Parameters",
+              d: "Les Field Parameters servent à modifier dynamiquement les axes, légendes, ou colonnes affichées dans un visuel (aspect structurel). Les Calculation Groups modifient la formule interne du calcul appliqué aux mesures existantes (aspect fonctionnel)."
+            }
+          ].map((item, i) => (
+            <div key={i} style={{ padding: "0.75rem", background: "#fff5f5", borderRadius: 8, borderLeft: `3px solid ${C.red}` }}>
+              <div style={{ fontWeight: 700, fontSize: 13, color: "#991b1b", marginBottom: 3 }}>{item.t}</div>
+              <div style={{ fontSize: 12.5, color: "#374151", lineHeight: 1.5 }}>{item.d}</div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <Card title="Tableau d'interaction et Limitations" accent={C.teal} icon="🔄">
+        <T headers={["Fonctionnalité", "Comportement avec Calculation Groups", "Impact / Résolution"]}
+           rows={[
+             ["RLS / OLS", "Parfaitement compatible.", "Les règles RLS s'appliquent sur les tables dimensionnelles normales sans perturber la logique du Calculation Group."],
+             ["Direct Lake", "Supporté.", "V-Order et Direct Lake fonctionnent normalement. Attention cependant aux fallbacks si les formules DAX utilisent des fonctions non supportées par Direct Lake."],
+             ["Format String", "Chaque Calculation Item peut définir son format string dynamique.", "Permet de retourner '$#,##0' pour les valeurs monétaires et '0.0%' pour les variations de pourcentage d'un même KPI."],
+             ["Implicit Measures", "Bloqué.", "Vous devez définir explicitement des mesures DAX (ex: [Total Ventes] = SUM(Ventes[Montant])) pour toutes les colonnes utilisées."],
+           ]}
+        />
+      </Card>
+
+      <Card title="Quiz Pratique : Calculation Groups" accent={C.amber} icon="🎯">
+        <Quiz qs={cgQuestions} />
+      </Card>
+    </div>
+  );
+}
+
+/* ─────────────── QUERY FOLDING SECTION ─────────────── */
+function QueryFoldingSection() {
+  const qfQuestions = ALL_QUESTIONS.filter(q => q.id === 18);
+  return (
+    <div>
+      <STitle sub="Délégation de requêtes, diagnostic visuel et stratégies d'optimisation dans Power Query Online.">🔍 Query Folding dans Dataflows Gen2</STitle>
+
+      <Card title="Principe de Délégation" accent={C.purple} icon="⚙️">
+        <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
+          Le <strong>Query Folding</strong> (délégation de requêtes) est la capacité de Power Query à convertir des transformations M en une seule requête SQL (ou autre langage natif) et à l'exécuter directement sur la source de données. Cela évite le transfert massif de données non filtrées sur le réseau.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: "0.5rem" }}>
+          <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", padding: "0.75rem", borderRadius: 8 }}>
+            <div style={{ fontWeight: 700, color: C.green, fontSize: 13 }}>Avec Query Folding (Recommandé)</div>
+            <div style={{ fontSize: 12, color: "#166534", marginTop: 4 }}>
+              Le moteur SQL source filtre, agrège et ne renvoie que les 1000 lignes nécessaires. Performance optimale.
+            </div>
+          </div>
+          <div style={{ background: "#fff1f2", border: "1px solid #fecdd3", padding: "0.75rem", borderRadius: 8 }}>
+            <div style={{ fontWeight: 700, color: C.red, fontSize: 13 }}>Sans Query Folding (À éviter)</div>
+            <div style={{ fontSize: 12, color: "#991b1b", marginTop: 4 }}>
+              Toutes les lignes (ex: 50 millions) sont chargées en mémoire dans Fabric, puis filtrées par le moteur Power Query Mashup. Lenteur extrême.
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <Card title="Diagnostic visuel dans Power Query Online" accent={C.blue} icon="👁️">
+        <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.5rem" }}>
+          Dans Dataflows Gen2, chaque étape appliquée à droite dispose d'un indicateur de pliage (Folding Indicator) :
+        </p>
+        <T headers={["Indicateur Visuel", "Signification", "Comportement"]}
+           rows={[
+             ["Plié (Folded — Icône Nuage/Base)", "L'étape est traduite et envoyée à la source.", "Délégation réussie. Aucun calcul local."],
+             ["Non Plié (Not Folded — Icône Ordinateur)", "L'étape est résolue localement par Power Query.", "Les données de l'étape précédente sont toutes téléchargées localement."],
+             ["Opaque / Inconnu (Opaque)", "Le statut ne peut pas être déterminé automatiquement.", "Considérer comme non plié pour des raisons de prudence ou vérifier la requête native."],
+           ]}
+        />
+        <Tip>Faites un clic droit sur une étape et vérifiez si l'option <strong>"View Native Query"</strong> est active. Si elle est grisée, le folding est rompu à cette étape.</Tip>
+      </Card>
+
+      <Card title="Transformations courantes qui BRISENT le folding" accent={C.red} icon="⚠️">
+        <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
+          <li><code>Table.Buffer()</code> : Gèle la table en mémoire locale, bloquant définitivement tout folding pour les étapes suivantes.</li>
+          <li><strong>Changements de type de données complexes</strong> : Convertir du texte en binaire ou utiliser des formats non standards pour la source.</li>
+          <li><strong>Merge de sources différentes</strong> : Fusionner une table SQL et un fichier CSV rompt le folding sur la partie SQL après la jointure.</li>
+          <li><strong>Appels de fonctions personnalisées</strong> : Toute étape appelant du code M personnalisé ou des API externes.</li>
+          <li><strong>Logique d'indexation</strong> : Ajouter une colonne d'index personnalisée sans clé primaire source.</li>
+        </ul>
+      </Card>
+
+      <Card title="Tableau de Stratégies de Préservation" accent={C.teal} icon="🛠️">
+        <T headers={["Objectif", "Stratégie recommandée", "Pourquoi ?"]}
+           rows={[
+             ["Filtrer les lignes", "Toujours filtrer (Filtres de date, région) dès la toute première étape.", "Permet de générer un WHERE SQL optimal à la source."],
+             ["Bufferisation", "Placer <code>Table.Buffer()</code> ou <code>Table.StopFolding()</code> uniquement à la fin si indispensable.", "Permet au folding de s'exécuter sur le maximum d'étapes en amont."],
+             ["Jointures", "Utiliser des vues SQL à la source pré-jointes si possible.", "Évite d'écrire des jointures complexes en M qui risquent de bloquer le moteur."],
+             ["Calculs", "Privilégier les fonctions standard de Power Query (ex: Date.Year) plutôt que des fonctions textuelles manuelles.", "Les fonctions standard disposent de convertisseurs natifs vers le SQL de la source."],
+           ]}
+        />
+      </Card>
+
+      <Card title="Quiz Pratique : Query Folding" accent={C.amber} icon="🎯">
+        <Quiz qs={qfQuestions} />
+      </Card>
+    </div>
+  );
+}
 
 
 export default function App() {
@@ -2994,14 +4030,10 @@ export default function App() {
     if (id === "copilot")      return <CopilotSection/>;
     if (id === "memo")         return <MemoSection/>;
     if (id === "pieges")       return <PiegesSection/>;
-    if (id === "scenarios")    return <div><STitle>🎯 Scénarios Sécurité</STitle><Quiz qs={SECU_QS}/></div>;
-    if (id === "archi_scenarios") return <ArchiScenariosSection/>;
-    if (id === "git")       return <GitSection/>;
-    if (id === "datastores")return <DataStoresSection/>;
-    if (id === "transform") return <TransformSection/>;
-    if (id === "semantic")  return <SemanticSection/>;
-    if (id === "aiready")   return <AIReadySection/>;
-    if (id === "secgov")    return <SecGovSection/>;
+    if (id === "scenarios")    return <QuizHub defaultCategory="Sécurité" />;
+    if (id === "archi_scenarios") return <QuizHub defaultCategory="Architecture" />;
+    if (id === "calcgroups")   return <CalcGroupsSection />;
+    if (id === "queryfolding") return <QueryFoldingSection />;
     if (id === "git")       return <GitSection/>;
     if (id === "datastores")return <DataStoresSection/>;
     if (id === "transform") return <TransformSection/>;
