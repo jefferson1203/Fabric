@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 /* ─────────────── DESIGN TOKENS ─────────────── */
 const C = {
@@ -3021,45 +3022,118 @@ export default function App() {
   const groupColor = activeSection ? GROUPS[activeSection.group]?.color : C.blue;
 
   return (
-    <div style={{fontFamily:"'Segoe UI',system-ui,sans-serif",maxWidth:960,margin:"0 auto",fontSize:14}}>
-      {/* HEADER */}
-      <div style={{background:`linear-gradient(135deg,#1e3a8a,${groupColor||C.blue})`,padding:"1rem 1.5rem 0",borderRadius:"12px 12px 0 0"}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-          <span style={{color:"#93c5fd",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase"}}>Microsoft Fabric — Guide Ultime 2026</span>
-          <span style={{color:"#bfdbfe",fontSize:11}}>DP-600 · DP-700</span>
+    <div className="app-container">
+      {/* LEFT COLUMN: MAIN CONTENT */}
+      <div className="main-content">
+        {/* HEADER */}
+        <div className="header-gradient" style={{ background: `linear-gradient(135deg, #1e3a8a, ${groupColor || C.blue})` }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+            <span style={{ color: "#93c5fd", fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>Microsoft Fabric — Guide Ultime 2026</span>
+            <span style={{ color: "#bfdbfe", fontSize: 11, fontWeight: 600 }}>DP-600 · DP-700</span>
+          </div>
+          <h1 style={{ fontSize: 24, fontWeight: 800, margin: 0, letterSpacing: "-0.5px" }}>
+            {active === "home" ? "🏠 Microsoft Fabric" : `${activeSection?.icon || ""} ${activeSection?.label || ""}`}
+          </h1>
         </div>
-        {/* GROUPED NAV */}
-        <div style={{display:"flex",overflowX:"auto",gap:0,paddingBottom:0}}>
-          {Object.entries(GROUPS).map(([gk,g])=>(
-            <div key={gk} style={{display:"flex",flexDirection:"column",marginRight:4}}>
-              <div style={{fontSize:9,fontWeight:700,color:g.color==="white"?"#93c5fd":g.color+"cc",letterSpacing:1,textTransform:"uppercase",padding:"2px 8px",marginBottom:2,whiteSpace:"nowrap"}}>{g.label}</div>
-              <div style={{display:"flex",gap:1}}>
-                {SECTIONS.filter(s=>s.group===gk).map(s=>(
-                  <button key={s.id} id={`nav-btn-${s.id}`} onClick={()=>setActive(s.id)} style={{
-                    background:active===s.id?"#fff":"transparent",
-                    color:active===s.id?"#1e3a8a":"#93c5fd",
-                    border:"none",padding:"7px 10px",cursor:"pointer",
-                    fontSize:11,fontWeight:active===s.id?700:400,
-                    whiteSpace:"nowrap",borderRadius:active===s.id?"6px 6px 0 0":0,
-                    transition:"all 0.15s",marginTop:active===s.id?0:4
-                  }}>
-                    <span style={{marginRight:3}}>{s.icon}</span>{s.label}
-                  </button>
-                ))}
+
+        {/* CONTENT */}
+        <div className="content-card">
+          {renderSection(active)}
+        </div>
+
+        <div style={{ textAlign: "center", padding: "0.75rem", fontSize: 11, color: "#94a3b8" }}>
+          Basé sur Microsoft Learn · learn.microsoft.com/fabric · Mis à jour juin 2026 · DP-600 / DP-700
+        </div>
+      </div>
+
+      {/* RIGHT COLUMN: STICKY SIDEBAR */}
+      <aside className="sidebar-container">
+        {/* Pinned Home / Accueil button */}
+        <div style={{
+          padding: "1rem",
+          borderBottom: "1px solid rgba(226, 232, 240, 0.8)",
+          background: "rgba(248, 250, 252, 0.9)",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)"
+        }}>
+          <button
+            id="nav-btn-home"
+            onClick={() => {
+              setActive("home");
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.5rem",
+              background: active === "home" ? "linear-gradient(135deg, #1e3a8a, #1d4ed8)" : "#ffffff",
+              color: active === "home" ? "#ffffff" : "#1e3a8a",
+              border: active === "home" ? "none" : "1px solid #cbd5e1",
+              borderRadius: 10,
+              padding: "0.75rem 1rem",
+              fontSize: 13.5,
+              fontWeight: 700,
+              cursor: "pointer",
+              boxShadow: active === "home" ? "0 4px 12px rgba(29, 78, 216, 0.2)" : "none",
+              transition: "all 0.2s ease"
+            }}
+          >
+            🏠 Retour à l'Accueil
+          </button>
+        </div>
+
+        {/* Scrollable list of category-grouped tabs */}
+        <div className="sidebar-scroll">
+          {Object.entries(GROUPS).filter(([gk]) => gk !== "intro").map(([gk, g]) => (
+            <div key={gk} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+              {/* Category Header */}
+              <div style={{
+                fontSize: 10,
+                fontWeight: 800,
+                color: g.color,
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                padding: "0.25rem 0.5rem",
+                borderBottom: `2px solid ${g.color}20`,
+                marginBottom: "0.25rem"
+              }}>
+                {g.label}
               </div>
+              {/* Tabs */}
+              {SECTIONS.filter(s => s.group === gk).map(s => (
+                <button
+                  key={s.id}
+                  id={`nav-btn-${s.id}`}
+                  onClick={() => {
+                    setActive(s.id);
+                    // Smooth scroll main content window to top on change
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className={`nav-btn ${active === s.id ? 'active' : ''}`}
+                  style={{
+                    background: active === s.id ? `${g.color}12` : "transparent",
+                    color: active === s.id ? g.color : "#475569",
+                    borderLeft: active === s.id ? `3px solid ${g.color}` : "3px solid transparent",
+                    paddingLeft: active === s.id ? "11px" : "12px", // align text nicely despite border
+                  }}
+                >
+                  <span style={{ fontSize: 14 }}>{s.icon}</span>
+                  <span style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap"
+                  }}>{s.label}</span>
+                </button>
+              ))}
             </div>
           ))}
         </div>
-      </div>
-
-      {/* CONTENT */}
-      <div style={{background:"#fff",padding:"2rem",border:"1px solid #e5e7eb",borderTop:"none",borderRadius:"0 0 12px 12px",minHeight:500}}>
-        {renderSection(active)}
-      </div>
-
-      <div style={{textAlign:"center",padding:"0.75rem",fontSize:11,color:"#9ca3af"}}>
-        Basé sur Microsoft Learn · learn.microsoft.com/fabric · Mis à jour juin 2026 · DP-600 / DP-700
-      </div>
+      </aside>
     </div>
   );
 }
