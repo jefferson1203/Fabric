@@ -17,35 +17,35 @@ const C = {
 /* ─────────────── COMPAT ALIASES (v1 section data uses these names) ─────────────── */
 /* ─────────────── NAV SECTIONS ─────────────── */
 const SECTIONS = [
-  { id:"home",       label:"Accueil",              icon:"🏠", group:"intro" },
-  { id:"overview",   label:"Sécurité",             icon:"🏛️", group:"secu" },
-  { id:"auth",       label:"Auth & Réseau",         icon:"🔐", group:"secu" },
-  { id:"workspace",  label:"Workspace",             icon:"🏢", group:"secu" },
-  { id:"rls",        label:"RLS",                   icon:"↔️", group:"secu" },
-  { id:"cls",        label:"CLS",                   icon:"📋", group:"secu" },
-  { id:"ols",        label:"OLS",                   icon:"👁️", group:"secu" },
-  { id:"ddm",        label:"DDM",                   icon:"🎭", group:"secu" },
-  { id:"onelake",    label:"OneLake Sec.",          icon:"🏔️", group:"secu" },
-  { id:"purview",    label:"Purview",               icon:"🛡️", group:"gov" },
-  { id:"catalogue",  label:"Catalog",               icon:"📚", group:"gov" },
-  { id:"architecture",label:"Architecture",         icon:"🏗️", group:"arch" },
-  { id:"deployment", label:"Ingestion CI/CD",       icon:"🚀", group:"arch" },
-  { id:"queryfolding",label:"Query Folding",        icon:"🔍", group:"arch" },
-  { id:"git",        label:"Git & Collab.",         icon:"🌿", group:"arch" },
-  { id:"pbiformats", label:"Formats PBI",           icon:"📄", group:"arch" },
-  { id:"datastores", label:"Data Stores",           icon:"🗄️", group:"ds" },
-  { id:"transform",  label:"Transform",             icon:"⚙️", group:"ds" },
-  { id:"semantic",   label:"Semantic Models",       icon:"📐", group:"ds" },
-  { id:"calcgroups", label:"Calc Groups",            icon:"🧮", group:"ds" },
-  { id:"aiready",    label:"AI-Ready Data",         icon:"🤖", group:"ds" },
-  { id:"secgov",     label:"SecGov Expert",         icon:"🔒", group:"ds" },
-  { id:"optimization",label:"Delta Optim.",         icon:"⚡", group:"perf" },
-  { id:"activator",  label:"Activator",             icon:"🔔", group:"perf" },
-  { id:"copilot",    label:"Copilot & AI",          icon:"🤖", group:"perf" },
-  { id:"scenarios",  label:"Quiz Hub (Sécu)",       icon:"🎯", group:"exam" },
-  { id:"archi_scenarios",label:"Quiz Hub (Archi)",  icon:"🧠", group:"exam" },
-  { id:"memo",       label:"Fiche Mémo",            icon:"📌", group:"exam" },
-  { id:"pieges",     label:"Pièges & Erreurs",      icon:"⚠️", group:"exam" },
+  { id:"home",       label:"Accueil",              icon:"", group:"intro" },
+  { id:"overview",   label:"Sécurité",             icon:"", group:"secu" },
+  { id:"auth",       label:"Auth & Réseau",          group:"secu" },
+  { id:"workspace",  label:"Workspace",              group:"secu" },
+  { id:"rls",        label:"RLS",                   icon:"", group:"secu" },
+  { id:"cls",        label:"CLS",                   icon:"", group:"secu" },
+  { id:"ols",        label:"OLS",                   icon:"", group:"secu" },
+  { id:"ddm",        label:"DDM",                    group:"secu" },
+  { id:"onelake",    label:"OneLake Sec.",          icon:"", group:"secu" },
+  { id:"purview",    label:"Purview",               icon:"", group:"gov" },
+  { id:"catalogue",  label:"Catalog",                group:"gov" },
+  { id:"architecture",label:"Architecture",         icon:"", group:"arch" },
+  { id:"deployment", label:"Ingestion CI/CD",       icon:"", group:"arch" },
+  { id:"queryfolding",label:"Query Folding",         group:"arch" },
+  { id:"git",        label:"Git & Collab.",          group:"arch" },
+  { id:"pbiformats", label:"Formats PBI",            group:"arch" },
+  { id:"datastores", label:"Data Stores",           icon:"", group:"ds" },
+  { id:"transform",  label:"Transform",             icon:"", group:"ds" },
+  { id:"semantic",   label:"Semantic Models",        group:"ds" },
+  { id:"calcgroups", label:"Calc Groups",             group:"ds" },
+  { id:"aiready",    label:"AI-Ready Data",          group:"ds" },
+  { id:"secgov",     label:"SecGov Expert",         icon:"", group:"ds" },
+  { id:"optimization",label:"Delta Optim.",          group:"perf" },
+  { id:"activator",  label:"Activator",              group:"perf" },
+  { id:"copilot",    label:"Copilot & AI",           group:"perf" },
+  { id:"scenarios",  label:"Quiz Hub (Sécu)",        group:"exam" },
+  { id:"archi_scenarios",label:"Quiz Hub (Archi)",   group:"exam" },
+  { id:"memo",       label:"Fiche Mémo",             group:"exam" },
+  { id:"pieges",     label:"Pièges & Erreurs",      icon:"", group:"exam" },
 ];
 
 const GROUPS = {
@@ -84,10 +84,10 @@ const Code = ({ code }) => (
   </pre>
 );
 
-const Card = ({ title, children, accent=C.blue, icon, noPad }) => (
+const Card = ({ title, children, accent=C.blue, noPad }) => (
   <div style={{border:"1px solid #e5e7eb",borderRadius:12,padding:noPad?"0":"1.25rem",marginBottom:"1rem",background:"#fff",borderLeft:`4px solid ${accent}`}}>
     {title&&<h3 style={{margin:"0 0 0.75rem",fontSize:15,fontWeight:600,color:"#111827",display:"flex",alignItems:"center",gap:8}}>
-      {icon&&<span>{icon}</span>}{title}
+      {title}
     </h3>}
     {children}
   </div>
@@ -101,21 +101,21 @@ const Badge = ({ text, color="blue" }) => {
 
 const Tip = ({ children }) => (
   <div style={{background:"#fefce8",border:"1px solid #fde047",borderRadius:8,padding:"0.75rem 1rem",margin:"0.75rem 0",fontSize:13.5}}>
-    <span style={{fontWeight:700,color:"#854d0e"}}>💡 Exam Tip · </span>
+    <span style={{fontWeight:700,color:"#854d0e"}}>Exam Tip · </span>
     <span style={{color:"#713f12"}}>{children}</span>
   </div>
 );
 
 const Warn = ({ children }) => (
   <div style={{background:"#fff7ed",border:"1px solid #fdba74",borderRadius:8,padding:"0.75rem 1rem",margin:"0.75rem 0",fontSize:13.5}}>
-    <span style={{fontWeight:700,color:"#c2410c"}}>⚠️ Attention · </span>
+    <span style={{fontWeight:700,color:"#c2410c"}}>Attention · </span>
     <span style={{color:"#9a3412"}}>{children}</span>
   </div>
 );
 
 const Important = ({ children }) => (
   <div style={{background:"#eff6ff",border:"1px solid #93c5fd",borderRadius:8,padding:"0.75rem 1rem",margin:"0.75rem 0",fontSize:13.5}}>
-    <span style={{fontWeight:700,color:C.blue}}>🔑 Point clé · </span>
+    <span style={{fontWeight:700,color:C.blue}}>Point clé · </span>
     <span style={{color:"#1e40af"}}>{children}</span>
   </div>
 );
@@ -164,7 +164,7 @@ function ScenarioCard({ scenario: s }) {
       </div>
       {revealed&&(
         <div style={{marginTop:"0.75rem",padding:"0.75rem 1rem",background:"#f0fdf4",borderRadius:8,border:"1px solid #bbf7d0"}}>
-          <p style={{fontSize:13,color:"#166534",margin:"0 0 0.4rem",fontWeight:600}}>✅ {s.options[s.answer]}</p>
+          <p style={{fontSize:13,color:"#166534",margin:"0 0 0.4rem",fontWeight:600}}>Réponse correcte : {s.options[s.answer]}</p>
           <p style={{fontSize:13,color:"#166534",margin:s.code?"0 0 0.5rem":0,lineHeight:1.5}}>{s.explanation}</p>
           {s.code&&<Code code={s.code}/>}
         </div>
@@ -187,8 +187,8 @@ const ALL_QUESTIONS = [
     options: ["A. Row-Level Security (RLS)", "B. Column-Level Security (CLS) — DENY sur les colonnes sensibles", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security (OLS)"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. ❌ A : RLS filtre des lignes de données (horizontal). ❌ C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. ❌ D : OLS cache des tables entières.",
-    explanation: "✅ B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. ❌ A : RLS filtre des lignes de données (horizontal). ❌ C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. ❌ D : OLS cache des tables entières."
+    exp: "B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. A : RLS filtre des lignes de données (horizontal). C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. D : OLS cache des tables entières.",
+    explanation: "B est correct car CLS (Column-Level Security) permet de restreindre l'accès à des colonnes spécifiques de manière granulaire. A : RLS filtre des lignes de données (horizontal). C : DDM masque les valeurs mais ne restreint pas l'accès aux colonnes. D : OLS cache des tables entières."
   },
   {
     id: 2,
@@ -203,8 +203,8 @@ const ALL_QUESTIONS = [
     options: ["A. RLS ne fonctionne pas dans Fabric Warehouse", "B. L'utilisateur est Admin ou Member — ces rôles bypassent RLS dans tous les contextes", "C. La politique RLS n'est pas activée", "D. RLS doit être configuré dans Power BI Desktop uniquement"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. ❌ A : RLS fonctionne parfaitement dans le Warehouse. ❌ C : RLS est actif dès sa liaison à la table. ❌ D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI.",
-    explanation: "✅ B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. ❌ A : RLS fonctionne parfaitement dans le Warehouse. ❌ C : RLS est actif dès sa liaison à la table. ❌ D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI."
+    exp: "B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. A : RLS fonctionne parfaitement dans le Warehouse. C : RLS est actif dès sa liaison à la table. D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI.",
+    explanation: "B est correct car les rôles Admin et Member du workspace bypassent RLS dans tous les contextes. Dans le Warehouse, Contributor le bypass aussi, mais dans le Semantic Model, Contributor y est soumis. A : RLS fonctionne parfaitement dans le Warehouse. C : RLS est actif dès sa liaison à la table. D : RLS peut se configurer dans le Warehouse (T-SQL) ou Power BI."
   },
   {
     id: 3,
@@ -219,8 +219,8 @@ const ALL_QUESTIONS = [
     options: ["A. Row-Level Security", "B. Column-Level Security", "C. Dynamic Data Masking (DDM)", "D. Object-Level Security"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. ❌ A : RLS restreint l'accès aux lignes de données. ❌ B : CLS bloque l'accès aux colonnes. ❌ D : OLS cache entièrement la table.",
-    explanation: "✅ C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. ❌ A : RLS restreint l'accès aux lignes de données. ❌ B : CLS bloque l'accès aux colonnes. ❌ D : OLS cache entièrement la table."
+    exp: "C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. A : RLS restreint l'accès aux lignes de données. B : CLS bloque l'accès aux colonnes. D : OLS cache entièrement la table.",
+    explanation: "C est correct car DDM (Dynamic Data Masking) remplace les valeurs sensibles par un masque tout en préservant le format d'origine. A : RLS restreint l'accès aux lignes de données. B : CLS bloque l'accès aux colonnes. D : OLS cache entièrement la table."
   },
   {
     id: 4,
@@ -235,8 +235,8 @@ const ALL_QUESTIONS = [
     options: ["A. Non — les Contributors sont soumis aux OneLake Security Roles", "B. Oui — Admin, Member et Contributor bypassent OneLake Security par défaut", "C. Cela dépend de la configuration du tenant", "D. Non — ils doivent avoir le rôle DefaultReader"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. ❌ A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. ❌ C : Ce comportement ne dépend pas des tenant settings. ❌ D : Les rôles de workspace remplacent le besoin de DefaultReader.",
-    explanation: "✅ B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. ❌ A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. ❌ C : Ce comportement ne dépend pas des tenant settings. ❌ D : Les rôles de workspace remplacent le besoin de DefaultReader."
+    exp: "B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. C : Ce comportement ne dépend pas des tenant settings. D : Les rôles de workspace remplacent le besoin de DefaultReader.",
+    explanation: "B est correct car les rôles de workspace Admin, Member et Contributor bypassent OneLake Security par défaut. A : Les Contributors ne sont pas soumis aux OneLake Data Access Roles. C : Ce comportement ne dépend pas des tenant settings. D : Les rôles de workspace remplacent le besoin de DefaultReader."
   },
   {
     id: 5,
@@ -251,8 +251,8 @@ const ALL_QUESTIONS = [
     options: ["A. RLS avec un filtre DAX qui renvoie une table vide", "B. CLS avec DENY sur toutes les colonnes", "C. Object-Level Security (OLS) dans le semantic model", "D. DDM sur toutes les colonnes"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. ❌ A : RLS filtre les données mais la table reste visible. ❌ B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. ❌ D : DDM n'obfusque que les valeurs, le schéma reste visible.",
-    explanation: "✅ C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. ❌ A : RLS filtre les données mais la table reste visible. ❌ B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. ❌ D : DDM n'obfusque que les valeurs, le schéma reste visible."
+    exp: "C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. A : RLS filtre les données mais la table reste visible. B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. D : DDM n'obfusque que les valeurs, le schéma reste visible.",
+    explanation: "C est correct car OLS (Object-Level Security) masque entièrement la table et ses métadonnées du modèle sémantique. A : RLS filtre les données mais la table reste visible. B : CLS bloque l'accès aux colonnes mais le nom de la table reste visible. D : DDM n'obfusque que les valeurs, le schéma reste visible."
   },
   {
     id: 6,
@@ -267,8 +267,8 @@ const ALL_QUESTIONS = [
     options: ["A. RLS uniquement avec des filtres complexes", "B. RLS (filtrage par région) + CLS (masquer MargeNette) + DDM (numéros de compte)", "C. OLS + DDM seulement", "D. Créer une vue par région avec les colonnes autorisées"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). ❌ A : RLS seul ne peut pas masquer des colonnes. ❌ C : OLS masquerait toute la table. ❌ D : Créer des vues multiples est complexe à maintenir.",
-    explanation: "✅ B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). ❌ A : RLS seul ne peut pas masquer des colonnes. ❌ C : OLS masquerait toute la table. ❌ D : Créer des vues multiples est complexe à maintenir."
+    exp: "B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). A : RLS seul ne peut pas masquer des colonnes. C : OLS masquerait toute la table. D : Créer des vues multiples est complexe à maintenir.",
+    explanation: "B est correct car cette combinaison implémente le filtrage horizontal (RLS), la restriction verticale (CLS) et le masquage de données (DDM). A : RLS seul ne peut pas masquer des colonnes. C : OLS masquerait toute la table. D : Créer des vues multiples est complexe à maintenir."
   },
   {
     id: 7,
@@ -283,8 +283,8 @@ const ALL_QUESTIONS = [
     options: ["A. Un seul Lakehouse avec 3 schémas (bronze, silver, gold) et RLS par couche", "B. 3 Lakehouses dans un même workspace avec des rôles item différents", "C. 3 Lakehouses dans 3 workspaces séparés, avec des rôles workspace différents par workspace", "D. Un Warehouse unique avec des vues par couche et CLS"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. ❌ A : RLS ne restreint pas l'accès au niveau des items du workspace. ❌ B : Un Contributor verra tous les items du workspace. ❌ D : Un Warehouse unique ne permet pas l'isolation physique par couche.",
-    explanation: "✅ C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. ❌ A : RLS ne restreint pas l'accès au niveau des items du workspace. ❌ B : Un Contributor verra tous les items du workspace. ❌ D : Un Warehouse unique ne permet pas l'isolation physique par couche."
+    exp: "C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. A : RLS ne restreint pas l'accès au niveau des items du workspace. B : Un Contributor verra tous les items du workspace. D : Un Warehouse unique ne permet pas l'isolation physique par couche.",
+    explanation: "C est correct car séparer les couches dans des workspaces distincts permet de gérer les permissions de manière isolée. A : RLS ne restreint pas l'accès au niveau des items du workspace. B : Un Contributor verra tous les items du workspace. D : Un Warehouse unique ne permet pas l'isolation physique par couche."
   },
   {
     id: 8,
@@ -299,8 +299,8 @@ const ALL_QUESTIONS = [
     options: ["A. Lakehouse — plus flexible et supporté par toutes les équipes", "B. Warehouse — T-SQL complet (DDL + DML), RLS/CLS natifs, idéal pour les équipes SQL", "C. Eventhouse — pour des requêtes analytiques rapides", "D. Lakehouse avec SQL Analytics Endpoint uniquement"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. ❌ A : Le Lakehouse nécessite Spark pour les écritures. ❌ C : Eventhouse est destiné au streaming et logs. ❌ D : Le SQL Endpoint du Lakehouse est en lecture seule.",
-    explanation: "✅ B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. ❌ A : Le Lakehouse nécessite Spark pour les écritures. ❌ C : Eventhouse est destiné au streaming et logs. ❌ D : Le SQL Endpoint du Lakehouse est en lecture seule."
+    exp: "B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. A : Le Lakehouse nécessite Spark pour les écritures. C : Eventhouse est destiné au streaming et logs. D : Le SQL Endpoint du Lakehouse est en lecture seule.",
+    explanation: "B est correct car le Warehouse offre le support complet du T-SQL (lecture et écriture DDL/DML), ainsi que RLS/CLS natifs. A : Le Lakehouse nécessite Spark pour les écritures. C : Eventhouse est destiné au streaming et logs. D : Le SQL Endpoint du Lakehouse est en lecture seule."
   },
   {
     id: 9,
@@ -315,8 +315,8 @@ const ALL_QUESTIONS = [
     options: ["A. Créer un Pipeline qui copie les données Gold dans Analytics Workspace toutes les heures", "B. Utiliser un Shortcut depuis Analytics Workspace vers le Gold Lakehouse du Data Workspace", "C. Configurer Mirroring entre les deux Lakehouses", "D. Donner aux analystes le rôle Contributor dans le Data Workspace"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. ❌ A : Dupliquer les données augmente le coût et la latence. ❌ C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. ❌ D : Donner Contributor expose l'ensemble du workspace.",
-    explanation: "✅ B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. ❌ A : Dupliquer les données augmente le coût et la latence. ❌ C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. ❌ D : Donner Contributor expose l'ensemble du workspace."
+    exp: "B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. A : Dupliquer les données augmente le coût et la latence. C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. D : Donner Contributor expose l'ensemble du workspace.",
+    explanation: "B est correct car les Shortcuts OneLake créent des liens virtuels sans dupliquer physiquement les fichiers Parquet. A : Dupliquer les données augmente le coût et la latence. C : Le Mirroring réplique les bases relationnelles externes, pas OneLake. D : Donner Contributor expose l'ensemble du workspace."
   },
   {
     id: 10,
@@ -331,8 +331,8 @@ const ALL_QUESTIONS = [
     options: ["A. Les ajouter comme Capacity Admin sur toutes les capacités", "B. Créer un groupe de sécurité et l'ajouter au tenant setting 'Create workspaces' dans le portail Admin", "C. Donner le rôle Member dans tous les workspaces existants", "D. Activer le tenant setting 'Enable Microsoft Fabric for the entire organization'"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. ❌ A : Capacity Admin donne des droits d'administration de capacité. ❌ C : Être membre n'autorise pas la création de nouveaux workspaces. ❌ D : Activer Fabric permet d'utiliser le service mais pas de créer des workspaces.",
-    explanation: "✅ B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. ❌ A : Capacity Admin donne des droits d'administration de capacité. ❌ C : Être membre n'autorise pas la création de nouveaux workspaces. ❌ D : Activer Fabric permet d'utiliser le service mais pas d'instancier des workspaces."
+    exp: "B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. A : Capacity Admin donne des droits d'administration de capacité. C : Être membre n'autorise pas la création de nouveaux workspaces. D : Activer Fabric permet d'utiliser le service mais pas de créer des workspaces.",
+    explanation: "B est correct car configurer le paramètre 'Create workspaces' dans le portail Admin permet d'attribuer cette permission spécifique à un groupe de sécurité. A : Capacity Admin donne des droits d'administration de capacité. C : Être membre n'autorise pas la création de nouveaux workspaces. D : Activer Fabric permet d'utiliser le service mais pas d'instancier des workspaces."
   },
   {
     id: 11,
@@ -347,8 +347,8 @@ const ALL_QUESTIONS = [
     options: ["A. Pipeline Data Factory avec trigger toutes les 15 minutes (Copy Activity)", "B. Shortcut vers Azure SQL Database", "C. Fabric Mirroring d'Azure SQL Database vers OneLake", "D. Dataflow Gen2 avec refresh planifié toutes les 30 minutes"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. ❌ A : Les pipelines introduisent du traitement batch. ❌ B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. ❌ D : Les Dataflows Gen2 sont batch et lents.",
-    explanation: "✅ C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. ❌ A : Les pipelines introduisent du traitement batch. ❌ B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. ❌ D : Les Dataflows Gen2 sont batch et lents."
+    exp: "C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. A : Les pipelines introduisent du traitement batch. B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. D : Les Dataflows Gen2 sont batch et lents.",
+    explanation: "C est correct car le Mirroring assure une réplication continue automatique en quasi temps réel via CDC. A : Les pipelines introduisent du traitement batch. B : Les Shortcuts ne se connectent pas directement aux bases SQL relationnelles. D : Les Dataflows Gen2 sont batch et lents."
   },
   {
     id: 12,
@@ -363,8 +363,8 @@ const ALL_QUESTIONS = [
     options: ["A. RLS + DDM + audit logs uniquement", "B. RLS (par service) + DDM (numéros dossier) + OLS (table RechercheClinique) + Purview Audit Logs", "C. CLS + OLS + audit logs — RLS n'est pas nécessaire", "D. OneLake Security Roles uniquement avec des rôles personnalisés par service"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. ❌ A : RLS + DDM ne cache pas la table. ❌ C : RLS est obligatoire pour filtrer selon le service. ❌ D : Les rôles OneLake ne supportent pas DDM/OLS.",
-    explanation: "✅ B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. ❌ A : RLS + DDM ne cache pas la table. ❌ C : RLS est obligatoire pour filtrer selon le service. ❌ D : Les rôles OneLake ne supportent pas DDM/OLS."
+    exp: "B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. A : RLS + DDM ne cache pas la table. C : RLS est obligatoire pour filtrer selon le service. D : Les rôles OneLake ne supportent pas DDM/OLS.",
+    explanation: "B est correct car chaque besoin correspond à un outil précis : RLS pour l'accès ligne, DDM pour masquer les numéros, OLS pour cacher la table et Purview Audit Logs pour l'audit HIPAA. A : RLS + DDM ne cache pas la table. C : RLS est obligatoire pour filtrer selon le service. D : Les rôles OneLake ne supportent pas DDM/OLS."
   },
   {
     id: 13,
@@ -379,8 +379,8 @@ const ALL_QUESTIONS = [
     options: ["A. OPTIMIZE requiert des droits Admin sur le workspace", "B. OPTIMIZE et VACUUM ne sont pas supportés dans le SQL Editor du Warehouse — utiliser Spark", "C. La table Gold doit être partitionnée pour supporter OPTIMIZE", "D. OPTIMIZE requiert que V-Order soit désactivé d'abord"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. ❌ A : Les Contributors peuvent l'exécuter via Spark. ❌ C : OPTIMIZE fonctionne sur toutes les tables Delta. ❌ D : V-Order et OPTIMIZE sont totalement compatibles.",
-    explanation: "✅ B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. ❌ A : Les Contributors peuvent l'exécuter via Spark. ❌ C : OPTIMIZE fonctionne sur toutes les tables Delta. ❌ D : V-Order et OPTIMIZE sont totalement compatibles."
+    exp: "B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. A : Les Contributors peuvent l'exécuter via Spark. C : OPTIMIZE fonctionne sur toutes les tables Delta. D : V-Order et OPTIMIZE sont totalement compatibles.",
+    explanation: "B est correct car OPTIMIZE et VACUUM s'exécutent uniquement via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse) et ne sont pas disponibles en T-SQL dans le Warehouse. A : Les Contributors peuvent l'exécuter via Spark. C : OPTIMIZE fonctionne sur toutes les tables Delta. D : V-Order et OPTIMIZE sont totalement compatibles."
   },
   {
     id: 14,
@@ -395,8 +395,8 @@ const ALL_QUESTIONS = [
     options: ["A. Partitionner par ClientID — cardinalité élevée pour un meilleur file skipping", "B. Partitionner par Region + Liquid Clustering sur ClientID", "C. Liquid Clustering sur (ClientID, Region) — incompatible avec le partitionnement Hive-style", "D. Partitionner par DateVente + Z-ORDER sur ClientID et Region"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. ❌ A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. ❌ B : Les deux ne peuvent pas coexister. ❌ D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements.",
-    explanation: "✅ C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. ❌ A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. ❌ B : Les deux ne peuvent pas coexister. ❌ D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements."
+    exp: "C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. B : Les deux ne peuvent pas coexister. D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements.",
+    explanation: "C est correct car Liquid Clustering et le partitionnement Hive-style sont exclusifs. Liquid Clustering est idéal pour des colonnes à haute cardinalité. A : Partitionner par ClientID (haute cardinalité) crée trop de partitions et dégrade les performances. B : Les deux ne peuvent pas coexister. D : Le Z-ORDER est moins flexible car il requiert de réécrire la table lors des changements."
   },
   {
     id: 15,
@@ -411,8 +411,8 @@ const ALL_QUESTIONS = [
     options: ["A. ALTER TABLE gold.FactVentes SET TBLPROPERTIES ('delta.parquet.vorder.enabled' = 'true');", "B. OPTIMIZE gold.FactVentes WITH VORDER;", "C. spark.conf.set(\"spark.sql.parquet.vorder.enabled\", \"true\");", "D. CREATE TABLE gold.FactVentes_vorder CLONE gold.FactVentes WITH VORDER;"],
     ans: 0,
     answer: 0,
-    exp: "✅ A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. ❌ B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. ❌ C : spark.conf.set n'applique le paramètre que pour la session active. ❌ D : Cette syntaxe de clonage avec V-Order n'existe pas.",
-    explanation: "✅ A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. ❌ B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. ❌ C : spark.conf.set n'applique le paramètre que pour la session active. ❌ D : Cette syntaxe de clonage avec V-Order n'existe pas."
+    exp: "A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. C : spark.conf.set n'applique le paramètre que pour la session active. D : Cette syntaxe de clonage avec V-Order n'existe pas.",
+    explanation: "A est correct car modifier les TBLPROPERTIES est la méthode persistante pour activer V-Order sur les métadonnées d'une table Delta. B : 'WITH VORDER' n'est pas une syntaxe d'OPTIMIZE. C : spark.conf.set n'applique le paramètre que pour la session active. D : Cette syntaxe de clonage avec V-Order n'existe pas."
   },
   {
     id: 16,
@@ -427,8 +427,8 @@ const ALL_QUESTIONS = [
     options: ["A. Créer 48 mesures avec DATESYTD(), DATESMTD(), etc. pour chaque KPI", "B. Créer un Calculation Group avec 4 Calculation Items — SELECTEDMEASURE() s'applique à toutes les mesures", "C. Utiliser des Field Parameters pour dynamiser les périodes", "D. Créer une table de paramètres M avec les 4 périodes et une mesure SWITCH()"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. ❌ A : Cela multiplierait inutilement le nombre de mesures. ❌ C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. ❌ D : SWITCH() oblige à coder en dur chaque mesure dans la formule.",
-    explanation: "✅ B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. ❌ A : Cela multiplierait inutilement le nombre de mesures. ❌ C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. ❌ D : SWITCH() oblige à coder en dur chaque mesure dans la formule."
+    exp: "B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. A : Cela multiplierait inutilement le nombre de mesures. C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. D : SWITCH() oblige à coder en dur chaque mesure dans la formule.",
+    explanation: "B est correct car les Calculation Groups s'appliquent à n'importe quelle mesure via SELECTEDMEASURE(), évitant la duplication. A : Cela multiplierait inutilement le nombre de mesures. C : Les Field Parameters changent les axes/légendes, pas les formules DAX temporelles. D : SWITCH() oblige à coder en dur chaque mesure dans la formule."
   },
   {
     id: 17,
@@ -443,8 +443,8 @@ const ALL_QUESTIONS = [
     options: ["A. Time Intelligence d'abord (Precedence 10), puis Devise (Precedence 20)", "B. Devise d'abord (Precedence 20 = plus haute priorité), puis Time Intelligence", "C. Les deux s'appliquent simultanément — l'ordre n'a pas d'importance", "D. Un seul Calculation Group peut être actif — il faut une logique SWITCH() pour combiner"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. ❌ A : Precedence 20 passe avant 10. ❌ C : Les groups s'exécutent de façon séquentielle. ❌ D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes.",
-    explanation: "✅ B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. ❌ A : Precedence 20 passe avant 10. ❌ C : Les groups s'exécutent de façon séquentielle. ❌ D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes."
+    exp: "B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. A : Precedence 20 passe avant 10. C : Les groups s'exécutent de façon séquentielle. D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes.",
+    explanation: "B est correct car la Precedence la plus élevée est évaluée en premier. Le résultat de 'Devise' servira d'entrée pour 'Time Intelligence'. A : Precedence 20 passe avant 10. C : Les groups s'exécutent de façon séquentielle. D : Plusieurs Calculation Groups peuvent coexister si leurs priorités sont distinctes."
   },
   {
     id: 18,
@@ -459,8 +459,8 @@ const ALL_QUESTIONS = [
     options: ["A. Augmenter la capacité Fabric pour accélérer le traitement Power Query", "B. Déplacer Table.Buffer() à la fin du pipeline, après tous les filtres et agrégations", "C. Remplacer Dataflow Gen2 par un Notebook PySpark", "D. Activer le Query Folding dans les paramètres du connecteur Azure SQL"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. ❌ A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. ❌ C : Changer d'outil demande beaucoup plus de temps de développement. ❌ D : Le folding est automatique, il n'existe pas de paramètre d'activation.",
-    explanation: "✅ B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. ❌ A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. ❌ C : Changer d'outil demande beaucoup plus de temps de développement. ❌ D : Le folding est automatique, il n'existe pas de paramètre d'activation."
+    exp: "B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. C : Changer d'outil demande beaucoup plus de temps de développement. D : Le folding est automatique, il n'existe pas de paramètre d'activation.",
+    explanation: "B est correct car Table.Buffer() bloque le Query Folding pour toutes les étapes qui la suivent. En la mettant à la fin, on permet à SQL de filtrer et grouper à la source. A : Augmenter le SKU est coûteux et ne règle pas le transfert réseau. C : Changer d'outil demande beaucoup plus de temps de développement. D : Le folding est automatique, il n'existe pas de paramètre d'activation."
   },
   {
     id: 19,
@@ -475,8 +475,8 @@ const ALL_QUESTIONS = [
     options: ["A. Les vues SQL ne sont pas supportées par Direct Lake — erreur de connexion", "B. Direct Lake a basculé en mode DirectQuery car la source est une vue SQL — les requêtes s'exécutent maintenant à la demande", "C. La vue SQL n'a pas de V-Order — activer V-Order sur la vue", "D. Le SQL Analytics Endpoint ne supporte pas les vues pour Direct Lake"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. ❌ A : Les vues SQL sont acceptées mais forcent le DirectQuery. ❌ C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. ❌ D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake.",
-    explanation: "✅ B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. ❌ A : Les vues SQL sont acceptées mais forcent le DirectQuery. ❌ C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. ❌ D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake."
+    exp: "B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. A : Les vues SQL sont acceptées mais forcent le DirectQuery. C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake.",
+    explanation: "B est correct car Direct Lake bascule en DirectQuery quand la source est une vue SQL au lieu d'une table Delta physique, générant des requêtes interactives. A : Les vues SQL sont acceptées mais forcent le DirectQuery. C : V-Order ne s'applique qu'aux fichiers Parquet physiques des tables Delta. D : Le SQL Endpoint supporte les vues mais elles empêchent le mode Direct Lake."
   },
   {
     id: 20,
@@ -491,8 +491,8 @@ const ALL_QUESTIONS = [
     options: ["A. VACUUM a corrompu la table Delta — recréer la table depuis Silver", "B. Le Semantic Model Direct Lake référence des fichiers Parquet supprimés par VACUUM — augmenter la rétention à 168h minimum et déclencher un refresh", "C. 24 heures de rétention VACUUM est correcte — le problème vient d'un autre facteur", "D. Direct Lake ne supporte pas VACUUM — désactiver VACUUM sur les tables Gold"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). ❌ A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. ❌ C : 24h est trop agressif pour la coexistence avec Direct Lake. ❌ D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante.",
-    explanation: "✅ B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). ❌ A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. ❌ C : 24h est trop agressif pour la coexistence avec Direct Lake. ❌ D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante."
+    exp: "B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. C : 24h est trop agressif pour la coexistence avec Direct Lake. D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante.",
+    explanation: "B est correct car le frame de Direct Lake pointe vers des fichiers Parquet spécifiques. Si VACUUM les supprime avant le refresh, le modèle échoue. Rétention recommandée : 168h (7 jours). A : VACUUM n'a pas corrompu la table, il a supprimé des fichiers requis par le modèle. C : 24h est trop agressif pour la coexistence avec Direct Lake. D : Direct Lake supporte VACUUM s'il est configuré avec une rétention suffisante."
   },
   {
     id: 21,
@@ -507,8 +507,8 @@ const ALL_QUESTIONS = [
     options: ["A. Pipeline Data Factory avec trigger toutes les heures qui compare le CA dans le Warehouse", "B. Eventstream → Eventhouse + Activator avec règle DECREASES > 15% → notification Teams", "C. Notebook PySpark planifié toutes les heures avec envoi d'email via spark.sendEmail()", "D. Power BI Scheduled Alert sur le rapport CA journalier"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. ❌ A : Les Pipelines sont batch et périodiques. ❌ C : Un Notebook Spark est trop lourd pour du push temps réel. ❌ D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative.",
-    explanation: "✅ B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. ❌ A : Les Pipelines sont batch et périodiques. ❌ C : Un Notebook Spark est trop lourd pour du push temps réel. ❌ D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative."
+    exp: "B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. A : Les Pipelines sont batch et périodiques. C : Un Notebook Spark est trop lourd pour du push temps réel. D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative.",
+    explanation: "B est correct car Activator gère de façon native le streaming et les variations relatives (% de hausse ou baisse) sans coder de logique. A : Les Pipelines sont batch et périodiques. C : Un Notebook Spark est trop lourd pour du push temps réel. D : Les alertes Power BI sont statiques (seuils fixes) et ne gèrent pas la variation relative."
   },
   {
     id: 22,
@@ -523,8 +523,8 @@ const ALL_QUESTIONS = [
     options: ["A. THRESHOLD — déclencher si la valeur dépasse un seuil", "B. BECOMES — déclencher quand la condition passe de false à true", "C. HEARTBEAT — déclencher en cas d'absence de données pendant la durée définie", "D. EXIT RANGE — déclencher si la valeur sort d'une plage"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. ❌ A : THRESHOLD surveille les valeurs. ❌ B : BECOMES suit les transitions d'état. ❌ D : EXIT RANGE surveille les sorties de plages.",
-    explanation: "✅ C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. ❌ A : THRESHOLD surveille les valeurs. ❌ B : BECOMES suit les transitions d'état. ❌ D : EXIT RANGE surveille les sorties de plages."
+    exp: "C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. A : THRESHOLD surveille les valeurs. B : BECOMES suit les transitions d'état. D : EXIT RANGE surveille les sorties de plages.",
+    explanation: "C est correct car la règle HEARTBEAT d'Activator sert précisément à détecter l'absence d'activité ou de messages sur une période. A : THRESHOLD surveille les valeurs. B : BECOMES suit les transitions d'état. D : EXIT RANGE surveille les sorties de plages."
   },
   {
     id: 23,
@@ -539,8 +539,8 @@ const ALL_QUESTIONS = [
     options: ["A. Copilot nécessite une licence Microsoft 365 E5 séparée", "B. Le Trial SKU ne supporte pas Copilot — une capacité F2+ achetée est requise", "C. Copilot doit être activé au niveau du workspace, pas du tenant", "D. Copilot n'est disponible que pour les rôles Admin et Member — pas les data scientists"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. ❌ A : Aucune licence M365 E5 n'est requise. ❌ C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. ❌ D : Tous les rôles d'écriture peuvent utiliser Copilot.",
-    explanation: "✅ B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. ❌ A : Aucune licence M365 E5 n'est requise. ❌ C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. ❌ D : Tous les rôles d'écriture peuvent utiliser Copilot."
+    exp: "B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. A : Aucune licence M365 E5 n'est requise. C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. D : Tous les rôles d'écriture peuvent utiliser Copilot.",
+    explanation: "B est correct car les capacités gratuites (Trial SKU) ne supportent pas Copilot, qui nécessite au minimum une capacité payante F2+. A : Aucune licence M365 E5 n'est requise. C : L'activation globale se fait sur le tenant, puis s'associe à la capacité payante. D : Tous les rôles d'écriture peuvent utiliser Copilot."
   },
   {
     id: 24,
@@ -555,8 +555,8 @@ const ALL_QUESTIONS = [
     options: ["A. Copilot dans les Notebooks — génération de code PySpark en langage naturel", "B. Power BI Q&A — questions en langage naturel sur les données du rapport", "C. Fabric IQ Data Agent — agent IA avec accès multi-sources et contexte Ontology", "D. Azure OpenAI Service + Python SDK — construire un agent personnalisé"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. ❌ A : Copilot Notebook sert à la génération de code. ❌ B : Power BI Q&A est limité à un seul Semantic Model. ❌ D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe.",
-    explanation: "✅ C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. ❌ A : Copilot Notebook sert à la génération de code. ❌ B : Power BI Q&A est limité à un seul Semantic Model. ❌ D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe."
+    exp: "C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. A : Copilot Notebook sert à la génération de code. B : Power BI Q&A est limité à un seul Semantic Model. D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe.",
+    explanation: "C est correct car le Data Agent de Fabric IQ interroge plusieurs sources Fabric en utilisant l'Ontology pour le contexte métier. A : Copilot Notebook sert à la génération de code. B : Power BI Q&A est limité à un seul Semantic Model. D : Bâtir son propre agent OpenAI hors Fabric est l'approche la plus complexe."
   },
   {
     id: 25,
@@ -571,8 +571,8 @@ const ALL_QUESTIONS = [
     options: ["A. .pbix — le format standard, le plus compatible", "B. .pbit — template sans données", "C. .pbip — fichiers texte TMDL, compatible Git avec diff propre", "D. .pbids — fichier de connexion à la source"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. ❌ A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. ❌ B : Le format .pbit est un template vide non destiné au travail collaboratif. ❌ D : Le format .pbids sert uniquement à stocker des infos de connexion.",
-    explanation: "✅ C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. ❌ A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. ❌ B : Le format .pbit est un template vide non destiné au travail collaboratif. ❌ D : Le format .pbids sert uniquement à stocker des infos de connexion."
+    exp: "C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. B : Le format .pbit est un template vide non destiné au travail collaboratif. D : Le format .pbids sert uniquement à stocker des infos de connexion.",
+    explanation: "C est correct car le format .pbip (Power BI Project) éclate le modèle en fichiers de définition texte TMDL et JSON, parfaits pour Git. A : Le format .pbix est binaire, ce qui empêche d'obtenir des diffs Git lisibles. B : Le format .pbit est un template vide non destiné au travail collaboratif. D : Le format .pbids sert uniquement à stocker des infos de connexion."
   },
   {
     id: 26,
@@ -587,8 +587,8 @@ const ALL_QUESTIONS = [
     options: ["A. Le format .pbix ne supporte pas les sensitivity labels", "B. L'email a corrompu le fichier binaire .pbix", "C. Le partenaire n'a pas les permissions Purview nécessaires pour déchiffrer le fichier", "D. Les sensitivity labels n'affectent pas les exports — le fichier devrait s'ouvrir normalement"],
     ans: 2,
     answer: 2,
-    exp: "✅ C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. ❌ A : Le format .pbix supporte les sensitivity labels. ❌ B : L'email ne corrompt pas le fichier. ❌ D : Les labels restreignent l'accès même après export.",
-    explanation: "✅ C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. ❌ A : Le format .pbix supporte les sensitivity labels. ❌ B : L'email ne corrompt pas le fichier. ❌ D : Les labels restreignent l'accès même après export."
+    exp: "C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. A : Le format .pbix supporte les sensitivity labels. B : L'email ne corrompt pas le fichier. D : Les labels restreignent l'accès même après export.",
+    explanation: "C est correct car le label avec chiffrement Purview protège le fichier de façon persistante, seuls les comptes autorisés peuvent l'ouvrir. A : Le format .pbix supporte les sensitivity labels. B : L'email ne corrompt pas le fichier. D : Les labels restreignent l'accès même après export."
   },
   {
     id: 27,
@@ -603,8 +603,8 @@ const ALL_QUESTIONS = [
     options: ["A. Les Deployment Pipelines ne supportent plus les Semantic Models — utiliser Git", "B. Le Semantic Model utilise le format legacy non migré vers Enhanced Metadata (PBIR)", "C. Le Semantic Model dépasse la limite de taille du Deployment Pipeline", "D. Les rôles RLS ne sont pas compatibles entre Test et Prod"],
     ans: 1,
     answer: 1,
-    exp: "✅ B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). ❌ A : Les Deployment Pipelines supportent toujours les modèles sémantiques. ❌ C : La taille n'empêche pas la promotion. ❌ D : Les rôles RLS ne bloquent pas le support de l'item.",
-    explanation: "✅ B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). ❌ A : Les Deployment Pipelines supportent toujours les modèles sémantiques. ❌ C : La taille n'empêche pas la promotion. ❌ D : Les rôles RLS ne bloquent pas le support de l'item."
+    exp: "B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). A : Les Deployment Pipelines supportent toujours les modèles sémantiques. C : La taille n'empêche pas la promotion. D : Les rôles RLS ne bloquent pas le support de l'item.",
+    explanation: "B est correct car depuis février 2026, les Deployment Pipelines exigent la migration des Semantic Models vers le format Enhanced Metadata (PBIR). A : Les Deployment Pipelines supportent toujours les modèles sémantiques. C : La taille n'empêche pas la promotion. D : Les rôles RLS ne bloquent pas le support de l'item."
   }
 ];
 
@@ -644,7 +644,7 @@ function Quiz({ qs }) {
             </div>
             {r && (
               <div style={{ marginTop: "0.75rem", padding: "0.75rem 1rem", background: "#f0fdf4", borderRadius: 8, border: "1px solid #bbf7d0" }}>
-                <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 600 }}>✅ {(q.opts || q.options)[q.ans || q.answer]}</p>
+                <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 600 }}>Réponse correcte : {(q.opts || q.options)[q.ans || q.answer]}</p>
                 <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.5 }}>{q.exp || q.explanation}</p>
                 {q.code && <Code code={q.code} />}
               </div>
@@ -710,7 +710,7 @@ function QuizHub({ defaultCategory = "Tous" }) {
         Testez vos connaissances Fabric avec notre Quiz Hub unifié. Filtrez par catégorie, suivez votre score en direct et préparez-vous efficacement aux examens DP-600 et DP-700.
       </p>
 
-      <Card title="Tableau de Bord du Quiz" accent={C.indigo} icon="📊">
+      <Card title="Tableau de Bord du Quiz" accent={C.indigo} icon="">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center", marginBottom: "1rem" }}>
           <div>
             <div style={{ fontSize: 13, color: "#475569", marginBottom: 4 }}>Score global pour les questions affichées :</div>
@@ -733,7 +733,7 @@ function QuizHub({ defaultCategory = "Tous" }) {
                 transition: "all 0.2s"
               }}
             >
-              🔄 Réinitialiser le Quiz
+              Réinitialiser le Quiz
             </button>
           </div>
         </div>
@@ -855,7 +855,7 @@ function QuizHub({ defaultCategory = "Tous" }) {
               </div>
               {isRevealed && (
                 <div style={{ marginTop: "0.75rem", padding: "0.875rem 1.25rem", background: "#f0fdf4", borderRadius: 8, border: "1px solid #bbf7d0" }}>
-                  <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 700 }}>✅ {(q.opts || q.options)[correctAnsIdx]}</p>
+                  <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 700 }}>Réponse correcte : {(q.opts || q.options)[correctAnsIdx]}</p>
                   <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.6 }}>{q.exp || q.explanation}</p>
                   {q.code && <Code code={q.code} />}
                 </div>
@@ -881,14 +881,14 @@ const HomePage = ({ onNav }) => (
         Préparation complète DP-600 & DP-700
       </p>
       <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-        {[{label:"21 sections",icon:"📚"},{label:"27 scénarios certif",icon:"🎯"},{label:"Fiche mémo",icon:"📌"},{label:"Pièges classiques",icon:"⚠️"},{label:"Mis à jour 2026",icon:"🔄"}].map((b,i)=>(
-          <span key={i} style={{background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"4px 10px",fontSize:12,fontWeight:500}}>{b.icon} {b.label}</span>
+        {[{label:"21 sections"},{label:"27 scénarios certif"},{label:"Fiche mémo"},{label:"Pièges classiques"},{label:"Mis à jour 2026"}].map((b,i)=>(
+          <span key={i} style={{background:"rgba(255,255,255,0.15)",borderRadius:6,padding:"4px 10px",fontSize:12,fontWeight:500}}>{b.label}</span>
         ))}
       </div>
     </div>
 
     {/* EXAM GUIDED PATHS */}
-    <Card title="Parcours de Préparation Guidés (DP-600 & DP-700)" accent={C.indigo} icon="🗺️">
+    <Card title="Parcours de Préparation Guidés (DP-600 & DP-700)" accent={C.indigo} icon="">
       <p style={{ fontSize: 14, color: "#374151", marginBottom: "1rem", lineHeight: 1.6 }}>
         Sélectionnez votre examen pour afficher le parcours de révision recommandé par étape :
       </p>
@@ -896,7 +896,6 @@ const HomePage = ({ onNav }) => (
         {/* DP-600 Path */}
         <div style={{ background: `${C.blue}08`, border: `1px solid ${C.blue}30`, borderRadius: 12, padding: "1.25rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
-            <span style={{ fontSize: 20 }}>📊</span>
             <div style={{ fontWeight: 800, fontSize: 15, color: C.blue }}>Parcours DP-600</div>
           </div>
           <div style={{ fontSize: 12, color: "#64748b", marginBottom: "0.75rem" }}>Fabric Analytics Engineer (Core Developer)</div>
@@ -938,7 +937,6 @@ const HomePage = ({ onNav }) => (
         {/* DP-700 Path */}
         <div style={{ background: `${C.purple}08`, border: `1px solid ${C.purple}30`, borderRadius: 12, padding: "1.25rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
-            <span style={{ fontSize: 20 }}>🛡️</span>
             <div style={{ fontWeight: 800, fontSize: 15, color: C.purple }}>Parcours DP-700</div>
           </div>
           <div style={{ fontSize: 12, color: "#64748b", marginBottom: "0.75rem" }}>Fabric Data Engineer (Enterprise Administrator)</div>
@@ -987,22 +985,21 @@ const HomePage = ({ onNav }) => (
           <div key={k} id={`home-group-${k}`} style={{background:g.color+"0d",border:`1px solid ${g.color}30`,borderRadius:12,padding:"1rem",cursor:"pointer"}} onClick={()=>onNav(secs[0].id)}>
             <div style={{fontSize:12,fontWeight:700,color:g.color,marginBottom:6,textTransform:"uppercase",letterSpacing:0.5}}>{g.label}</div>
             {secs.map(s=>(
-              <div key={s.id} id={`home-sec-link-${s.id}`} style={{fontSize:12,color:"#374151",padding:"2px 0",cursor:"pointer"}} onClick={e=>{e.stopPropagation();onNav(s.id);}}>{s.icon} {s.label}</div>
+              <div key={s.id} id={`home-sec-link-${s.id}`} style={{fontSize:12,color:"#374151",padding:"2px 0",cursor:"pointer"}} onClick={e=>{e.stopPropagation();onNav(s.id);}}>{s.label}</div>
             ))}
           </div>
         );
       })}
     </div>
 
-    <Card title="Les 3 niveaux de sécurité Fabric" accent={C.blue} icon="🛡️">
+    <Card title="Les 3 niveaux de sécurité Fabric" accent={C.blue} icon="">
       <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10}}>
         {[
-          {n:"Niveau 1",t:"Authentification",d:"Microsoft Entra ID — identité vérifiée avant tout accès",c:C.blue,i:"🪪"},
-          {n:"Niveau 2",t:"Autorisation Fabric",d:"Workspace roles, item permissions, tenant settings",c:C.purple,i:"🏢"},
-          {n:"Niveau 3",t:"Sécurité des données",d:"RLS, CLS, OLS, DDM, OneLake roles",c:C.teal,i:"🔒"},
+          {n:"Niveau 1",t:"Authentification",d:"Microsoft Entra ID — identité vérifiée avant tout accès",c:C.blue},
+          {n:"Niveau 2",t:"Autorisation Fabric",d:"Workspace roles, item permissions, tenant settings",c:C.purple},
+          {n:"Niveau 3",t:"Sécurité des données",d:"RLS, CLS, OLS, DDM, OneLake roles",c:C.teal},
         ].map((l,i)=>(
           <div key={i} style={{background:`${l.c}12`,border:`1px solid ${l.c}30`,borderRadius:10,padding:"1rem",textAlign:"center"}}>
-            <div style={{fontSize:24,marginBottom:4}}>{l.i}</div>
             <div style={{fontSize:10,fontWeight:700,color:l.c,letterSpacing:1,marginBottom:3}}>{l.n}</div>
             <div style={{fontSize:13,fontWeight:600,color:"#111827",marginBottom:4}}>{l.t}</div>
             <div style={{fontSize:11,color:"#6b7280",lineHeight:1.4}}>{l.d}</div>
@@ -1014,19 +1011,18 @@ const HomePage = ({ onNav }) => (
       </Important>
     </Card>
 
-    <Card title="Les 7 workloads Fabric" accent={C.purple} icon="⚙️">
+    <Card title="Les 7 workloads Fabric" accent={C.purple} icon="">
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:8}}>
         {[
-          {name:"Data Factory",desc:"Pipelines, Dataflows Gen2, Copy Job",icon:"🏭",c:C.blue},
-          {name:"Data Engineering",desc:"Lakehouses, Notebooks, Spark",icon:"⚒️",c:C.teal},
-          {name:"Data Warehouse",desc:"Warehouse T-SQL, SQL endpoint",icon:"🏦",c:C.purple},
-          {name:"Data Science",desc:"ML, expériences, modèles",icon:"🔬",c:C.green},
-          {name:"Real-Time Intel.",desc:"Eventstream, Eventhouse, KQL",icon:"⚡",c:C.amber},
-          {name:"Power BI",desc:"Semantic models, rapports, apps",icon:"📊",c:C.red},
-          {name:"Fabric IQ (preview)",desc:"Agents, Ontology, Copilot",icon:"🤖",c:C.indigo},
+          {name:"Data Factory",desc:"Pipelines, Dataflows Gen2, Copy Job",c:C.blue},
+          {name:"Data Engineering",desc:"Lakehouses, Notebooks, Spark",icon:"",c:C.teal},
+          {name:"Data Warehouse",desc:"Warehouse T-SQL, SQL endpoint",c:C.purple},
+          {name:"Data Science",desc:"ML, expériences, modèles",c:C.green},
+          {name:"Real-Time Intel.",desc:"Eventstream, Eventhouse, KQL",c:C.amber},
+          {name:"Power BI",desc:"Semantic models, rapports, apps",c:C.red},
+          {name:"Fabric IQ (preview)",desc:"Agents, Ontology, Copilot",c:C.indigo},
         ].map((w,i)=>(
           <div key={i} style={{background:`${w.c}10`,border:`1px solid ${w.c}25`,borderRadius:8,padding:"0.75rem",textAlign:"center"}}>
-            <div style={{fontSize:22,marginBottom:4}}>{w.icon}</div>
             <div style={{fontSize:12,fontWeight:600,color:"#111827",marginBottom:3}}>{w.name}</div>
             <div style={{fontSize:11,color:"#6b7280",lineHeight:1.3}}>{w.desc}</div>
           </div>
@@ -1034,14 +1030,14 @@ const HomePage = ({ onNav }) => (
       </div>
     </Card>
 
-    <Card title="Architecture OneLake — 1 lake, N workloads" accent={C.teal} icon="🏔️">
+    <Card title="Architecture OneLake — 1 lake, N workloads" accent={C.teal} icon="">
       <div style={{background:"#f8fafc",borderRadius:8,padding:"1rem",fontFamily:"monospace",fontSize:12,lineHeight:2,color:"#374151"}}>
         <div style={{color:C.teal,fontWeight:700,marginBottom:4}}>OneLake (Azure Data Lake Storage Gen2)</div>
-        <div style={{paddingLeft:16}}>📁 Tenant → Workspace → Lakehouse / Warehouse / KQL DB</div>
-        <div style={{paddingLeft:16}}>🔗 Shortcuts → ADLS, S3, GCS, autres Lakehouses (sans copie)</div>
-        <div style={{paddingLeft:16}}>🔄 Mirroring → Azure SQL, Snowflake, CosmosDB (réplication continue)</div>
-        <div style={{paddingLeft:16}}>🔒 Security → Workspace roles + OneLake Data Access Roles + RLS/CLS</div>
-        <div style={{paddingLeft:16}}>📋 Governance → Sensitivity labels, Lineage, Endorsement (OneLake Catalog)</div>
+        <div style={{paddingLeft:16}}>Tenant → Workspace → Lakehouse / Warehouse / KQL DB</div>
+        <div style={{paddingLeft:16}}>Shortcuts → ADLS, S3, GCS, autres Lakehouses (sans copie)</div>
+        <div style={{paddingLeft:16}}>Mirroring → Azure SQL, Snowflake, CosmosDB (réplication continue)</div>
+        <div style={{paddingLeft:16}}>Security → Workspace roles + OneLake Data Access Roles + RLS/CLS</div>
+        <div style={{paddingLeft:16}}>Governance → Sensitivity labels, Lineage, Endorsement (OneLake Catalog)</div>
       </div>
     </Card>
   </div>
@@ -1050,9 +1046,9 @@ const HomePage = ({ onNav }) => (
 /* ─────────────── OPTIMIZATION SECTION ─────────────── */
 const OptimizationSection = () => (
   <div>
-    <STitle sub="V-Order, OPTIMIZE, VACUUM, Z-Order, Liquid Clustering — maîtriser la maintenance Delta pour les examens DP-700 et DP-600.">⚡ Optimisation des tables Delta</STitle>
+    <STitle sub="V-Order, OPTIMIZE, VACUUM, Z-Order, Liquid Clustering — maîtriser la maintenance Delta pour les examens DP-700 et DP-600.">Optimisation des tables Delta</STitle>
 
-    <Card title={`Les 5 leviers d'optimisation Delta dans Fabric`} accent={C.amber} icon="🎛️">
+    <Card title={`Les 5 leviers d'optimisation Delta dans Fabric`} accent={C.amber} icon="">
       <T headers={["Levier","Objectif","Quand l'utiliser"]}
          rows={[
            ["V-Order","Optimise le layout des fichiers Parquet pour des lectures plus rapides par tous les moteurs Fabric","Activer sur toutes les tables Gold (surtout Direct Lake). Désactivé par défaut en Spark pour les nouveaux workspaces, activé par défaut dans Warehouse."],
@@ -1065,13 +1061,13 @@ const OptimizationSection = () => (
       <Warn>OPTIMIZE et VACUUM s'exécutent via Spark (Notebooks, Spark Job Definition, ou UI Maintenance du Lakehouse). Ils ne sont PAS supportés dans le SQL Analytics Endpoint ni dans le Warehouse SQL Editor.</Warn>
     </Card>
 
-    <Card title="V-Order — Comprendre le comportement par workload" accent={C.blue} icon="📐">
+    <Card title="V-Order — Comprendre le comportement par workload" accent={C.blue} icon="">
       <T headers={["Workload/Context","V-Order activé par défaut ?","Détails & Runtimes"]}
          rows={[
-           ["Fabric Warehouse","✅ Oui (Toujours activé)","Toujours activé par défaut. Impossible à désactiver (irréversible)."],
-           ["Spark (Runtime 1.2 / Pre-2025)","✅ Oui","Activé par défaut sur les anciennes versions de runtime."],
-           ["Spark (Runtime 1.3+ / F SKU 2025+)","❌ Non (Désactivé)","Désactivé par défaut. Doit être activé manuellement."],
-           ["Dataflow Gen2","✅ Oui","Activé par défaut lors du chargement dans OneLake."],
+           ["Fabric Warehouse","Oui (Toujours activé)","Toujours activé par défaut. Impossible à désactiver (irréversible)."],
+           ["Spark (Runtime 1.2 / Pre-2025)","Oui","Activé par défaut sur les anciennes versions de runtime."],
+           ["Spark (Runtime 1.3+ / F SKU 2025+)","Non (Désactivé)","Désactivé par défaut. Doit être activé manuellement."],
+           ["Dataflow Gen2","Oui","Activé par défaut lors du chargement dans OneLake."],
          ]}
       />
       <Code code={`-- Activer V-Order sur une table existante (Spark SQL)
@@ -1115,7 +1111,7 @@ OPTIMIZE gold.Ventes WHERE DateVente = current_date();`}/>
       />
     </Card>
 
-    <Card title="VACUUM — Stratégie de rétention" accent={C.purple} icon="🗑️">
+    <Card title="VACUUM — Stratégie de rétention" accent={C.purple} icon="">
       <Code code={`-- VACUUM avec rétention 7 jours (défaut)
 VACUUM gold.Ventes RETAIN 168 HOURS;
 
@@ -1135,12 +1131,12 @@ VACUUM gold.Ventes RETAIN 168 HOURS DRY RUN;`}/>
       />
     </Card>
 
-    <Card title="Stratégie de maintenance par couche Médaillon" accent={C.green} icon="📋">
+    <Card title="Stratégie de maintenance par couche Médaillon" accent={C.green} icon="">
       <T headers={["Couche","V-Order","OPTIMIZE","VACUUM","Z-Order / Liquid Clustering","Fréquence"]}
          rows={[
-           ["Bronze","❌ Non (write-heavy)","Hebdomadaire (petits fichiers)","Hebdomadaire 168h","Pas nécessaire","Faible priorité"],
-           ["Silver","⚠️ Optionnel","Quotidien si volumes élevés","Hebdomadaire 168h","Liquid Clustering sur colonnes de jointure","Modérée"],
-           ["Gold","✅ Obligatoire (Direct Lake)","Après chaque chargement","Hebdomadaire 168h+","Liquid Clustering sur colonnes de filtre PBI","Haute priorité"],
+           ["Bronze","Non (write-heavy)","Hebdomadaire (petits fichiers)","Hebdomadaire 168h","Pas nécessaire","Faible priorité"],
+           ["Silver","Optionnel","Quotidien si volumes élevés","Hebdomadaire 168h","Liquid Clustering sur colonnes de jointure","Modérée"],
+           ["Gold","Obligatoire (Direct Lake)","Après chaque chargement","Hebdomadaire 168h+","Liquid Clustering sur colonnes de filtre PBI","Haute priorité"],
          ]}
       />
       <Tip>Gold tables consommées par Direct Lake = V-Order obligatoire. OPTIMIZE doit être planifié après le chargement Gold, avant le Semantic Model Refresh.</Tip>
@@ -1151,9 +1147,9 @@ VACUUM gold.Ventes RETAIN 168 HOURS DRY RUN;`}/>
 /* ─────────────── ACTIVATOR SECTION ─────────────── */
 const ActivatorSection = () => (
   <div>
-    <STitle sub={`Le moteur de détection d'événements et d'automatisation de Fabric — surveiller, détecter, agir.`}>🔔 Fabric Activator</STitle>
+    <STitle sub={`Le moteur de détection d'événements et d'automatisation de Fabric — surveiller, détecter, agir.`}>Fabric Activator</STitle>
 
-    <Card title={`Qu'est-ce que Fabric Activator ?`} accent={C.red} icon="🔔">
+    <Card title={`Qu'est-ce que Fabric Activator ?`} accent={C.red} icon="">
       <p style={{fontSize:14,color:"#374151",marginBottom:"0.75rem",lineHeight:1.6}}>
         Activator est un <strong>moteur de détection d'événements no-code</strong> qui surveille des flux de données en continu et déclenche des actions automatiques quand des conditions sont remplies. Il est au cœur de la stack Real-Time Intelligence de Fabric.
       </p>
@@ -1175,11 +1171,11 @@ const ActivatorSection = () => (
     <Card title="Sources de données supportées" accent={C.blue} icon="📥">
       <T headers={["Source","Description","Status"]}
          rows={[
-           ["Eventstream","Flux temps réel (IoT Hub, Event Hub, Kafka, HTTP...)","✅ GA"],
-           ["Power BI report visuals","Détecter quand une mesure dépasse un seuil dans un rapport publié","✅ GA"],
+           ["Eventstream","Flux temps réel (IoT Hub, Event Hub, Kafka, HTTP...)","GA"],
+           ["Power BI report visuals","Détecter quand une mesure dépasse un seuil dans un rapport publié","GA"],
            ["Warehouse SQL query rules","Surveiller les résultats d'une requête SQL planifiée","🔵 Preview (mars 2026)"],
            ["Mirrored Database Change Feed","Flux CDC depuis Azure SQL, CosmosDB, Snowflake, PostgreSQL...","🔵 Preview (avril 2026)"],
-           ["Azure Blob Storage events","Détecter l'arrivée de nouveaux fichiers","✅ GA"],
+           ["Azure Blob Storage events","Détecter l'arrivée de nouveaux fichiers","GA"],
          ]}
       />
     </Card>
@@ -1197,22 +1193,22 @@ const ActivatorSection = () => (
       <Important>Activator gère l'état par objet — il ne déclenchera pas une alerte à chaque événement mais uniquement lors d'une transition de condition (edge-based), évitant le spam d'alertes.</Important>
     </Card>
 
-    <Card title="Actions disponibles" accent={C.purple} icon="⚡">
+    <Card title="Actions disponibles" accent={C.purple} icon="">
       <T headers={["Action","Description","Status"]}
          rows={[
-           ["Email","Envoyer un email à un ou plusieurs destinataires","✅ GA"],
-           ["Teams notification","Envoyer un message dans un canal Teams","✅ GA"],
-           ["Power Automate flow","Déclencher un workflow Power Automate","✅ GA"],
-           ["Fabric Pipeline","Lancer un Data Factory Pipeline (ex: recharger une table)","✅ GA"],
-           ["Notebook","Exécuter un Notebook Spark (ex: corriger une anomalie data)","✅ GA"],
-           ["Spark Job Definition","Soumettre un job batch/streaming Spark","✅ GA"],
+           ["Email","Envoyer un email à un ou plusieurs destinataires","GA"],
+           ["Teams notification","Envoyer un message dans un canal Teams","GA"],
+           ["Power Automate flow","Déclencher un workflow Power Automate","GA"],
+           ["Fabric Pipeline","Lancer un Data Factory Pipeline (ex: recharger une table)","GA"],
+           ["Notebook","Exécuter un Notebook Spark (ex: corriger une anomalie data)","GA"],
+           ["Spark Job Definition","Soumettre un job batch/streaming Spark","GA"],
            ["Dataflow","Déclencher un refresh Dataflow Gen2","🔵 Preview"],
            ["User Data Function","Exécuter une fonction custom business logic","🔵 Preview"],
          ]}
       />
     </Card>
 
-    <Card title={`Scénarios types d'Activator`} accent={C.green} icon="💡">
+    <Card title={`Scénarios types d'Activator`} accent={C.green} icon="">
       <div style={{display:"flex",flexDirection:"column",gap:8}}>
         {[
           {scenario:"IoT Temperature Monitor",desc:"Eventstream reçoit des données de capteurs → Activator détecte temp > seuil → Email au technicien + Pipeline pour logguer l'incident",color:C.red},
@@ -1235,9 +1231,9 @@ const ActivatorSection = () => (
 /* ─────────────── COPILOT / AI SECTION ─────────────── */
 const CopilotSection = () => (
   <div>
-    <STitle sub={`Copilot intégré dans tous les workloads, Data Agents, Fabric IQ — l'IA au cœur de la plateforme data.`}>🤖 Copilot & IA dans Microsoft Fabric</STitle>
+    <STitle sub={`Copilot intégré dans tous les workloads, Data Agents, Fabric IQ — l'IA au cœur de la plateforme data.`}>Copilot & IA dans Microsoft Fabric</STitle>
 
-    <Card title="Prérequis pour Copilot" accent={C.indigo} icon="🔑">
+    <Card title="Prérequis pour Copilot" accent={C.indigo} icon="">
       <T headers={["Prérequis","Détail"]}
          rows={[
            ["Capacité Fabric","F2 minimum ou Power BI Premium P1 — Trial SKU ne supporte PAS Copilot"],
@@ -1250,20 +1246,20 @@ const CopilotSection = () => (
       <Warn>Un Trial SKU (60 jours gratuits) ne supporte pas Copilot. Une capacité F2+ achetée est requise. C'est un piège fréquent aux examens.</Warn>
     </Card>
 
-    <Card title="Copilot par workload" accent={C.blue} icon="🤖">
+    <Card title="Copilot par workload" accent={C.blue} icon="">
       <T headers={["Workload","Copilot disponible ?","Ce que fait Copilot","Status"]}
          rows={[
-           ["Notebooks (Data Engineering/Science)","✅","Génération de code PySpark/SQL, explication de code, débogage, complétion contextuelle","Preview"],
-           ["Power BI / Semantic Models","✅","Génération de rapports depuis description NL, création de mesures DAX, Q&A sur les données","Preview"],
-           ["Data Factory (Pipelines)","✅","Suggestion d'activités, explication d'erreurs pipeline, Error Insights Summary","Preview"],
-           ["Data Warehouse","✅","Génération de requêtes T-SQL, explication de résultats, création de vues","Preview"],
-           ["Real-Time Intelligence","✅","Génération de requêtes KQL, aide à la configuration Eventstream","Preview"],
-           ["OneLake Catalog","✅","Exploration data en langage naturel via Fabric IQ","Preview"],
+           ["Notebooks (Data Engineering/Science)","","Génération de code PySpark/SQL, explication de code, débogage, complétion contextuelle","Preview"],
+           ["Power BI / Semantic Models","","Génération de rapports depuis description NL, création de mesures DAX, Q&A sur les données","Preview"],
+           ["Data Factory (Pipelines)","","Suggestion d'activités, explication d'erreurs pipeline, Error Insights Summary","Preview"],
+           ["Data Warehouse","","Génération de requêtes T-SQL, explication de résultats, création de vues","Preview"],
+           ["Real-Time Intelligence","","Génération de requêtes KQL, aide à la configuration Eventstream","Preview"],
+           ["OneLake Catalog","","Exploration data en langage naturel via Fabric IQ","Preview"],
          ]}
       />
     </Card>
 
-    <Card title="Fabric IQ (Preview) — La couche intelligence unifiée" accent={C.indigo} icon="🧠">
+    <Card title="Fabric IQ (Preview) — La couche intelligence unifiée" accent={C.indigo} icon="">
       <p style={{fontSize:14,color:"#374151",marginBottom:"0.75rem",lineHeight:1.6}}>
         Fabric IQ est un nouveau workload (preview, Build 2026) qui unifie le contexte métier de l'organisation pour alimenter les agents IA et les copilots.
       </p>
@@ -1277,7 +1273,7 @@ const CopilotSection = () => (
          ]}
       />
       <div style={{background:C.lIndigo,borderRadius:8,padding:"0.875rem",marginTop:"0.75rem",border:`1px solid ${C.indigo}30`}}>
-        <div style={{fontWeight:600,fontSize:12,color:C.indigo,marginBottom:6}}>🔗 Intégrations Fabric IQ</div>
+        <div style={{fontWeight:600,fontSize:12,color:C.indigo,marginBottom:6}}>Intégrations Fabric IQ</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,fontSize:12,color:"#374151"}}>
           {["Microsoft Foundry (multi-agent orchestration)","Copilot Studio (embed agents dans Teams, web apps)","Microsoft 365 Copilot (Outlook, Excel, Teams)","Power BI Q&A enrichie avec contexte ontologie","Activator (déclencher des actions depuis agents)","OneLake (source de données unifiée pour tous les agents)"].map((s,i)=>(
             <div key={i} style={{padding:"4px 8px",background:"#fff",borderRadius:6,border:`1px solid ${C.indigo}20`}}>• {s}</div>
@@ -1286,7 +1282,7 @@ const CopilotSection = () => (
       </div>
     </Card>
 
-    <Card title="Fonctions IA natives dans le Warehouse (T-SQL)" accent={C.teal} icon="🔬">
+    <Card title="Fonctions IA natives dans le Warehouse (T-SQL)" accent={C.teal} icon="">
       <Code code={`-- Analyse de sentiments (texte)
 SELECT
     ReviewText,
@@ -1311,7 +1307,7 @@ FROM dbo.ClientHistory;`}/>
       </Warn>
     </Card>
 
-    <Card title="Data Science — Cycle ML complet dans Fabric" accent={C.purple} icon="🔬">
+    <Card title="Data Science — Cycle ML complet dans Fabric" accent={C.purple} icon="">
       <T headers={["Étape","Outil Fabric","Description"]}
          rows={[
            ["Exploration","Notebooks + Lakehouse","EDA avec PySpark, pandas, matplotlib sur données OneLake"],
@@ -1330,9 +1326,9 @@ FROM dbo.ClientHistory;`}/>
 /* ─────────────── MEMO SECTION ─────────────── */
 const MemoSection = () => (
   <div>
-    <STitle sub="Les raccourcis mentaux essentiels à avoir en tête pour les examens DP-600 et DP-700.">📌 Fiche Mémo — Certification DP-600 / DP-700</STitle>
+    <STitle sub="Les raccourcis mentaux essentiels à avoir en tête pour les examens DP-600 et DP-700.">Fiche Mémo — Certification DP-600 / DP-700</STitle>
 
-    <Card title={`Règle d'or : Bypass de sécurité`} accent={C.red} icon="🚨">
+    <Card title={`Règle d'or : Bypass de sécurité`} accent={C.red} icon="">
       <div style={{background:"#fff1f2",borderRadius:8,padding:"1rem",border:"1px solid #fecdd3",fontSize:13,color:"#881337"}}>
         <div style={{fontWeight:700,fontSize:15,marginBottom:8}}>TOUJOURS mémoriser :</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
@@ -1396,7 +1392,7 @@ const MemoSection = () => (
       </div>
     </Card>
 
-    <Card title="Arbre de décision stockage / architecture" accent={C.purple} icon="🏗️">
+    <Card title="Arbre de décision stockage / architecture" accent={C.purple} icon="">
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,fontSize:13}}>
         {[
           {q:"Équipe T-SQL/BI, pas de Spark ni ML",r:"→ Warehouse (Gold)",c:C.blue},
@@ -1416,7 +1412,7 @@ const MemoSection = () => (
       </div>
     </Card>
 
-    <Card title="Commandes T-SQL critiques à connaître" accent={C.slate} icon="💻">
+    <Card title="Commandes T-SQL critiques à connaître" accent={C.slate} icon="">
       <Code code={`-- RLS : créer une politique de sécurité
 CREATE SECURITY POLICY dbo.RegionFilter
 ADD FILTER PREDICATE dbo.fn_RLS_Region(Region) ON dbo.Ventes
@@ -1447,50 +1443,50 @@ VACUUM gold.Ventes RETAIN 168 HOURS;`}/>
 /* ─────────────── PIEGES SECTION ─────────────── */
 const PiegesSection = () => (
   <div>
-    <STitle sub="Les erreurs les plus fréquentes aux examens DP-600 et DP-700 — et comment les éviter.">⚠️ Pièges classiques & Points critiques</STitle>
+    <STitle sub="Les erreurs les plus fréquentes aux examens DP-600 et DP-700 — et comment les éviter.">Pièges classiques & Points critiques</STitle>
 
     {[
       {
         cat:"Sécurité", color:C.red,
         items:[
-          {p:"❌ Piège","t":"Contributor bypass tout","d":"Vrai uniquement dans le Warehouse T-SQL et OneLake. Dans le Semantic Model Power BI, le Contributor est SOUMIS à la RLS/OLS. Seuls Admin/Member contournent la sécurité dans tous les contextes. Pour tester la sécurité d'un modèle sémantique, un utilisateur Contributor convient pour vérifier la RLS."},
-          {p:"❌ Piège","t":"DDM = vraie sécurité","d":"DDM masque visuellement les données mais un utilisateur avec UNMASK ou des droits admin voit les vraies valeurs. DDM = obfuscation, pas sécurité. Combiner avec CLS pour vraiment protéger."},
-          {p:"❌ Piège","t":"OLS dans Warehouse = idem Semantic Model","d":"OLS (Object-Level Security) dans Power BI/Semantic Model ≠ OneLake OLS. Dans Warehouse, utiliser CLS (DENY) pour interdire des colonnes. OLS ne s'applique qu'au modèle sémantique."},
-          {p:"❌ Piège","t":"UNMASK = accès global","d":"GRANT UNMASK TO permet de voir toutes les colonnes masquées. GRANT UNMASK ON table(colonne) TO est le grant granulaire sur une seule colonne."},
-          {p:"❌ Piège","t":"Direct Lake on SQL = pas de fallback DirectQuery","d":"Direct Lake on OneLake n'a pas de fallback DirectQuery. Direct Lake on SQL endpoint PEUT tomber en DirectQuery si la source est une vue SQL (pas une table Delta)."},
+          {p:"Piège","t":"Contributor bypass tout","d":"Vrai uniquement dans le Warehouse T-SQL et OneLake. Dans le Semantic Model Power BI, le Contributor est SOUMIS à la RLS/OLS. Seuls Admin/Member contournent la sécurité dans tous les contextes. Pour tester la sécurité d'un modèle sémantique, un utilisateur Contributor convient pour vérifier la RLS."},
+          {p:"Piège","t":"DDM = vraie sécurité","d":"DDM masque visuellement les données mais un utilisateur avec UNMASK ou des droits admin voit les vraies valeurs. DDM = obfuscation, pas sécurité. Combiner avec CLS pour vraiment protéger."},
+          {p:"Piège","t":"OLS dans Warehouse = idem Semantic Model","d":"OLS (Object-Level Security) dans Power BI/Semantic Model ≠ OneLake OLS. Dans Warehouse, utiliser CLS (DENY) pour interdire des colonnes. OLS ne s'applique qu'au modèle sémantique."},
+          {p:"Piège","t":"UNMASK = accès global","d":"GRANT UNMASK TO permet de voir toutes les colonnes masquées. GRANT UNMASK ON table(colonne) TO est le grant granulaire sur une seule colonne."},
+          {p:"Piège","t":"Direct Lake on SQL = pas de fallback DirectQuery","d":"Direct Lake on OneLake n'a pas de fallback DirectQuery. Direct Lake on SQL endpoint PEUT tomber en DirectQuery si la source est une vue SQL (pas une table Delta)."},
         ]
       },
       {
         cat:"Architecture & Ingestion", color:C.purple,
         items:[
-          {p:"❌ Piège","t":"Shortcut = Mirroring","d":"Shortcut = lien virtuel, pas de copie, accès temps réel. Mirroring = réplication continue physique dans OneLake. Un Shortcut vers Azure SQL n'existe pas — utiliser Mirroring."},
-          {p:"❌ Piège","t":"SQL Analytics Endpoint = Warehouse","d":"Le SQL Analytics Endpoint d'un Lakehouse est en LECTURE SEULE. Pas de DML, pas de CREATE SECURITY POLICY, pas d'OPTIMIZE/VACUUM. Pour T-SQL complet → Warehouse."},
-          {p:"❌ Piège","t":"Dataflow Gen2 = Streaming Dataflow","d":"Dataflow Gen2 = batch (refresh planifié). Streaming Dataflows = traitement continu temps réel. Modèles de traitement totalement différents."},
-          {p:"❌ Piège","t":"Copy Job = Pipeline simple","d":"Copy Job est entre Mirroring (automatique) et Pipeline (complexe). Il supporte CDC, bulk, et incremental sans nécessiter de Pipeline complet. Nouveau en 2025."},
+          {p:"Piège","t":"Shortcut = Mirroring","d":"Shortcut = lien virtuel, pas de copie, accès temps réel. Mirroring = réplication continue physique dans OneLake. Un Shortcut vers Azure SQL n'existe pas — utiliser Mirroring."},
+          {p:"Piège","t":"SQL Analytics Endpoint = Warehouse","d":"Le SQL Analytics Endpoint d'un Lakehouse est en LECTURE SEULE. Pas de DML, pas de CREATE SECURITY POLICY, pas d'OPTIMIZE/VACUUM. Pour T-SQL complet → Warehouse."},
+          {p:"Piège","t":"Dataflow Gen2 = Streaming Dataflow","d":"Dataflow Gen2 = batch (refresh planifié). Streaming Dataflows = traitement continu temps réel. Modèles de traitement totalement différents."},
+          {p:"Piège","t":"Copy Job = Pipeline simple","d":"Copy Job est entre Mirroring (automatique) et Pipeline (complexe). Il supporte CDC, bulk, et incremental sans nécessiter de Pipeline complet. Nouveau en 2025."},
         ]
       },
       {
         cat:"Delta & Performance", color:C.amber,
         items:[
-          {p:"❌ Piège","t":"OPTIMIZE/VACUUM dans SQL endpoint","d":"OPTIMIZE et VACUUM ne fonctionnent PAS dans le SQL Analytics Endpoint ni dans l'éditeur SQL du Warehouse. Exécuter dans un Notebook Spark ou via la UI Maintenance du Lakehouse."},
-          {p:"❌ Piège","t":"V-Order désactivé = performances identiques","d":"V-Order activé sur tables Gold = lectures Direct Lake significativement plus rapides. Pour les nouveaux workspaces F SKU, V-Order est désactivé par défaut en Spark — à activer manuellement."},
-          {p:"❌ Piège","t":"Liquid Clustering + Partitionnement","d":"Liquid Clustering est incompatible avec le partitionnement Hive-style. Choisir l'un ou l'autre. Pour de nouvelles tables → Liquid Clustering recommandé."},
-          {p:"❌ Piège","t":"VACUUM < 7 jours = sûr","d":"Descendre la rétention VACUUM sous 7 jours désactive le Time Travel et peut casser l'Incremental Refresh des semantic models (Direct Lake framing). Ne jamais faire sans analyse des impacts."},
-          {p:"❌ Piège","t":"V-Order irréversible dans Warehouse","d":"Dans Fabric Warehouse, V-Order est activé par défaut et ne peut PAS être désactivé. Ce comportement est différent du Lakehouse Spark où V-Order est configurable."},
+          {p:"Piège","t":"OPTIMIZE/VACUUM dans SQL endpoint","d":"OPTIMIZE et VACUUM ne fonctionnent PAS dans le SQL Analytics Endpoint ni dans l'éditeur SQL du Warehouse. Exécuter dans un Notebook Spark ou via la UI Maintenance du Lakehouse."},
+          {p:"Piège","t":"V-Order désactivé = performances identiques","d":"V-Order activé sur tables Gold = lectures Direct Lake significativement plus rapides. Pour les nouveaux workspaces F SKU, V-Order est désactivé par défaut en Spark — à activer manuellement."},
+          {p:"Piège","t":"Liquid Clustering + Partitionnement","d":"Liquid Clustering est incompatible avec le partitionnement Hive-style. Choisir l'un ou l'autre. Pour de nouvelles tables → Liquid Clustering recommandé."},
+          {p:"Piège","t":"VACUUM < 7 jours = sûr","d":"Descendre la rétention VACUUM sous 7 jours désactive le Time Travel et peut casser l'Incremental Refresh des semantic models (Direct Lake framing). Ne jamais faire sans analyse des impacts."},
+          {p:"Piège","t":"V-Order irréversible dans Warehouse","d":"Dans Fabric Warehouse, V-Order est activé par défaut et ne peut PAS être désactivé. Ce comportement est différent du Lakehouse Spark où V-Order est configurable."},
         ]
       },
       {
         cat:"Déploiement & Gouvernance", color:C.teal,
         items:[
-          {p:"❌ Piège","t":"Deployment Pipelines sans workspaces séparés","d":"Les Deployment Pipelines requièrent 1 workspace SÉPARÉ par stage. Impossible de l'utiliser dans un workspace unique (Pattern monolithique)."},
-          {p:"❌ Piège","t":"Git = Deployment Pipeline","d":"Git = versionning du code source. Deployment Pipeline = promotion entre environnements. Les deux sont complémentaires, pas interchangeables."},
-          {p:"❌ Piège","t":"RLS identique Dev/Prod non nécessaire","d":"La configuration RLS/CLS DOIT être identique entre Test et Prod pour valider correctement le comportement sécurité avant promotion."},
-          {p:"❌ Piège","t":"Copilot sur Trial SKU","d":"Le Trial SKU (60 jours) ne supporte pas Copilot. Une capacité F2+ achetée est requise. Trial = Copilot indisponible."},
-          {p:"❌ Piège","t":"Enhanced Metadata requis pour Deployment Pipelines","d":"Depuis février 2026, les Deployment Pipelines ne supportent plus les Semantic Models non migrés vers Enhanced Metadata (format legacy obsolète)."},
+          {p:"Piège","t":"Deployment Pipelines sans workspaces séparés","d":"Les Deployment Pipelines requièrent 1 workspace SÉPARÉ par stage. Impossible de l'utiliser dans un workspace unique (Pattern monolithique)."},
+          {p:"Piège","t":"Git = Deployment Pipeline","d":"Git = versionning du code source. Deployment Pipeline = promotion entre environnements. Les deux sont complémentaires, pas interchangeables."},
+          {p:"Piège","t":"RLS identique Dev/Prod non nécessaire","d":"La configuration RLS/CLS DOIT être identique entre Test et Prod pour valider correctement le comportement sécurité avant promotion."},
+          {p:"Piège","t":"Copilot sur Trial SKU","d":"Le Trial SKU (60 jours) ne supporte pas Copilot. Une capacité F2+ achetée est requise. Trial = Copilot indisponible."},
+          {p:"Piège","t":"Enhanced Metadata requis pour Deployment Pipelines","d":"Depuis février 2026, les Deployment Pipelines ne supportent plus les Semantic Models non migrés vers Enhanced Metadata (format legacy obsolète)."},
         ]
       },
     ].map((cat,ci)=>(
-      <Card key={ci} title={cat.cat} accent={cat.color} icon="⚠️">
+      <Card key={ci} title={cat.cat} accent={cat.color} icon="">
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {cat.items.map((item,i)=>(
             <div key={i} style={{padding:"0.75rem",background:"#fafafa",borderRadius:8,borderLeft:`3px solid ${cat.color}`}}>
@@ -1523,15 +1519,15 @@ const SectionTitle = ({children}) => <STitle>{children}</STitle>;
 const _SECTIONS_DATA = {
   overview: (
     <div>
-      <SectionTitle>🏛️ Modèle de sécurité Microsoft Fabric — Vue d'ensemble</SectionTitle>
+      <SectionTitle>Modèle de sécurité Microsoft Fabric — Vue d'ensemble</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14 }}>
         Fabric utilise une sécurité en couches (Defense in Depth). Un utilisateur doit passer <strong>3 niveaux</strong> pour accéder aux données.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12, marginBottom: "1.5rem" }}>
         {[
-          { n: "Niveau 1", title: "Authentification", desc: "Microsoft Entra ID — identité vérifiée", color: "blue", icon: "🪪" },
-          { n: "Niveau 2", title: "Autorisation Fabric", desc: "Workspace roles, item permissions, tenant settings", color: "purple", icon: "🏢" },
-          { n: "Niveau 3", title: "Sécurité des données", desc: "RLS, CLS, OLS, DDM, OneLake roles", color: "teal", icon: "🔒" },
+          { n: "Niveau 1", title: "Authentification", desc: "Microsoft Entra ID — identité vérifiée", color: "blue", icon: "" },
+          { n: "Niveau 2", title: "Autorisation Fabric", desc: "Workspace roles, item permissions, tenant settings", color: "purple", icon: "" },
+          { n: "Niveau 3", title: "Sécurité des données", desc: "RLS, CLS, OLS, DDM, OneLake roles", color: "teal", icon: "" },
         ].map((lvl, i) => (
           <div key={i} style={{
             background: colors[`light${lvl.color.charAt(0).toUpperCase() + lvl.color.slice(1)}`],
@@ -1545,7 +1541,7 @@ const _SECTIONS_DATA = {
           </div>
         ))}
       </div>
-      <Card title="Matrice des contrôles de sécurité" accent={colors.blue} icon="📊">
+      <Card title="Matrice des contrôles de sécurité" accent={colors.blue} icon="">
         <Table
           headers={["Contrôle", "Niveau", "Où ?", "Ce qu'il protège", "Bypass par"]}
           rows={[
@@ -1568,8 +1564,8 @@ const _SECTIONS_DATA = {
 
   auth: (
     <div>
-      <SectionTitle>🔐 Authentification & Sécurité Réseau</SectionTitle>
-      <Card title="Microsoft Entra ID (anciennement Azure AD)" accent={colors.blue} icon="🪪">
+      <SectionTitle>Authentification & Sécurité Réseau</SectionTitle>
+      <Card title="Microsoft Entra ID (anciennement Azure AD)" accent={colors.blue} icon="">
         <p style={{ fontSize: 14, color: "#374151", margin: "0 0 0.75rem", lineHeight: 1.6 }}>
           Fabric utilise exclusivement Microsoft Entra ID pour l'authentification. Tout accès est chiffré par défaut. Seule l'authentification Entra est supportée pour CLS et RLS.
         </p>
@@ -1587,7 +1583,7 @@ const _SECTIONS_DATA = {
           ))}
         </div>
       </Card>
-      <Card title="Sécurité réseau — Inbound" accent={colors.purple} icon="🌐">
+      <Card title="Sécurité réseau — Inbound" accent={colors.purple} icon="">
         <Table
           headers={["Solution", "Usage", "Avantage"]}
           rows={[
@@ -1597,7 +1593,7 @@ const _SECTIONS_DATA = {
           ]}
         />
       </Card>
-      <Card title="Sécurité réseau — Outbound" accent={colors.teal} icon="🔗">
+      <Card title="Sécurité réseau — Outbound" accent={colors.teal} icon="">
         <Table
           headers={["Solution", "Usage"]}
           rows={[
@@ -1617,22 +1613,22 @@ const _SECTIONS_DATA = {
 
   workspace: (
     <div>
-      <SectionTitle>🏢 Workspace Roles & Capacité</SectionTitle>
+      <SectionTitle>Workspace Roles & Capacité</SectionTitle>
       <Card title="Les 4 rôles Workspace" accent={colors.purple} icon="👥">
         <Table
           headers={["Rôle", "Lire", "Modifier", "Partager", "Gérer membres", "Bypass sécurité data"]}
           rows={[
-            ["Admin", "✅", "✅", "✅", "✅ (tous rôles)", "✅ OUI (Warehouse & Semantic Model)"],
-            ["Member", "✅", "✅", "✅", "✅ (Contributor/Viewer)", "✅ OUI (Warehouse & Semantic Model)"],
-            ["Contributor", "✅", "✅", "❌", "❌", "⚠️ OUI dans Warehouse / ❌ NON dans Semantic Model (soumis RLS/OLS)"],
-            ["Viewer", "✅ (lecture seule)", "❌", "❌", "❌", "❌ NON (soumis à tous les contrôles)"],
+            ["Admin", "", "", "", "(tous rôles)", "OUI (Warehouse & Semantic Model)"],
+            ["Member", "", "", "", "(Contributor/Viewer)", "OUI (Warehouse & Semantic Model)"],
+            ["Contributor", "", "", "", "", "OUI dans Warehouse / NON dans Semantic Model (soumis RLS/OLS)"],
+            ["Viewer", "(lecture seule)", "", "", "", "NON (soumis à tous les contrôles)"],
           ]}
         />
         <Warning>
           <strong>Différence critique examen :</strong> Dans le Warehouse (T-SQL), le rôle Contributor bypass RLS, CLS, DDM et OneLake Security. Mais dans le Semantic Model Power BI, le rôle Contributor est SOUMIS aux règles RLS et OLS !
         </Warning>
       </Card>
-      <Card title="Item-Level Permissions" accent={colors.teal} icon="🔑">
+      <Card title="Item-Level Permissions" accent={colors.teal} icon="">
         <p style={{ fontSize: 14, color: "#374151", margin: "0 0 0.75rem", lineHeight: 1.6 }}>
           Partager un item spécifique sans donner accès à tout le workspace.
         </p>
@@ -1648,7 +1644,7 @@ const _SECTIONS_DATA = {
         />
         <ExamTip>Un utilisateur sans rôle workspace peut toujours accéder à un item partagé directement. La règle : la permission la plus permissive entre workspace role et item permission gagne.</ExamTip>
       </Card>
-      <Card title="Hiérarchie Admin — Tenant → Capacité → Workspace" accent={colors.amber} icon="🏗️">
+      <Card title="Hiérarchie Admin — Tenant → Capacité → Workspace" accent={colors.amber} icon="">
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {[
             { level: "Fabric Admin (Tenant)", desc: "Contrôle global : activer/désactiver Fabric, tenant settings, audit logs", color: colors.red },
@@ -1665,7 +1661,7 @@ const _SECTIONS_DATA = {
           ))}
         </div>
       </Card>
-      <Card title="Domaines (Domains)" accent={colors.teal} icon="🗂️">
+      <Card title="Domaines (Domains)" accent={colors.teal} icon="">
         <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
           Un domaine est un regroupement logique de workspaces (ex: Finance, RH, Marketing). Un Domain Admin gère les workspaces de son domaine sans être Fabric Admin global. Utile pour déléguer la gouvernance métier.
         </p>
@@ -1675,11 +1671,11 @@ const _SECTIONS_DATA = {
 
   rls: (
     <div>
-      <SectionTitle>↔️ Row-Level Security (RLS)</SectionTitle>
+      <SectionTitle>Row-Level Security (RLS)</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         RLS filtre les <strong>lignes</strong> retournées par une requête selon l'identité de l'utilisateur. C'est le "tranche horizontale" de la sécurité data.
       </p>
-      <Card title="Implémentation dans Fabric Warehouse (T-SQL)" accent={colors.blue} icon="🏭">
+      <Card title="Implémentation dans Fabric Warehouse (T-SQL)" accent={colors.blue} icon="">
         <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.5rem" }}>Exemple : chaque manager ne voit que les ventes de sa région.</p>
         <CodeBlock code={`
 -- 1. Créer une fonction de filtre
@@ -1702,7 +1698,7 @@ EXEC sp_set_session_context @key = N'Region', @value = 'Europe';
 `} />
         <ExamTip>L'examen peut demander la syntaxe exacte de CREATE SECURITY POLICY et la différence entre FILTER PREDICATE (lecture) et BLOCK PREDICATE (écriture).</ExamTip>
       </Card>
-      <Card title="RLS dans un Semantic Model Power BI (DAX)" accent={colors.purple} icon="📊">
+      <Card title="RLS dans un Semantic Model Power BI (DAX)" accent={colors.purple} icon="">
         <CodeBlock code={`
 -- Dans Power BI Desktop > Modélisation > Gérer les rôles
 -- Rôle : "Vendeur_Region"
@@ -1718,7 +1714,7 @@ EXEC sp_set_session_context @key = N'Region', @value = 'Europe';
           Fonctions DAX utiles pour RLS : <code>USERPRINCIPALNAME()</code> (email), <code>USERNAME()</code> (domain\user), <code>CUSTOMDATA()</code> (valeur custom dans connection string).
         </p>
       </Card>
-      <Card title="RLS — Points clés certification" accent={colors.green} icon="📌">
+      <Card title="RLS — Points clés certification" accent={colors.green} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>Seule l'<strong>authentification Entra ID</strong> est supportée pour RLS dans Warehouse</li>
           <li>Dans le <strong>Warehouse (T-SQL)</strong>, Admin/Member/Contributor bypassent RLS.</li>
@@ -1734,11 +1730,11 @@ EXEC sp_set_session_context @key = N'Region', @value = 'Europe';
 
   cls: (
     <div>
-      <SectionTitle>📋 Column-Level Security (CLS)</SectionTitle>
+      <SectionTitle>Column-Level Security (CLS)</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         CLS restreint l'accès à des <strong>colonnes spécifiques</strong> dans un Warehouse. Les utilisateurs non autorisés reçoivent une erreur s'ils tentent de SELECT une colonne protégée.
       </p>
-      <Card title="Implémentation via GRANT/DENY" accent={colors.teal} icon="🔒">
+      <Card title="Implémentation via GRANT/DENY" accent={colors.teal} icon="">
         <CodeBlock code={`
 -- Accorder l'accès à toutes les colonnes SAUF les sensibles
 GRANT SELECT ON dbo.Employes TO [AnalystesRH];
@@ -1752,7 +1748,7 @@ DENY SELECT ON dbo.Employes(Salaire, BonusAnnuel, NumeroSecu)
 -- SELECT Nom, Prenom FROM dbo.Employes  → OK
 `} />
       </Card>
-      <Card title="CLS vs DDM — Quelle différence ?" accent={colors.amber} icon="⚖️">
+      <Card title="CLS vs DDM — Quelle différence ?" accent={colors.amber} icon="">
         <Table
           headers={["Critère", "CLS", "DDM"]}
           rows={[
@@ -1764,7 +1760,7 @@ DENY SELECT ON dbo.Employes(Salaire, BonusAnnuel, NumeroSecu)
           ]}
         />
       </Card>
-      <Card title="Points clés certification CLS" accent={colors.purple} icon="📌">
+      <Card title="Points clés certification CLS" accent={colors.purple} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>CLS s'applique uniquement dans <strong>Fabric Warehouse</strong> via T-SQL GRANT/DENY</li>
           <li>Seule l'<strong>authentification Microsoft Entra</strong> est supportée</li>
@@ -1779,11 +1775,11 @@ DENY SELECT ON dbo.Employes(Salaire, BonusAnnuel, NumeroSecu)
 
   ols: (
     <div>
-      <SectionTitle>👁️ Object-Level Security (OLS)</SectionTitle>
+      <SectionTitle>Object-Level Security (OLS)</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         OLS cache des <strong>tables ou colonnes entières</strong> dans un semantic model Power BI. L'utilisateur ne voit même pas que l'objet existe (métadonnées cachées).
       </p>
-      <Card title="OLS dans Power BI / Semantic Model" accent={colors.purple} icon="👁️">
+      <Card title="OLS dans Power BI / Semantic Model" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           OLS se configure dans <strong>Tabular Editor</strong> ou <strong>SSMS via XMLA</strong>. Contrairement à CLS (Warehouse), OLS s'applique au niveau du modèle sémantique Power BI.
         </p>
@@ -1805,7 +1801,7 @@ Table OLS via Tabular Editor > Rôle >
   Table Permission = "None" → table invisible
 `} />
       </Card>
-      <Card title="OLS dans OneLake (Lakehouse)" accent={colors.blue} icon="🏔️">
+      <Card title="OLS dans OneLake (Lakehouse)" accent={colors.blue} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Dans OneLake, OLS permet de cacher des <strong>tables ou dossiers entiers</strong> aux utilisateurs non autorisés. En preview, configurable via les OneLake Data Access Roles.
         </p>
@@ -1819,13 +1815,13 @@ Table OLS via Tabular Editor > Rôle >
 -- dans l'explorateur du Lakehouse
 `} />
       </Card>
-      <Card title="Comparatif OLS vs CLS vs RLS" accent={colors.teal} icon="📊">
+      <Card title="Comparatif OLS vs CLS vs RLS" accent={colors.teal} icon="">
         <Table
           headers={["", "OLS", "CLS", "RLS"]}
           rows={[
             ["Granularité", "Table/Colonne entière", "Colonne", "Lignes"],
             ["Où s'applique", "Semantic model / OneLake", "Warehouse (T-SQL)", "Warehouse / Semantic model"],
-            ["Métadonnées cachées ?", "✅ Oui", "❌ Non (erreur accès)", "❌ Non"],
+            ["Métadonnées cachées ?", "Oui", "Non (erreur accès)", "Non"],
             ["Configuration", "Tabular Editor / XMLA / OneLake roles", "T-SQL DENY", "T-SQL CREATE SECURITY POLICY / DAX"],
             ["Cas d'usage", "Cacher des tables RH, financières", "Interdire colonnes sensibles", "Filtrer par région/utilisateur"],
           ]}
@@ -1837,11 +1833,11 @@ Table OLS via Tabular Editor > Rôle >
 
   ddm: (
     <div>
-      <SectionTitle>🎭 Dynamic Data Masking (DDM)</SectionTitle>
+      <SectionTitle>Dynamic Data Masking (DDM)</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         DDM remplace les valeurs sensibles par des valeurs masquées <strong>à la volée</strong>, sans modifier les données stockées. La structure de la table reste visible.
       </p>
-      <Card title="Fonctions de masquage disponibles" accent={colors.teal} icon="🎭">
+      <Card title="Fonctions de masquage disponibles" accent={colors.teal} icon="">
         <Table
           headers={["Fonction", "Syntaxe", "Exemple résultat"]}
           rows={[
@@ -1852,7 +1848,7 @@ Table OLS via Tabular Editor > Rôle >
           ]}
         />
       </Card>
-      <Card title="Implémentation T-SQL" accent={colors.blue} icon="💻">
+      <Card title="Implémentation T-SQL" accent={colors.blue} icon="">
         <CodeBlock code={`
 -- À la création de la table
 CREATE TABLE dbo.Clients (
@@ -1879,7 +1875,7 @@ GRANT UNMASK TO [UtilisateursPrivilégiés];
 GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
 `} />
       </Card>
-      <Card title="Points critiques DDM" accent={colors.amber} icon="⚠️">
+      <Card title="Points critiques DDM" accent={colors.amber} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>DDM <strong>n'est pas une vraie sécurité</strong> — un utilisateur avec des droits d'inférence peut deviner les valeurs</li>
           <li>Les utilisateurs avec <strong>UNMASK permission</strong> voient les vraies valeurs</li>
@@ -1895,8 +1891,8 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
 
   onelake: (
     <div>
-      <SectionTitle>🏔️ OneLake Security & Data Access Roles</SectionTitle>
-      <Card title="Architecture de sécurité OneLake" accent={colors.blue} icon="🏔️">
+      <SectionTitle>OneLake Security & Data Access Roles</SectionTitle>
+      <Card title="Architecture de sécurité OneLake" accent={colors.blue} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           OneLake est le data lake unifié de Fabric. La sécurité est définie en couches superposées.
         </p>
@@ -1916,7 +1912,7 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
           ))}
         </div>
       </Card>
-      <Card title="OneLake Data Access Roles (Preview)" accent={colors.purple} icon="🔐">
+      <Card title="OneLake Data Access Roles (Preview)" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Permettent de définir l'accès en lecture au niveau <strong>dossier ou table</strong> dans un Lakehouse. Deux rôles système par défaut :
         </p>
@@ -1939,7 +1935,7 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
 -- et est synchronisée vers le SQL endpoint
 `} />
       </Card>
-      <Card title="SQL Analytics Endpoint — comportement sécurité" accent={colors.teal} icon="⚡">
+      <Card title="SQL Analytics Endpoint — comportement sécurité" accent={colors.teal} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>Quand OneLake Security est activé, les politiques sont <strong>centralement appliquées</strong></li>
           <li>On <strong>ne peut pas</strong> définir RLS/CLS/OLS directement en T-SQL via le SQL endpoint en mode OneLake Security</li>
@@ -1948,7 +1944,7 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
         </ul>
         <ExamTip>Question fréquente : "Comment garantir que les raccourcis (shortcuts) respectent la sécurité du Lakehouse source ?" → OneLake Security synchronise automatiquement les politiques.</ExamTip>
       </Card>
-      <Card title="Workspace Identity" accent={colors.amber} icon="🤖">
+      <Card title="Workspace Identity" accent={colors.amber} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li>Permet à un workspace d'avoir une <strong>identité managée</strong> pour accès Azure</li>
           <li>Requiert un <strong>F SKU capacity</strong> (pas disponible sur Trial ou PPU)</li>
@@ -1962,8 +1958,8 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
 
   purview: (
     <div>
-      <SectionTitle>🛡️ Gouvernance — Microsoft Purview & Conformité</SectionTitle>
-      <Card title="Microsoft Purview Integration" accent={colors.blue} icon="🛡️">
+      <SectionTitle>Gouvernance — Microsoft Purview & Conformité</SectionTitle>
+      <Card title="Microsoft Purview Integration" accent={colors.blue} icon="">
         <Table
           headers={["Fonctionnalité", "Description", "Usage"]}
           rows={[
@@ -1976,7 +1972,7 @@ GRANT UNMASK ON dbo.Clients(Salaire) TO [AdminRH];
           ]}
         />
       </Card>
-      <Card title="Audit & Monitoring" accent={colors.teal} icon="📋">
+      <Card title="Audit & Monitoring" accent={colors.teal} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Toutes les activités Fabric sont loggées dans les <strong>Audit Logs Microsoft 365</strong>.
         </p>
@@ -1994,7 +1990,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
 -- depuis AppSource
 `} />
       </Card>
-      <Card title="Chiffrement des données" accent={colors.green} icon="🔒">
+      <Card title="Chiffrement des données" accent={colors.green} icon="">
         <Table
           headers={["Couche", "Mécanisme"]}
           rows={[
@@ -2018,11 +2014,11 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
 
   catalogue: (
     <div>
-      <SectionTitle>📚 OneLake Catalog & Gouvernance des données</SectionTitle>
+      <SectionTitle>OneLake Catalog & Gouvernance des données</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         Le OneLake Catalog est le portail de découverte, gouvernance et sécurité unifié de Fabric. Il remplace le Hub Purview dans Fabric et centralise toutes les capacités de gouvernance.
       </p>
-      <Card title="Les 3 onglets du OneLake Catalog" accent={colors.blue} icon="📚">
+      <Card title="Les 3 onglets du OneLake Catalog" accent={colors.blue} icon="">
         <Table
           headers={["Onglet", "Pour qui", "Ce qu'il contient"]}
           rows={[
@@ -2033,7 +2029,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         />
         <ExamTip>Le Govern tab dans OneLake Catalog remplace le Microsoft Purview Hub pour les insights Fabric. Les Fabric Admins voient 3 sous-onglets : "Manage data estate", "Protect secure & comply", "Discover trust and reuse".</ExamTip>
       </Card>
-      <Card title="Endorsement — Promouvoir & Certifier" accent={colors.green} icon="✅">
+      <Card title="Endorsement — Promouvoir & Certifier" accent={colors.green} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           L'endorsement permet de distinguer les assets de confiance des assets exploratoires.
         </p>
@@ -2054,7 +2050,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
 `} />
         <Warning>Ne pas certifier automatiquement tous les items. La certification doit être un signal clair de confiance pour les consommateurs de données.</Warning>
       </Card>
-      <Card title="Data Lineage — Traçabilité bout en bout" accent={colors.purple} icon="🔗">
+      <Card title="Data Lineage — Traçabilité bout en bout" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           La lineage montre le chemin complet des données : source → Lakehouse → Pipeline → Semantic Model → Rapport Power BI.
         </p>
@@ -2078,7 +2074,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         />
         <ExamTip>Lineage est disponible dans le OneLake Catalog (onglet item details &gt; Lineage). Utilisez des conventions de nommage cohérentes pour améliorer la lisibilité du lineage.</ExamTip>
       </Card>
-      <Card title="OneLake Catalog vs Microsoft Purview Unified Catalog" accent={colors.amber} icon="⚖️">
+      <Card title="OneLake Catalog vs Microsoft Purview Unified Catalog" accent={colors.amber} icon="">
         <Table
           headers={["", "OneLake Catalog", "Purview Unified Catalog"]}
           rows={[
@@ -2090,7 +2086,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
           ]}
         />
       </Card>
-      <Card title="Sensitivity Labels — Labels de sensibilité" accent={colors.teal} icon="🏷️">
+      <Card title="Sensitivity Labels — Labels de sensibilité" accent={colors.teal} icon="🏷">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Les sensitivity labels (via Microsoft Purview Information Protection) classifient les données selon leur niveau de confidentialité.
         </p>
@@ -2122,7 +2118,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
 
   architecture: (
     <div>
-      <SectionTitle>🏗️ Patterns d'architecture Fabric</SectionTitle>
+      <SectionTitle>Patterns d'architecture Fabric</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         Les questions d'architecture sont parmi les plus fréquentes aux examens DP-600 et DP-700. Comprendre quand utiliser chaque composant est essentiel.
       </p>
@@ -2141,7 +2137,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
           </p>
         </div>
       </Card>
-      <Card title="Lakehouse vs Warehouse — Quand utiliser quoi ?" accent={colors.blue} icon="⚖️">
+      <Card title="Lakehouse vs Warehouse — Quand utiliser quoi ?" accent={colors.blue} icon="">
         <Table
           headers={["Critère", "Lakehouse", "Warehouse"]}
           rows={[
@@ -2167,7 +2163,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         />
         <ExamTip>Shortcut = pas de copie physique, données restent à la source. Mirroring = copie répliquée automatiquement. Pipeline = copie orchestrée manuelle. Les shortcuts héritent de la sécurité OneLake source.</ExamTip>
       </Card>
-      <Card title="Patterns de déploiement Fabric (4 patterns Microsoft)" accent={colors.purple} icon="🏢">
+      <Card title="Patterns de déploiement Fabric (4 patterns Microsoft)" accent={colors.purple} icon="">
         <Table
           headers={["Pattern", "Structure", "Isolation", "Gouvernance", "Usage typique"]}
           rows={[
@@ -2178,7 +2174,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
           ]}
         />
       </Card>
-      <Card title="Architecture sécurité recommandée — Séparation Data / Analytics" accent={colors.green} icon="🔐">
+      <Card title="Architecture sécurité recommandée — Séparation Data / Analytics" accent={colors.green} icon="">
         <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.5 }}>
           Pattern recommandé pour les environnements enterprise avec isolation sécurité forte :
         </p>
@@ -2196,7 +2192,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         </div>
         <ExamTip>Les business users ne devraient jamais accéder directement aux Lakehouses ou Warehouses. Leur accès passe par le Analytics Workspace via Power BI App ou Semantic Model avec RLS.</ExamTip>
       </Card>
-      <Card title="Outil de transformation — Quand utiliser quoi ?" accent={colors.red} icon="⚙️">
+      <Card title="Outil de transformation — Quand utiliser quoi ?" accent={colors.red} icon="">
         <Table
           headers={["Outil", "Profil", "Usage idéal", "Quand éviter"]}
           rows={[
@@ -2213,7 +2209,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
 
   deployment: (
     <div>
-      <SectionTitle>🚀 Ingestion · Transformation · Streaming · Déploiement · CI/CD</SectionTitle>
+      <SectionTitle>Ingestion · Transformation · Streaming · Déploiement · CI/CD</SectionTitle>
 
       {/* ── INGESTION ── */}
       <div style={{ fontSize: 13, fontWeight: 700, color: colors.blue, letterSpacing: 1, textTransform: "uppercase", marginBottom: "0.75rem", paddingBottom: 4, borderBottom: `2px solid ${colors.blue}` }}>
@@ -2236,7 +2232,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         <ExamTip>Copy Job = entre Mirroring (automatique) et Pipeline (complexe). Pour une ingestion incrémentale simple sans orchestration lourde → Copy Job. Pour une réplication continue d'une source OLTP → Mirroring.</ExamTip>
       </Card>
 
-      <Card title="Ingestion par type de source" accent={colors.teal} icon="🔌">
+      <Card title="Ingestion par type de source" accent={colors.teal} icon="">
         <Table
           headers={["Type de source", "Outil recommandé", "Raison"]}
           rows={[
@@ -2252,7 +2248,7 @@ Search-UnifiedAuditLog -StartDate "2026-01-01"
         />
       </Card>
 
-      <Card title="Patterns de chargement de données" accent={colors.purple} icon="🔄">
+      <Card title="Patterns de chargement de données" accent={colors.purple} icon="">
         <Table
           headers={["Pattern", "Description", "Outil typique", "Quand l'utiliser"]}
           rows={[
@@ -2281,7 +2277,7 @@ delta_table.alias("cible").merge(
         2 — Transformation des données
       </div>
 
-      <Card title="Outil de transformation — Arbre de décision" accent={colors.teal} icon="⚙️">
+      <Card title="Outil de transformation — Arbre de décision" accent={colors.teal} icon="">
         <Table
           headers={["Outil", "Langage", "Profil", "Idéal pour", "Limite"]}
           rows={[
@@ -2312,7 +2308,7 @@ delta_table.alias("cible").merge(
         </div>
       </Card>
 
-      <Card title="SCD Type 2 (Slowly Changing Dimensions) dans Fabric" accent={colors.teal} icon="🔄">
+      <Card title="SCD Type 2 (Slowly Changing Dimensions) dans Fabric" accent={colors.teal} icon="">
         <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
           La dimension à variation lente (SCD) Type 2 conserve l'historique complet en créant une nouvelle ligne pour chaque modification de données.
         </p>
@@ -2386,7 +2382,7 @@ WHERE c.ClientID IS NULL OR (c.Nom <> s.Nom OR c.Ville <> s.Ville);`} />
         </ExamTip>
       </Card>
 
-      <Card title="Direct Lake Framing — Cycle de vie & Fallbacks" accent={colors.blue} icon="🖼️">
+      <Card title="Direct Lake Framing — Cycle de vie & Fallbacks" accent={colors.blue} icon="🖼">
         <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
           Le <strong>Framing</strong> est l'opération par laquelle le Semantic Model en mode Direct Lake aligne ses métadonnées sur une version spécifique des fichiers Parquet d'une table Delta dans OneLake.
         </p>
@@ -2417,7 +2413,7 @@ WHERE c.ClientID IS NULL OR (c.Nom <> s.Nom OR c.Ville <> s.Ville);`} />
         3 — Streaming & temps réel
       </div>
 
-      <Card title="Architecture streaming Fabric — Eventstream + Eventhouse" accent={colors.purple} icon="⚡">
+      <Card title="Architecture streaming Fabric — Eventstream + Eventhouse" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Fabric propose deux stacks pour le temps réel : <strong>Eventstream</strong> (ingestion + routage) et <strong>Eventhouse / KQL</strong> (stockage + analyse). Ils sont conçus pour fonctionner ensemble.
         </p>
@@ -2429,10 +2425,10 @@ WHERE c.ClientID IS NULL OR (c.Nom <> s.Nom OR c.Ville <> s.Ville);`} />
         <Table
           headers={["Composant", "Rôle", "Stockage permanent ?", "Destinations supportées"]}
           rows={[
-            ["Eventstream", "Ingestion + routage + transformations en flux", "❌ Non — stream en mémoire", "Eventhouse, Lakehouse (Delta), Activator, Event Hub, HTTP, Warehouse"],
-            ["Eventhouse (KQL DB)", "Stockage et requêtage temps réel (séries temporelles)", "✅ Oui — stockage KQL natif", "Power BI Real-Time, Shortcuts OneLake, exports"],
-            ["Spark Structured Streaming", "Streaming via notebooks PySpark, micro-batches", "✅ Oui — écrit en Delta", "Lakehouse Delta tables"],
-            ["Streaming Dataflows", "Dataflows continus (non batch) pour ingestion temps réel", "✅ Oui — via destinations", "Eventhouse, Lakehouse"],
+            ["Eventstream", "Ingestion + routage + transformations en flux", "Non — stream en mémoire", "Eventhouse, Lakehouse (Delta), Activator, Event Hub, HTTP, Warehouse"],
+            ["Eventhouse (KQL DB)", "Stockage et requêtage temps réel (séries temporelles)", "Oui — stockage KQL natif", "Power BI Real-Time, Shortcuts OneLake, exports"],
+            ["Spark Structured Streaming", "Streaming via notebooks PySpark, micro-batches", "Oui — écrit en Delta", "Lakehouse Delta tables"],
+            ["Streaming Dataflows", "Dataflows continus (non batch) pour ingestion temps réel", "Oui — via destinations", "Eventhouse, Lakehouse"],
           ]}
         />
       </Card>
@@ -2461,7 +2457,7 @@ SalesEvents
         <ExamTip>DP-700 : savoir choisir entre tumbling (agrégation périodique) et sliding (moyenne mobile). Tumbling = bin() dans KQL. Streaming Dataflows ≠ Dataflows Gen2 — ils ont des modèles de traitement différents.</ExamTip>
       </Card>
 
-      <Card title="Eventstream vs Spark Structured Streaming — Quand choisir ?" accent={colors.red} icon="⚖️">
+      <Card title="Eventstream vs Spark Structured Streaming — Quand choisir ?" accent={colors.red} icon="">
         <Table
           headers={["Critère", "Eventstream", "Spark Structured Streaming"]}
           rows={[
@@ -2480,17 +2476,17 @@ SalesEvents
         4 — Dépendances d'éléments & Stratégies d'actualisation
       </div>
 
-      <Card title="Chaîne de dépendances dans un Pipeline orchestré" accent={colors.green} icon="🔗">
+      <Card title="Chaîne de dépendances dans un Pipeline orchestré" accent={colors.green} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Un pipeline Fabric peut orchestrer des éléments dans l'ordre en respectant les dépendances. Chaque activité attend le succès de la précédente avant de démarrer.
         </p>
         <div style={{ background: "#f0fdf4", borderRadius: 8, padding: "0.875rem", marginBottom: "0.75rem", fontFamily: "monospace", fontSize: 12, lineHeight: 2, color: "#374151" }}>
           <div style={{ color: colors.green, fontWeight: 700 }}>Exemple de chaîne end-to-end :</div>
-          <div>1️⃣  <strong>Dataflow Gen2</strong>  → Ingère et nettoie les données sources → écrit en Bronze</div>
-          <div>2️⃣  <strong>Notebook PySpark</strong>  → Transforme Bronze → Silver (si succès Dataflow)</div>
-          <div>3️⃣  <strong>Notebook PySpark</strong>  → Agrège Silver → Gold (si succès étape 2)</div>
-          <div>4️⃣  <strong>Script SQL</strong>  → Rafraîchit vues Warehouse (si succès Gold)</div>
-          <div>5️⃣  <strong>Semantic Model Refresh</strong>  → Actualise le modèle Power BI (si succès SQL)</div>
+          <div>1⃣  <strong>Dataflow Gen2</strong>  → Ingère et nettoie les données sources → écrit en Bronze</div>
+          <div>2⃣  <strong>Notebook PySpark</strong>  → Transforme Bronze → Silver (si succès Dataflow)</div>
+          <div>3⃣  <strong>Notebook PySpark</strong>  → Agrège Silver → Gold (si succès étape 2)</div>
+          <div>4⃣  <strong>Script SQL</strong>  → Rafraîchit vues Warehouse (si succès Gold)</div>
+          <div>5⃣  <strong>Semantic Model Refresh</strong>  → Actualise le modèle Power BI (si succès SQL)</div>
         </div>
         <Table
           headers={["Activité de contrôle", "Rôle dans l'orchestration"]}
@@ -2518,7 +2514,7 @@ SalesEvents
           ]}
         />
         <div style={{ background: "#eff6ff", borderRadius: 8, padding: "0.875rem", marginTop: "0.75rem", border: "1px solid #bfdbfe" }}>
-          <div style={{ fontWeight: 600, fontSize: 12, color: colors.blue, marginBottom: 6 }}>⚠️ Direct Lake — points critiques</div>
+          <div style={{ fontWeight: 600, fontSize: 12, color: colors.blue, marginBottom: 6 }}>Direct Lake — points critiques</div>
           <ul style={{ fontSize: 12, color: "#1e40af", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.9 }}>
             <li>Direct Lake lit les fichiers Delta <strong>directement depuis OneLake</strong> — pas de copie en mémoire lors du refresh</li>
             <li>Si la source est une <strong>vue SQL</strong> (pas une table Delta), Direct Lake tombe en mode <strong>DirectQuery</strong> — plus lent</li>
@@ -2578,7 +2574,7 @@ SalesEvents
         />
       </Card>
 
-      <Card title="Stratégie de branches Git recommandée" accent={colors.purple} icon="🌿">
+      <Card title="Stratégie de branches Git recommandée" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Il n'y a pas d'isolation de branche au sein d'un workspace Fabric partagé. Tout changement direct dans le workspace est immédiatement visible de tous. La bonne pratique est de travailler en isolation sur des branches personnelles.
         </p>
@@ -2607,7 +2603,7 @@ SalesEvents
         6 — Déploiement & CI/CD
       </div>
 
-      <Card title="Deployment Pipelines — Dev → Test → Prod" accent={colors.blue} icon="🚀">
+      <Card title="Deployment Pipelines — Dev → Test → Prod" accent={colors.blue} icon="">
         <Table
           headers={["Caractéristique", "Détail"]}
           rows={[
@@ -2624,7 +2620,7 @@ SalesEvents
         <ExamTip>Deployment Pipeline = outil ALM (Application Lifecycle Management) de Fabric. Git = outil de versionning. Les deux sont complémentaires : Git pour le code source, Deployment Pipelines pour la promotion entre environnements.</ExamTip>
       </Card>
 
-      <Card title="Monitoring — Outils disponibles" accent={colors.purple} icon="📊">
+      <Card title="Monitoring — Outils disponibles" accent={colors.purple} icon="">
         <Table
           headers={["Outil", "Usage", "Portée"]}
           rows={[
@@ -2640,7 +2636,7 @@ SalesEvents
         <ExamTip>"Requêtes Warehouse dégradées les 60 dernières minutes avec nom d'utilisateur" → Query Insights. "Consommation totale de capacité et throttling" → Capacity Metrics App. "Qui a accédé à quel dataset ?" → Audit Logs.</ExamTip>
       </Card>
 
-      <Card title="Capacity Management — SKUs & Throttling" accent={colors.amber} icon="⚡">
+      <Card title="Capacity Management — SKUs & Throttling" accent={colors.amber} icon="">
         <Table
           headers={["Concept", "Explication"]}
           rows={[
@@ -2653,7 +2649,7 @@ SalesEvents
         />
       </Card>
 
-      <Card title="Stratégie de sécurité par environnement" accent={colors.green} icon="🔒">
+      <Card title="Stratégie de sécurité par environnement" accent={colors.green} icon="">
         <Table
           headers={["Environnement", "Workspace roles", "Données", "Sécurité granulaire"]}
           rows={[
@@ -2665,7 +2661,7 @@ SalesEvents
         <ExamTip>La configuration RLS/CLS doit être IDENTIQUE entre Test et Prod pour valider correctement la sécurité avant promotion. Ne jamais exposer les données de production en Dev.</ExamTip>
       </Card>
 
-      <Card title="Déploiement Frontend de l'Application — Vercel & CI/CD" accent={colors.blue} icon="⚡">
+      <Card title="Déploiement Frontend de l'Application — Vercel & CI/CD" accent={colors.blue} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Cette application interactive est un projet React moderne packagé avec Vite et configuré pour un déploiement continu (CI/CD) vers <strong>Vercel</strong>.
         </p>
@@ -2703,17 +2699,17 @@ jobs:
 
   pbiformats: (
     <div>
-      <SectionTitle>📄 Formats de fichiers Power BI — PBIX · PBIT · PBIP · PBIDS</SectionTitle>
+      <SectionTitle>Formats de fichiers Power BI — PBIX · PBIT · PBIP · PBIDS</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         Chaque format Power BI a un rôle précis dans le cycle de développement. Le choix du format impacte directement la sécurité, la gouvernance et la capacité à versionner le code.
       </p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginBottom: "1.5rem" }}>
         {[
-          { fmt: ".pbix", name: "Power BI Report", color: colors.blue, icon: "📊", tagline: "Le format standard tout-en-un" },
-          { fmt: ".pbit", name: "Power BI Template", color: colors.teal, icon: "📋", tagline: "Structure sans données" },
-          { fmt: ".pbip", name: "Power BI Project", color: colors.purple, icon: "🗂️", tagline: "Fichiers texte — Git ready" },
-          { fmt: ".pbids", name: "PBI Data Source", color: colors.amber, icon: "🔗", tagline: "Connexion uniquement" },
+          { fmt: ".pbix", name: "Power BI Report", color: colors.blue, icon: "", tagline: "Le format standard tout-en-un" },
+          { fmt: ".pbit", name: "Power BI Template", color: colors.teal, icon: "", tagline: "Structure sans données" },
+          { fmt: ".pbip", name: "Power BI Project", color: colors.purple, icon: "", tagline: "Fichiers texte — Git ready" },
+          { fmt: ".pbids", name: "PBI Data Source", color: colors.amber, icon: "", tagline: "Connexion uniquement" },
         ].map((f, i) => (
           <div key={i} style={{
             background: `${f.color}10`, border: `1.5px solid ${f.color}40`,
@@ -2727,25 +2723,25 @@ jobs:
         ))}
       </div>
 
-      <Card title=".pbix — Power BI Report File (format standard)" accent={colors.blue} icon="📊">
+      <Card title=".pbix — Power BI Report File (format standard)" accent={colors.blue} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Fichier binaire compressé qui contient <strong>tout</strong> : modèle sémantique, données en cache, rapports, visuels, connexions, RLS, OLS. C'est le format par défaut de Power BI Desktop.
         </p>
         <Table
           headers={["Contenu", "Inclus ?"]}
           rows={[
-            ["Modèle sémantique (tables, relations, DAX)", "✅ Oui"],
-            ["Données en cache (Import mode)", "✅ Oui — données embarquées dans le fichier"],
-            ["Pages et visuels du rapport", "✅ Oui"],
-            ["Connexions aux sources (DirectQuery/Live)", "✅ Oui (chaînes de connexion)"],
-            ["Rôles RLS définis", "✅ Oui"],
-            ["Sensitivity label", "✅ Oui (si appliqué)"],
-            ["Lisible par Git / diff", "❌ Non — fichier binaire"],
+            ["Modèle sémantique (tables, relations, DAX)", "Oui"],
+            ["Données en cache (Import mode)", "Oui — données embarquées dans le fichier"],
+            ["Pages et visuels du rapport", "Oui"],
+            ["Connexions aux sources (DirectQuery/Live)", "Oui (chaînes de connexion)"],
+            ["Rôles RLS définis", "Oui"],
+            ["Sensitivity label", "Oui (si appliqué)"],
+            ["Lisible par Git / diff", "Non — fichier binaire"],
           ]}
         />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: "0.75rem" }}>
           <div style={{ background: "#f0fdf4", borderRadius: 8, padding: "0.75rem", border: "1px solid #bbf7d0" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>✅ Quand l'utiliser</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>Quand l'utiliser</div>
             <ul style={{ fontSize: 12, color: "#166534", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Travail solo ou petite équipe</li>
               <li>Partage rapide d'un rapport complet</li>
@@ -2754,7 +2750,7 @@ jobs:
             </ul>
           </div>
           <div style={{ background: "#fff7ed", borderRadius: 8, padding: "0.75rem", border: "1px solid #fed7aa" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#c2410c", marginBottom: 4 }}>⚠️ Risques sécurité</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#c2410c", marginBottom: 4 }}>Risques sécurité</div>
             <ul style={{ fontSize: 12, color: "#9a3412", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Données réelles embarquées = fuite si partagé</li>
               <li>Chaînes de connexion visibles dans le fichier</li>
@@ -2767,23 +2763,23 @@ jobs:
         <ExamTip>PBIX = données embarquées → risque de fuite. Pour les données sensibles, publier directement dans le Service et contrôler l'accès via workspace roles + RLS.</ExamTip>
       </Card>
 
-      <Card title=".pbit — Power BI Template (structure sans données)" accent={colors.teal} icon="📋">
+      <Card title=".pbit — Power BI Template (structure sans données)" accent={colors.teal} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Identique au PBIX mais <strong>sans les données en cache</strong>. À l'ouverture, Power BI demande les paramètres de connexion. Idéal pour standardiser des rapports à travers plusieurs équipes ou clients.
         </p>
         <Table
           headers={["Contenu", "Inclus ?"]}
           rows={[
-            ["Modèle sémantique (structure, DAX, relations)", "✅ Oui"],
-            ["Données en cache", "❌ Non — demandées à l'ouverture"],
-            ["Pages et visuels", "✅ Oui"],
-            ["Paramètres de connexion (prompts)", "✅ Oui (variables demandées à l'ouverture)"],
-            ["Rôles RLS", "✅ Oui (structure des rôles)"],
+            ["Modèle sémantique (structure, DAX, relations)", "Oui"],
+            ["Données en cache", "Non — demandées à l'ouverture"],
+            ["Pages et visuels", "Oui"],
+            ["Paramètres de connexion (prompts)", "Oui (variables demandées à l'ouverture)"],
+            ["Rôles RLS", "Oui (structure des rôles)"],
           ]}
         />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: "0.75rem" }}>
           <div style={{ background: "#f0fdf4", borderRadius: 8, padding: "0.75rem", border: "1px solid #bbf7d0" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>✅ Quand l'utiliser</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>Quand l'utiliser</div>
             <ul style={{ fontSize: 12, color: "#166534", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Standardiser un rapport pour plusieurs régions</li>
               <li>Distribuer des templates à des clients/filiales</li>
@@ -2792,7 +2788,7 @@ jobs:
             </ul>
           </div>
           <div style={{ background: "#f0f9ff", borderRadius: 8, padding: "0.75rem", border: "1px solid #bae6fd" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#0369a1", marginBottom: 4 }}>📌 Avantage sécurité</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#0369a1", marginBottom: 4 }}>Avantage sécurité</div>
             <ul style={{ fontSize: 12, color: "#075985", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Aucune donnée réelle dans le fichier</li>
               <li>Peut être partagé librement (email, SharePoint)</li>
@@ -2803,38 +2799,38 @@ jobs:
         <ExamTip>PBIT = template réutilisable sans données. Si une question demande "comment distribuer la même structure de rapport à 10 régions sans exposer les données des autres" → PBIT.</ExamTip>
       </Card>
 
-      <Card title=".pbip — Power BI Project (Git & CI/CD)" accent={colors.purple} icon="🗂️">
+      <Card title=".pbip — Power BI Project (Git & CI/CD)" accent={colors.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Format moderne basé sur une <strong>structure de dossiers avec fichiers texte</strong> (JSON + TMDL). Conçu pour les équipes de développement, la collaboration Git et les pipelines CI/CD. Depuis janvier 2026, les nouveaux rapports créés dans le Power BI Service utilisent PBIR (sous-format du PBIP) par défaut.
         </p>
         <div style={{ background: "#f8fafc", borderRadius: 8, padding: "0.875rem", marginBottom: "0.75rem", fontFamily: "monospace", fontSize: 12, color: "#374151", lineHeight: 1.8 }}>
           <div style={{ color: "#7c3aed", fontWeight: 600, marginBottom: 4 }}>Structure d'un projet PBIP :</div>
-          <div>📁 MonRapport.Report/</div>
-          <div style={{ paddingLeft: 16 }}>📄 definition.pbir  <span style={{ color: "#6b7280" }}>(manifest du rapport)</span></div>
-          <div style={{ paddingLeft: 16 }}>📄 report.json  <span style={{ color: "#6b7280" }}>(pages, visuels)</span></div>
-          <div style={{ paddingLeft: 16 }}>📄 StaticResources/  <span style={{ color: "#6b7280" }}>(images, thèmes)</span></div>
-          <div>📁 MonRapport.SemanticModel/</div>
-          <div style={{ paddingLeft: 16 }}>📁 definition/  <span style={{ color: "#6b7280" }}>(TMDL — tables, mesures, rôles)</span></div>
-          <div style={{ paddingLeft: 32 }}>📄 tables/Ventes.tmdl</div>
-          <div style={{ paddingLeft: 32 }}>📄 roles/RLS_Region.tmdl  <span style={{ color: "#6b7280" }}>← RLS versionnée !</span></div>
-          <div style={{ paddingLeft: 16 }}>📁 .pbi/</div>
-          <div style={{ paddingLeft: 32 }}>📄 cache.abf  <span style={{ color: "#e11d48" }}>(⚠️ à exclure du Git)</span></div>
-          <div style={{ paddingLeft: 32 }}>📄 localSettings.json  <span style={{ color: "#e11d48" }}>(⚠️ à exclure du Git)</span></div>
-          <div>📄 MonRapport.pbip  <span style={{ color: "#6b7280" }}>(manifest du projet)</span></div>
+          <div>MonRapport.Report/</div>
+          <div style={{ paddingLeft: 16 }}>definition.pbir  <span style={{ color: "#6b7280" }}>(manifest du rapport)</span></div>
+          <div style={{ paddingLeft: 16 }}>report.json  <span style={{ color: "#6b7280" }}>(pages, visuels)</span></div>
+          <div style={{ paddingLeft: 16 }}>StaticResources/  <span style={{ color: "#6b7280" }}>(images, thèmes)</span></div>
+          <div>MonRapport.SemanticModel/</div>
+          <div style={{ paddingLeft: 16 }}>definition/  <span style={{ color: "#6b7280" }}>(TMDL — tables, mesures, rôles)</span></div>
+          <div style={{ paddingLeft: 32 }}>tables/Ventes.tmdl</div>
+          <div style={{ paddingLeft: 32 }}>roles/RLS_Region.tmdl  <span style={{ color: "#6b7280" }}>← RLS versionnée !</span></div>
+          <div style={{ paddingLeft: 16 }}>.pbi/</div>
+          <div style={{ paddingLeft: 32 }}>cache.abf  <span style={{ color: "#e11d48" }}>(à exclure du Git)</span></div>
+          <div style={{ paddingLeft: 32 }}>localSettings.json  <span style={{ color: "#e11d48" }}>(à exclure du Git)</span></div>
+          <div>MonRapport.pbip  <span style={{ color: "#6b7280" }}>(manifest du projet)</span></div>
         </div>
         <Table
           headers={["Contenu", "Inclus / Détail"]}
           rows={[
-            ["Modèle sémantique (TMDL)", "✅ Fichiers texte lisibles et versionnables"],
-            ["Pages et visuels (JSON)", "✅ Diff Git propre ligne par ligne"],
-            ["Rôles RLS / OLS", "✅ Versionnés dans /definition/roles/*.tmdl"],
-            ["Données en cache (.abf)", "⚠️ Présent localement — à exclure du .gitignore"],
-            ["localSettings.json", "⚠️ Paramètres locaux — à exclure du .gitignore"],
-            ["Lisible/diffable par Git", "✅ Oui — format texte humain-lisible"],
+            ["Modèle sémantique (TMDL)", "Fichiers texte lisibles et versionnables"],
+            ["Pages et visuels (JSON)", "Diff Git propre ligne par ligne"],
+            ["Rôles RLS / OLS", "Versionnés dans /definition/roles/*.tmdl"],
+            ["Données en cache (.abf)", "Présent localement — à exclure du .gitignore"],
+            ["localSettings.json", "Paramètres locaux — à exclure du .gitignore"],
+            ["Lisible/diffable par Git", "Oui — format texte humain-lisible"],
           ]}
         />
         <div style={{ background: "#faf5ff", borderRadius: 8, padding: "0.875rem", marginTop: "0.75rem", border: "1px solid #ddd6fe" }}>
-          <div style={{ fontWeight: 600, fontSize: 12, color: "#7c3aed", marginBottom: 6 }}>🔒 Impact sécurité du format PBIP</div>
+          <div style={{ fontWeight: 600, fontSize: 12, color: "#7c3aed", marginBottom: 6 }}>Impact sécurité du format PBIP</div>
           <ul style={{ fontSize: 12, color: "#5b21b6", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.9 }}>
             <li>Les <strong>définitions RLS et OLS sont vues en clair</strong> dans les fichiers .tmdl → contrôler l'accès au dépôt Git</li>
             <li>Le fichier <code>cache.abf</code> contient des données réelles → <strong>obligatoirement dans .gitignore</strong></li>
@@ -2852,7 +2848,7 @@ jobs:
         <ExamTip>PBIP + Git = les définitions RLS/OLS sont versionnées dans des fichiers texte. C'est l'approche recommandée pour les équipes enterprise avec CI/CD. Le cache.abf (données locales) doit TOUJOURS être dans .gitignore.</ExamTip>
       </Card>
 
-      <Card title=".pbids — Power BI Data Source (connexion uniquement)" accent={colors.amber} icon="🔗">
+      <Card title=".pbids — Power BI Data Source (connexion uniquement)" accent={colors.amber} icon="">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Fichier JSON léger qui stocke uniquement les <strong>informations de connexion</strong> à une source de données. N'ouvre pas un rapport — démarre Power BI Desktop en mode "Obtenir des données" avec la source pré-configurée.
         </p>
@@ -2874,7 +2870,7 @@ jobs:
 }`} lang="json" />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: "0.75rem" }}>
           <div style={{ background: "#f0fdf4", borderRadius: 8, padding: "0.75rem", border: "1px solid #bbf7d0" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>✅ Quand l'utiliser</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#15803d", marginBottom: 4 }}>Quand l'utiliser</div>
             <ul style={{ fontSize: 12, color: "#166534", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Onboarding de nouveaux développeurs</li>
               <li>Standardiser les connexions à un Warehouse/Lakehouse</li>
@@ -2883,7 +2879,7 @@ jobs:
             </ul>
           </div>
           <div style={{ background: "#fff7ed", borderRadius: 8, padding: "0.75rem", border: "1px solid #fed7aa" }}>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#c2410c", marginBottom: 4 }}>⚠️ Points de vigilance</div>
+            <div style={{ fontWeight: 600, fontSize: 12, color: "#c2410c", marginBottom: 4 }}>Points de vigilance</div>
             <ul style={{ fontSize: 12, color: "#9a3412", margin: 0, paddingLeft: "1.25rem", lineHeight: 1.8 }}>
               <li>Ne jamais inclure de credentials dans le fichier</li>
               <li>Utiliser l'authentification Windows/Entra uniquement</li>
@@ -2894,7 +2890,7 @@ jobs:
         <ExamTip>PBIDS ne contient ni données ni visuels — juste la connexion. Utile pour distribuer uniformément la configuration de connexion à un Fabric Warehouse à toute une équipe.</ExamTip>
       </Card>
 
-      <Card title="Tableau de décision — Quel format choisir ?" accent={colors.green} icon="🎯">
+      <Card title="Tableau de décision — Quel format choisir ?" accent={colors.green} icon="">
         <Table
           headers={["Besoin", "Format recommandé", "Raison"]}
           rows={[
@@ -2909,23 +2905,23 @@ jobs:
         />
       </Card>
 
-      <Card title="Sensitivity Labels & formats de fichiers" accent={colors.red} icon="🏷️">
+      <Card title="Sensitivity Labels & formats de fichiers" accent={colors.red} icon="🏷">
         <p style={{ fontSize: 14, color: "#374151", marginBottom: "0.75rem", lineHeight: 1.6 }}>
           Les sensitivity labels se comportent différemment selon le format de fichier.
         </p>
         <Table
           headers={["Format", "Label conservé ?", "Chiffrement appliqué ?", "Comportement"]}
           rows={[
-            [".pbix", "✅ Oui", "✅ Si label avec protection", "Label et chiffrement appliqués au fichier sauvegardé"],
-            [".pbit", "✅ Oui", "✅ Si label avec protection", "Label hérité par les rapports créés depuis le template"],
-            [".pbip", "✅ Oui (dans métadonnées)", "⚠️ Partiel", "Label versionnable, mais le chiffrement s'applique au niveau service"],
-            [".pbids", "❌ Non applicable", "❌ Non", "Fichier de connexion uniquement, pas de données à protéger"],
+            [".pbix", "Oui", "Si label avec protection", "Label et chiffrement appliqués au fichier sauvegardé"],
+            [".pbit", "Oui", "Si label avec protection", "Label hérité par les rapports créés depuis le template"],
+            [".pbip", "Oui (dans métadonnées)", "Partiel", "Label versionnable, mais le chiffrement s'applique au niveau service"],
+            [".pbids", "Non applicable", "Non", "Fichier de connexion uniquement, pas de données à protéger"],
           ]}
         />
         <Warning>Un .pbix avec un sensitivity label "Confidentiel" et chiffrement activé ne peut être ouvert que par les utilisateurs ayant les permissions Purview correspondantes — même si le fichier est partagé par email.</Warning>
       </Card>
 
-      <Card title="PBIX vs PBIP — Résumé visuel" accent={colors.purple} icon="⚖️">
+      <Card title="PBIX vs PBIP — Résumé visuel" accent={colors.purple} icon="">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           {[
             {
@@ -2941,9 +2937,9 @@ jobs:
           ].map((item, i) => (
             <div key={i} style={{ background: `${item.color}08`, border: `1px solid ${item.color}30`, borderRadius: 10, padding: "1rem" }}>
               <div style={{ fontFamily: "monospace", fontWeight: 700, fontSize: 16, color: item.color, marginBottom: 8 }}>.{item.fmt.toLowerCase()}</div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: "#15803d", marginBottom: 4 }}>✅ Avantages</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "#15803d", marginBottom: 4 }}>Avantages</div>
               {item.pros.map((p, j) => <div key={j} style={{ fontSize: 12, color: "#166534", marginBottom: 2 }}>• {p}</div>)}
-              <div style={{ fontSize: 12, fontWeight: 600, color: "#b91c1c", margin: "8px 0 4px" }}>❌ Inconvénients</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "#b91c1c", margin: "8px 0 4px" }}>Inconvénients</div>
               {item.cons.map((c, j) => <div key={j} style={{ fontSize: 12, color: "#991b1b", marginBottom: 2 }}>• {c}</div>)}
             </div>
           ))}
@@ -2954,7 +2950,7 @@ jobs:
 
   scenarios: (
     <div>
-      <SectionTitle>🎯 Scénarios de Certification (DP-600 / DP-700)</SectionTitle>
+      <SectionTitle>Scénarios de Certification (DP-600 / DP-700)</SectionTitle>
       <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
         Testez vos connaissances avec ces scénarios réalistes basés sur le style des examens DP-600 et DP-700. Sélectionnez une réponse puis cliquez sur "Voir la réponse".
       </p>
@@ -2985,173 +2981,13 @@ jobs:
   )
 };
 Object.assign(FULL_CONTENT, _SECTIONS_DATA);
-function ArchiScenariosSection() {
-  const archiScenarios = [
-    {
-      id: 7, difficulty: "Moyen", color: "amber",
-      question: "Une entreprise veut que ses data engineers accèdent aux couches Bronze et Silver, mais que les analystes métier n'accèdent qu'à Gold. Quelle architecture recommandez-vous ?",
-      options: [
-        "A. Un seul Lakehouse avec 3 schémas (bronze, silver, gold) et RLS par couche",
-        "B. 3 Lakehouses dans un même workspace avec des rôles item différents",
-        "C. 3 Lakehouses dans 3 workspaces séparés, avec des rôles workspace différents par workspace",
-        "D. Un Warehouse unique avec des vues par couche et CLS",
-      ],
-      answer: 2,
-      explanation: "Workspaces séparés par couche = contrôle d'accès indépendant + isolation des incidents (blast radius) + lineage clair. Les data engineers ont Contributor sur Bronze/Silver, les analystes ont Viewer sur Gold uniquement. Microsoft Learn recommande explicitement cette approche pour les environnements enterprise.",
-    },
-    {
-      id: 8, difficulty: "Moyen", color: "amber",
-      question: "Votre équipe BI utilise principalement T-SQL, crée des vues, procédures stockées et rapports Power BI. Elle n'a pas besoin de Spark ni de ML. Quelle solution pour la couche Gold ?",
-      options: [
-        "A. Lakehouse — plus flexible et supporté par toutes les équipes",
-        "B. Warehouse — T-SQL complet (DDL + DML), RLS/CLS natifs, idéal pour les équipes SQL",
-        "C. Eventhouse — pour des requêtes analytiques rapides",
-        "D. Lakehouse avec SQL Analytics Endpoint uniquement",
-      ],
-      answer: 1,
-      explanation: "Warehouse = T-SQL complet pour les équipes SQL. CREATE SECURITY POLICY (RLS), GRANT/DENY (CLS), DDM, views, stored procedures — tout en T-SQL natif. Le SQL Analytics Endpoint d'un Lakehouse est en lecture seule et ne supporte pas DML ni les politiques de sécurité T-SQL.",
-    },
-    {
-      id: 9, difficulty: "Difficile", color: "red",
-      question: "Vous avez un Lakehouse Gold dans Workspace A. L'équipe Analytics veut créer des semantic models Power BI pointant vers ces données SANS copier les données dans leur workspace. Quelle solution ?",
-      options: [
-        "A. Créer un Pipeline qui copie les données Gold dans Analytics Workspace toutes les heures",
-        "B. Utiliser un Shortcut depuis Analytics Workspace vers le Gold Lakehouse du Data Workspace",
-        "C. Configurer Mirroring entre les deux Lakehouses",
-        "D. Donner aux analystes le rôle Contributor dans le Data Workspace",
-      ],
-      answer: 1,
-      explanation: "Shortcut = lien virtuel sans copie physique. Les données restent dans le Gold Lakehouse (Workspace A), les analystes y accèdent depuis Analytics Workspace via shortcut. La sécurité OneLake source est héritée automatiquement. Pas de duplication, accès quasi temps réel, une seule copie des données.",
-    },
-    {
-      id: 10, difficulty: "Difficile", color: "red",
-      question: "Un Fabric Admin veut permettre à un groupe d'utilisateurs de créer des workspaces Fabric sans leur donner des droits admin globaux. Comment procéder ?",
-      options: [
-        "A. Les ajouter comme Capacity Admin sur toutes les capacités",
-        "B. Créer un groupe de sécurité et l'ajouter au tenant setting 'Create workspaces' dans le portail Admin",
-        "C. Donner le rôle Member dans tous les workspaces existants",
-        "D. Activer le tenant setting 'Enable Microsoft Fabric for the entire organization'",
-      ],
-      answer: 1,
-      explanation: "Le tenant setting 'Create workspaces' permet de restreindre la création de workspaces à des groupes de sécurité spécifiques sans donner des droits admin globaux. Capacity Admin donnerait trop de pouvoir. Member dans les workspaces existants n'autorise pas la création de nouveaux workspaces.",
-    },
-    {
-      id: 11, difficulty: "Expert", color: "purple",
-      question: "Votre organisation veut synchroniser une base Azure SQL (OLTP, données changeant en continu) dans Fabric pour l'analytique, avec une latence maximale de quelques minutes. Quelle solution ?",
-      options: [
-        "A. Pipeline Data Factory avec trigger toutes les 15 minutes (Copy Activity)",
-        "B. Shortcut vers Azure SQL Database",
-        "C. Fabric Mirroring d'Azure SQL Database vers OneLake",
-        "D. Dataflow Gen2 avec refresh planifié toutes les 30 minutes",
-      ],
-      answer: 2,
-      explanation: "Mirroring = réplication continue automatique d'Azure SQL dans OneLake, quasi temps réel (Change Data Capture), sans orchestration manuelle. Shortcut ne supporte pas Azure SQL directement (seulement ADLS, S3, GCS). Pipeline/Dataflow sont batch et ajoutent de la latence. Mirroring est la solution native pour les sources OLTP → Fabric analytique.",
-    },
-    {
-      id: 12, difficulty: "Expert", color: "purple",
-      question: "SCÉNARIO COMPLET : Une entreprise Healthcare veut (1) accès patients uniquement aux médecins de leur service, (2) numéros de dossier masqués pour les administratifs, (3) table 'RechercheClinique' invisible aux non-chercheurs, (4) traçabilité complète HIPAA. Combinaison optimale ?",
-      options: [
-        "A. RLS + DDM + audit logs uniquement",
-        "B. RLS (par service) + DDM (numéros dossier) + OLS (table RechercheClinique) + Purview Audit Logs",
-        "C. CLS + OLS + audit logs — RLS n'est pas nécessaire",
-        "D. OneLake Security Roles uniquement avec des rôles personnalisés par service",
-      ],
-      answer: 1,
-      explanation: "Defense in depth complète : RLS filtre les lignes par service du médecin (accès horizontal), DDM masque les numéros de dossier pour les administratifs (format visible, valeur masquée), OLS cache totalement la table RechercheClinique aux non-chercheurs (même les métadonnées sont invisibles), Purview Audit Logs pour la traçabilité HIPAA. Chaque besoin correspond à un outil précis.",
-    },
-  ];
-  const [selected, setSelected] = useState({});
-  const [revealed, setRevealed] = useState({});
-  return (
-    <div>
-      <SectionTitle>🧠 Scénarios Architecture & Gouvernance</SectionTitle>
-      <p style={{ color: "#6b7280", marginBottom: "1.5rem", fontSize: 14, lineHeight: 1.6 }}>
-        Questions d'architecture, choix de composants et gouvernance — style cas pratiques DP-600 / DP-700.
-      </p>
-      {archiScenarios.map(scenario => {
-        const sel = selected[scenario.id];
-        const rev = revealed[scenario.id];
-        return (
-          <Card key={scenario.id} accent={colors[scenario.color] || colors.blue}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
-              <Badge text={`Q${scenario.id}`} color="blue" />
-              <Badge text={scenario.difficulty} color={scenario.color} />
-            </div>
-            <p style={{ fontSize: 14, color: "#1f2937", marginBottom: "0.75rem", fontWeight: 500, lineHeight: 1.5 }}>
-              {scenario.question}
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: "0.75rem" }}>
-              {scenario.options.map((opt, i) => {
-                let bg = "#f9fafb", border = "1px solid #e5e7eb", col = "#374151";
-                if (rev) {
-                  if (i === scenario.answer) { bg = "#dcfce7"; border = "1px solid #86efac"; col = "#15803d"; }
-                  else if (sel === i) { bg = "#fee2e2"; border = "1px solid #fca5a5"; col = "#b91c1c"; }
-                } else if (sel === i) { bg = "#dbeafe"; border = "1px solid #93c5fd"; col = "#1d4ed8"; }
-                return (
-                  <button key={i} id={`archi-q${scenario.id}-opt-${i}`} onClick={() => !rev && setSelected(p => ({ ...p, [scenario.id]: i }))} style={{
-                    background: bg, border, borderRadius: 6, padding: "8px 12px",
-                    cursor: rev ? "default" : "pointer", textAlign: "left",
-                    fontSize: 13, color: col, transition: "all 0.15s"
-                  }}>{opt}</button>
-                );
-              })}
-            </div>
-            <div style={{ display: "flex", gap: 8 }}>
-              <button id={`archi-q${scenario.id}-reveal-btn`} onClick={() => sel !== undefined && setRevealed(p => ({ ...p, [scenario.id]: true }))} disabled={sel === undefined} style={{
-                background: sel !== undefined ? colors.blue : "#d1d5db",
-                color: "#fff", border: "none", borderRadius: 6, padding: "6px 14px",
-                fontSize: 13, cursor: sel !== undefined ? "pointer" : "not-allowed", fontWeight: 600
-              }}>Voir la réponse</button>
-              <button id={`archi-q${scenario.id}-reset-btn`} onClick={() => { setSelected(p => { const n = {...p}; delete n[scenario.id]; return n; }); setRevealed(p => { const n = {...p}; delete n[scenario.id]; return n; }); }} style={{
-                background: "transparent", border: "1px solid #d1d5db", borderRadius: 6,
-                padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#6b7280"
-              }}>Réinitialiser</button>
-            </div>
-            {rev && (
-              <div style={{ marginTop: "0.75rem", padding: "0.75rem 1rem", background: "#f0fdf4", borderRadius: 8, border: "1px solid #bbf7d0" }}>
-                <p style={{ fontSize: 13, color: "#166534", margin: "0 0 0.4rem", fontWeight: 600 }}>
-                  ✅ Réponse : {scenario.options[scenario.answer]}
-                </p>
-                <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.5 }}>{scenario.explanation}</p>
-              </div>
-            )}
-          </Card>
-        );
-      })}
-      <Card title="Arbre de décision — Architecture Fabric" accent={colors.purple} icon="🌳">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, fontSize: 13 }}>
-          {[
-            { q: "Équipe SQL, BI, T-SQL natif", r: "→ Warehouse (Gold)", color: colors.blue },
-            { q: "Équipe Spark/Python/ML", r: "→ Lakehouse", color: colors.teal },
-            { q: "Données externes sans copie", r: "→ Shortcut", color: colors.green },
-            { q: "Source OLTP → temps réel", r: "→ Mirroring", color: colors.purple },
-            { q: "Orchestration ETL complexe", r: "→ Pipeline Data Factory", color: colors.amber },
-            { q: "Isolation sécurité par couche", r: "→ 1 Workspace par couche Médaillon", color: colors.red },
-            { q: "Dev → Test → Prod automatisé", r: "→ Deployment Pipelines + Git", color: colors.blue },
-            { q: "Délégation gouvernance métier", r: "→ Domains + Domain Admins", color: colors.teal },
-            { q: "Trust d'un dataset pour toute l'org", r: "→ Endorsement Certified", color: colors.green },
-            { q: "Lineage bout en bout", r: "→ OneLake Catalog > onglet Lineage", color: colors.purple },
-            { q: "Streaming IoT/logs temps réel", r: "→ Eventhouse + KQL", color: colors.amber },
-            { q: "Low-code transformation", r: "→ Dataflows Gen2", color: colors.blue },
-          ].map((item, i) => (
-            <div key={i} style={{ padding: "0.6rem", background: "#f9fafb", borderRadius: 8, borderLeft: `3px solid ${item.color}` }}>
-              <div style={{ fontSize: 12, color: "#6b7280" }}>{item.q}</div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: item.color }}>{item.r}</div>
-            </div>
-          ))}
-        </div>
-      </Card>
-    </div>
-  );
-}
-
 /* ═══════════════ GIT & COLLABORATION ═══════════════ */
 const GIT_PROFILES = [
-  { id:"solo",       label:"Solo / POC",        icon:"👤", team:"1-2 devs",  region:"1 region",       constraint:"Simplicite maximale" },
-  { id:"small",      label:"Petite equipe",      icon:"👥", team:"3-8 devs",  region:"1 region",       constraint:"Collaboration legere" },
-  { id:"medium",     label:"Equipe moyenne",     icon:"🏢", team:"8-25 devs", region:"1-2 regions",    constraint:"CI/CD structure" },
-  { id:"large",      label:"Grande organisation",icon:"🌐", team:"25+ devs",  region:"Multi-regions",  constraint:"Gouvernance stricte" },
-  { id:"regulated",  label:"Secteur regule",     icon:"🏦", team:"Variable",  region:"Multi-pays",     constraint:"Audit + Compliance" },
+  { id:"solo",       label:"Solo / POC",        icon:"", team:"1-2 devs",  region:"1 region",       constraint:"Simplicite maximale" },
+  { id:"small",      label:"Petite equipe",      icon:"", team:"3-8 devs",  region:"1 region",       constraint:"Collaboration legere" },
+  { id:"medium",     label:"Equipe moyenne",      team:"8-25 devs", region:"1-2 regions",    constraint:"CI/CD structure" },
+  { id:"large",      label:"Grande organisation",icon:"", team:"25+ devs",  region:"Multi-regions",  constraint:"Gouvernance stricte" },
+  { id:"regulated",  label:"Secteur regule",      team:"Variable",  region:"Multi-pays",     constraint:"Audit + Compliance" },
 ];
 
 const GIT_STRATEGIES = {
@@ -3231,12 +3067,12 @@ function GitSection() {
 
   return (
     <div>
-      <STitle>{"🌿 Git Integration & Collaboration — Strategies par profil"}</STitle>
+      <STitle>{"Git Integration & Collaboration — Strategies par profil"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"Strategies Git adaptees au profil d'equipe, nombre de developpeurs, contraintes regionales et de conformite."}
       </p>
 
-      <Card title={"Règles fondamentales Git dans Fabric"} accent={C.teal} icon={"📋"}>
+      <Card title={"Règles fondamentales Git dans Fabric"} accent={C.teal} icon={""}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
           {[
             {r:"1 Workspace = 1 branche Git",d:"Un workspace ne peut être connecté qu'a une seule branche à la fois. Règle absolue Fabric.",c:C.red},
@@ -3254,15 +3090,15 @@ function GitSection() {
         </div>
       </Card>
 
-      <Card title={"Compatibilité des Providers Git"} accent={C.blue} icon={"☁️"}>
+      <Card title={"Compatibilité des Providers Git"} accent={C.blue} icon={"☁"}>
         <p style={{fontSize:13,color:"#374151",marginBottom:"0.5rem"}}>
           Fabric s'intègre avec différents hébergeurs Git. Voici les statuts de compatibilité actuels :
         </p>
         <T headers={["Provider", "Statut", "Fonctionnalités & Limitations"]}
            rows={[
-             ["Azure DevOps (Repos)", "✅ GA", "Intégration native, synchronisation bidirectionnelle fluide, authentification automatique par jeton Azure."],
-             ["GitHub (Cloud/Enterprise)", "✅ GA", "Support complet, authentification par OAuth, synchronisation automatique des branches et items."],
-             ["GitLab (Cloud/Self-Managed)", "⚠️ Preview", "Support en preview publique. Limitations de configuration (nécessite des tokens personnels manuels, proxy réseau parfois obligatoire, intégration moins fluide)."],
+             ["Azure DevOps (Repos)", "GA", "Intégration native, synchronisation bidirectionnelle fluide, authentification automatique par jeton Azure."],
+             ["GitHub (Cloud/Enterprise)", "GA", "Support complet, authentification par OAuth, synchronisation automatique des branches et items."],
+             ["GitLab (Cloud/Self-Managed)", "Preview", "Support en preview publique. Limitations de configuration (nécessite des tokens personnels manuels, proxy réseau parfois obligatoire, intégration moins fluide)."],
            ]}
         />
         <Tip>
@@ -3289,7 +3125,7 @@ function GitSection() {
       </Card>
 
       {sel && (
-        <Card title={GIT_PROFILES.find(p=>p.id===profile).label} accent={sel.color} icon={"🌿"}>
+        <Card title={GIT_PROFILES.find(p=>p.id===profile).label} accent={sel.color} icon={""}>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:"0.75rem"}}>
             <div>
               <div style={{fontWeight:600,fontSize:12,color:sel.color,marginBottom:6}}>{"Branches"}</div>
@@ -3313,7 +3149,7 @@ function GitSection() {
         </Card>
       )}
 
-      <Card title={"Questions d'expert a se poser"} accent={C.indigo} icon={"🧠"}>
+      <Card title={"Questions d'expert a se poser"} accent={C.indigo} icon={""}>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {GIT_EXPERT_QS.map((item,i)=>(
             <div key={i} style={{padding:"0.875rem",background:C.lIndigo,borderRadius:10,border:`1px solid ${C.indigo}25`}}>
@@ -3329,7 +3165,7 @@ function GitSection() {
         </div>
       </Card>
 
-      <Card title={"Variable Library — Parametrage par environnement"} accent={C.teal} icon={"📦"}>
+      <Card title={"Variable Library — Parametrage par environnement"} accent={C.teal} icon={""}>
         <p style={{fontSize:14,color:"#374151",marginBottom:"0.75rem",lineHeight:1.6}}>
           {"La Variable Library stocke des parametres differents par environnement (Dev/Test/Prod) referenced dans les Pipelines sans modifier le code."}
         </p>
@@ -3372,7 +3208,7 @@ const DS_EXPERT_QS = [
 function DataStoresSection() {
   return (
     <div>
-      <STitle>{"🗄️ Analytics Data Stores in Fabric"}</STitle>
+      <STitle>{"Analytics Data Stores in Fabric"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"En tant qu'expert : comprendre quand choisir Lakehouse, Warehouse, Eventhouse, SQL DB ou Mirrored DB."}
       </p>
@@ -3390,7 +3226,7 @@ function DataStoresSection() {
         </div>
       </Card>
 
-      <Card title={"Comparatif complet des stores analytiques"} accent={C.blue} icon={"🗄️"}>
+      <Card title={"Comparatif complet des stores analytiques"} accent={C.blue} icon={""}>
         <T headers={["Store","Moteur","Langage","DML","Streaming","Cas usage ideal"]}
            rows={[
              ["Lakehouse","Spark / VertiPaq","PySpark, Spark SQL","Via Spark MERGE","Micro-batch","Data engineering, ML, volumes massifs"],
@@ -3402,7 +3238,7 @@ function DataStoresSection() {
         />
       </Card>
 
-      <Card title={"Lakehouse — Points critiques"} accent={C.teal} icon={"🏠"}>
+      <Card title={"Lakehouse — Points critiques"} accent={C.teal} icon={""}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
           <div>
             <div style={{fontWeight:600,fontSize:12,color:C.teal,marginBottom:6}}>{"Quand choisir"}</div>
@@ -3439,7 +3275,7 @@ DeltaTable.forName(spark,"gold.Clients").alias("t").merge(
         <Tip>{"Better Together : Lakehouse pour Bronze/Silver (Spark), Warehouse pour Gold (T-SQL). Connecter via Cross-Database queries ou shortcuts."}</Tip>
       </Card>
 
-      <Card title={"Eventhouse / KQL — Temps reel"} accent={C.amber} icon={"⚡"}>
+      <Card title={"Eventhouse / KQL — Temps reel"} accent={C.amber} icon={""}>
         <T headers={["Caracteristique","Detail"]}
            rows={[
              ["Modele de donnees","Append-only, time-series optimise. Pas d'UPDATE/DELETE natif."],
@@ -3470,7 +3306,7 @@ const TRANSFORM_EXPERT_QS = [
 function TransformSection() {
   return (
     <div>
-      <STitle>{"⚙️ Design & Transform Analytics Data"}</STitle>
+      <STitle>{"Design & Transform Analytics Data"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"Concevoir et transformer les donnees analytiques — les decisions d'expert, les patterns, les pieges."}
       </p>
@@ -3498,7 +3334,7 @@ function TransformSection() {
         />
       </Card>
 
-      <Card title={"Pattern Bronze → Silver complet (PySpark)"} accent={C.teal} icon={"🔄"}>
+      <Card title={"Pattern Bronze → Silver complet (PySpark)"} accent={C.teal} icon={""}>
         <Code code={`from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
@@ -3529,7 +3365,7 @@ DeltaTable.forName(spark,"silver.Ventes").alias("t") \\
     .execute()`} lang="python"/>
       </Card>
 
-      <Card title={"Outils de transformation — Decision"} accent={C.purple} icon={"⚙️"}>
+      <Card title={"Outils de transformation — Decision"} accent={C.purple} icon={""}>
         <T headers={["Outil","Langage","Profil","Ideal pour","Limite"]}
            rows={[
              ["Dataflow Gen2","Power Query (M)","Low-code","Nettoyage simple, 200+ connecteurs","Volumes limites, pas de ML"],
@@ -3554,7 +3390,7 @@ const SEMANTIC_QS = [
 function SemanticSection() {
   return (
     <div>
-      <STitle>{"📐 Design & Manage Semantic Models"}</STitle>
+      <STitle>{"Design & Manage Semantic Models"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"Concevoir et gerer des semantic models — Direct Lake, composite models, DAX, deploiement XMLA."}
       </p>
@@ -3572,7 +3408,7 @@ function SemanticSection() {
         </div>
       </Card>
 
-      <Card title={"Direct Lake — OneLake vs SQL"} accent={C.blue} icon={"🏎️"}>
+      <Card title={"Direct Lake — OneLake vs SQL"} accent={C.blue} icon={"🏎"}>
         <T headers={["","Direct Lake on SQL","Direct Lake on OneLake"]}
            rows={[
              ["Source","SQL Analytics Endpoint (Warehouse ou Lakehouse)","Tables Delta directement dans OneLake"],
@@ -3595,7 +3431,7 @@ function SemanticSection() {
         />
       </Card>
 
-      <Card title={"DAX — Patterns critiques"} accent={C.purple} icon={"📐"}>
+      <Card title={"DAX — Patterns critiques"} accent={C.purple} icon={""}>
         <Code code={`-- Variables DAX (performance + lisibilite)
 CA YTD =
 VAR AnneeCourante = YEAR(MAX(DimDate[Date]))
@@ -3647,7 +3483,7 @@ const AI_EXPERT_QS = [
 function AIReadySection() {
   return (
     <div>
-      <STitle>{"🤖 Preparer des donnees AI-Ready"}</STitle>
+      <STitle>{"Preparer des donnees AI-Ready"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"Feature engineering, feature store, data quality, gouvernance des modeles ML dans Fabric."}
       </p>
@@ -3665,7 +3501,7 @@ function AIReadySection() {
         </div>
       </Card>
 
-      <Card title={"Feature Engineering — Pipeline Silver vers Feature Store"} accent={C.blue} icon={"🔬"}>
+      <Card title={"Feature Engineering — Pipeline Silver vers Feature Store"} accent={C.blue} icon={""}>
         <Code code={`from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
@@ -3694,7 +3530,7 @@ df.write.format("delta") \\
     .saveAsTable("gold.feat_transactions")`} lang="python"/>
       </Card>
 
-      <Card title={"MLflow — Tracking dans Fabric"} accent={C.teal} icon={"📊"}>
+      <Card title={"MLflow — Tracking dans Fabric"} accent={C.teal} icon={""}>
         <Code code={`import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
@@ -3757,7 +3593,7 @@ const SECGOV_EXPERT_QS = [
 function SecGovSection() {
   return (
     <div>
-      <STitle>{"🔒 Securite & Gouvernance — Vue Experte"}</STitle>
+      <STitle>{"Securite & Gouvernance — Vue Experte"}</STitle>
       <p style={{color:"#6b7280",marginBottom:"1.5rem",fontSize:14,lineHeight:1.6}}>
         {"Les decisions strategiques, les questions a se poser, les arbitrages — vision architecte."}
       </p>
@@ -3775,7 +3611,7 @@ function SecGovSection() {
         </div>
       </Card>
 
-      <Card title={"Matrice de decision securite"} accent={C.red} icon={"📋"}>
+      <Card title={"Matrice de decision securite"} accent={C.red} icon={""}>
         <T headers={["Besoin","Controle","Ou","Bypass par"]}
            rows={[
              ["Filtrer des lignes par utilisateur","RLS (FILTER PREDICATE)","Warehouse / Semantic Model","Admin, Member, Contributor"],
@@ -3821,7 +3657,7 @@ ADD FILTER PREDICATE dbo.fn_RLS_Region(Region)
 ON dbo.Ventes WITH (STATE = ON);`}/>
       </Card>
 
-      <Card title={"RGPD — Droit a l'effacement (Right to be Forgotten)"} accent={C.purple} icon={"🗑️"}>
+      <Card title={"RGPD — Droit a l'effacement (Right to be Forgotten)"} accent={C.purple} icon={""}>
         <Code code={`-- Etape 1 : Warehouse (DML direct)
 DELETE FROM dbo.Transactions WHERE ClientID = @ClientID;
 DELETE FROM dbo.DimClients WHERE ClientID = @ClientID;
@@ -3843,7 +3679,7 @@ spark.sql(f"""
         <Warn>{"VACUUM RETAIN 0 HOURS desactive le Time Travel. Verifier que l'Incremental Refresh du Semantic Model ne depend pas d'anciennes versions Delta."}</Warn>
       </Card>
 
-      <Card title={"Tableau de bord gouvernance — Indicateurs cles"} accent={C.teal} icon={"📊"}>
+      <Card title={"Tableau de bord gouvernance — Indicateurs cles"} accent={C.teal} icon={""}>
         <T headers={["Indicateur","Source","Frequence","Action si anomalie"]}
            rows={[
              ["Items sans proprietaire","OneLake Catalog (Govern tab)","Hebdomadaire","Assigner un proprietaire ou archiver"],
@@ -3862,9 +3698,9 @@ function CalcGroupsSection() {
   const cgQuestions = ALL_QUESTIONS.filter(q => q.id === 16 || q.id === 17);
   return (
     <div>
-      <STitle sub="Time Intelligence, SELECTEDMEASURE(), Precedence, TMDL et interactions — expertise DAX pour DP-700.">🧮 Calculation Groups (DAX)</STitle>
+      <STitle sub="Time Intelligence, SELECTEDMEASURE(), Precedence, TMDL et interactions — expertise DAX pour DP-700.">Calculation Groups (DAX)</STitle>
 
-      <Card title="Définition et Utilité" accent={C.purple} icon="📐">
+      <Card title="Définition et Utilité" accent={C.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
           Les <strong>Calculation Groups</strong> permettent de réutiliser des formules de calcul complexes (comme la Time Intelligence) sur de nombreuses mesures existantes sans avoir à les dupliquer. Ils agissent comme des tables de filtres dynamiques où chaque ligne représente une formule (Calculation Item).
         </p>
@@ -3879,7 +3715,7 @@ function CalcGroupsSection() {
         />
       </Card>
 
-      <Card title="Exemple TMDL — Time Intelligence" accent={C.blue} icon="📄">
+      <Card title="Exemple TMDL — Time Intelligence" accent={C.blue} icon="">
         <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.5rem" }}>
           Structure d'un Calculation Group défini au format TMDL (Tabular Model Definition Language) :
         </p>
@@ -3907,7 +3743,7 @@ createOrReplace calculationGroup 'Time Intelligence'
 `} />
       </Card>
 
-      <Card title="Les 3 Règles Critiques pour l'Examen (DP-700)" accent={C.red} icon="🚨">
+      <Card title="Les 3 Règles Critiques pour l'Examen (DP-700)" accent={C.red} icon="">
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {[
             {
@@ -3931,7 +3767,7 @@ createOrReplace calculationGroup 'Time Intelligence'
         </div>
       </Card>
 
-      <Card title="Tableau d'interaction et Limitations" accent={C.teal} icon="🔄">
+      <Card title="Tableau d'interaction et Limitations" accent={C.teal} icon="">
         <T headers={["Fonctionnalité", "Comportement avec Calculation Groups", "Impact / Résolution"]}
            rows={[
              ["RLS / OLS", "Parfaitement compatible.", "Les règles RLS s'appliquent sur les tables dimensionnelles normales sans perturber la logique du Calculation Group."],
@@ -3942,7 +3778,7 @@ createOrReplace calculationGroup 'Time Intelligence'
         />
       </Card>
 
-      <Card title="Quiz Pratique : Calculation Groups" accent={C.amber} icon="🎯">
+      <Card title="Quiz Pratique : Calculation Groups" accent={C.amber} icon="">
         <Quiz qs={cgQuestions} />
       </Card>
     </div>
@@ -3954,9 +3790,9 @@ function QueryFoldingSection() {
   const qfQuestions = ALL_QUESTIONS.filter(q => q.id === 18);
   return (
     <div>
-      <STitle sub="Délégation de requêtes, diagnostic visuel et stratégies d'optimisation dans Power Query Online.">🔍 Query Folding dans Dataflows Gen2</STitle>
+      <STitle sub="Délégation de requêtes, diagnostic visuel et stratégies d'optimisation dans Power Query Online.">Query Folding dans Dataflows Gen2</STitle>
 
-      <Card title="Principe de Délégation" accent={C.purple} icon="⚙️">
+      <Card title="Principe de Délégation" accent={C.purple} icon="">
         <p style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
           Le <strong>Query Folding</strong> (délégation de requêtes) est la capacité de Power Query à convertir des transformations M en une seule requête SQL (ou autre langage natif) et à l'exécuter directement sur la source de données. Cela évite le transfert massif de données non filtrées sur le réseau.
         </p>
@@ -3976,7 +3812,7 @@ function QueryFoldingSection() {
         </div>
       </Card>
 
-      <Card title="Diagnostic visuel dans Power Query Online" accent={C.blue} icon="👁️">
+      <Card title="Diagnostic visuel dans Power Query Online" accent={C.blue} icon="">
         <p style={{ fontSize: 13, color: "#374151", marginBottom: "0.5rem" }}>
           Dans Dataflows Gen2, chaque étape appliquée à droite dispose d'un indicateur de pliage (Folding Indicator) :
         </p>
@@ -3990,7 +3826,7 @@ function QueryFoldingSection() {
         <Tip>Faites un clic droit sur une étape et vérifiez si l'option <strong>"View Native Query"</strong> est active. Si elle est grisée, le folding est rompu à cette étape.</Tip>
       </Card>
 
-      <Card title="Transformations courantes qui BRISENT le folding" accent={C.red} icon="⚠️">
+      <Card title="Transformations courantes qui BRISENT le folding" accent={C.red} icon="">
         <ul style={{ fontSize: 13, color: "#374151", paddingLeft: "1.25rem", lineHeight: 2 }}>
           <li><code>Table.Buffer()</code> : Gèle la table en mémoire locale, bloquant définitivement tout folding pour les étapes suivantes.</li>
           <li><strong>Changements de type de données complexes</strong> : Convertir du texte en binaire ou utiliser des formats non standards pour la source.</li>
@@ -4000,7 +3836,7 @@ function QueryFoldingSection() {
         </ul>
       </Card>
 
-      <Card title="Tableau de Stratégies de Préservation" accent={C.teal} icon="🛠️">
+      <Card title="Tableau de Stratégies de Préservation" accent={C.teal} icon="">
         <T headers={["Objectif", "Stratégie recommandée", "Pourquoi ?"]}
            rows={[
              ["Filtrer les lignes", "Toujours filtrer (Filtres de date, région) dès la toute première étape.", "Permet de générer un WHERE SQL optimal à la source."],
@@ -4011,7 +3847,7 @@ function QueryFoldingSection() {
         />
       </Card>
 
-      <Card title="Quiz Pratique : Query Folding" accent={C.amber} icon="🎯">
+      <Card title="Quiz Pratique : Query Folding" accent={C.amber} icon="">
         <Quiz qs={qfQuestions} />
       </Card>
     </div>
@@ -4044,7 +3880,7 @@ export default function App() {
     if (c) return c;
     return (
       <div>
-        <STitle>{SECTIONS.find(s=>s.id===id)?.icon} {SECTIONS.find(s=>s.id===id)?.label}</STitle>
+        <STitle>{SECTIONS.find(s=>s.id===id)?.label}</STitle>
         <Card accent={C.blue}><p style={{fontSize:14,color:"#374151"}}>Section en cours de chargement…</p></Card>
       </div>
     );
@@ -4064,7 +3900,7 @@ export default function App() {
             <span style={{ color: "#bfdbfe", fontSize: 11, fontWeight: 600 }}>DP-600 · DP-700</span>
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 800, margin: 0, letterSpacing: "-0.5px" }}>
-            {active === "home" ? "🏠 Microsoft Fabric" : `${activeSection?.icon || ""} ${activeSection?.label || ""}`}
+            {active === "home" ? "Microsoft Fabric" : (activeSection?.label || "")}
           </h1>
         </div>
 
@@ -4115,7 +3951,7 @@ export default function App() {
               transition: "all 0.2s ease"
             }}
           >
-            🏠 Retour à l'Accueil
+            Retour à l'Accueil
           </button>
         </div>
 
@@ -4154,7 +3990,6 @@ export default function App() {
                     paddingLeft: active === s.id ? "11px" : "12px", // align text nicely despite border
                   }}
                 >
-                  <span style={{ fontSize: 14 }}>{s.icon}</span>
                   <span style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
